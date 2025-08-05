@@ -57,7 +57,7 @@ script = ExtResource("1_iwpo4")
 [node name="camera_pivot" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="camera_pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959865, 0)
 
 [node name="interacao" type="RayCast3D" parent="camera_pivot/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999888, -0.0149569, 0, 0.0149569, 0.999888, 0, 0, 0)

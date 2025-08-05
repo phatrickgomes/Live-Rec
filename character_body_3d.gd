@@ -10,7 +10,7 @@ signal interact_object
 var objeto_selecionado 
 var forca_braco = 4 
 
-const SPEED = 10.0
+const SPEED = 0.0000001
 const JUMP_VELOCITY = 5.5
 const SENSIBILIDADE = 0.003
 

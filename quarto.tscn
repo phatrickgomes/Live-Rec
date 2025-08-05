@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://o5dd2gttglnj"]
+
+[ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://character_body_3d.tscn" id="2_chyoy"]
+[ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://area_3d.tscn" id="3_twob8"]
+[ext_resource type="PackedScene" uid="uid://b2v3m7ol3sqcr" path="res://carrot.tscn" id="4_jsa3l"]
+[ext_resource type="Script" uid="uid://dyi6m5mq7n7i" path="res://carrot.gd" id="5_xtcex"]
+[ext_resource type="PackedScene" uid="uid://de3ro0ubblrsc" path="res://Receba o quarto.glb" id="6_2vapn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3fl7"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_jka67"]
+sky_material = SubResource("ProceduralSkyMaterial_r3fl7")
+
+[sub_resource type="Environment" id="Environment_i5arm"]
+background_mode = 2
+sky = SubResource("Sky_jka67")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jka67"]
+size = Vector3(2.36725, 2.31653, 0.0585938)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a0tk4"]
+points = PackedVector3Array(10.1548, 0.158668, 10.1548, -10.1548, -0.158668, -10.1548, -10.1548, 0.158668, -10.1548, 10.1548, -0.158668, -10.1548, -10.1548, -0.158668, 10.1548, -10.1548, 0.158668, 10.1548, 10.1548, 0.158668, -10.1548, 10.1548, -0.158668, 10.1548)
+
+[node name="quarto" type="Node3D"]
+transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i5arm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="player" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
+transform = Transform3D(0.9, -0.000126576, 4.60491e-07, 0.000170537, 0.667983, -0.00485204, 6.11879e-07, 0.00480172, 0.674983, 1.06133, 1.41282, 0.0279773)
+
+[node name="GUI" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("3_twob8")]
+transform = Transform3D(0.0091725, 0, 0.158774, 0, 0.135988, 0, -0.262666, 0, 0.00554452, -1.55665, 1.44273, 1.37178)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GUI" groups=["monitor", "player", "tela_interativa"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0120695, 0, -0.457863)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="GUI/StaticBody3D" groups=["monitor", "player", "tela_interativa"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314205, -0.0569139, 1.33412)
+shape = SubResource("BoxShape3D_jka67")
+debug_fill = false
+
+[node name="Monitor" type="Camera3D" parent="GUI"]
+transform = Transform3D(3.80479, 0, 8.56817e-08, 0, 7.35357, 0, -3.35276e-08, 0, 6.29442, 0.132396, 0.176428, 3.89736)
+
+[node name="Carrot" parent="." groups=["player"] instance=ExtResource("4_jsa3l")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.8692, 0.649405, 0.696516)
+script = ExtResource("5_xtcex")
+
+[node name="Receba o quarto" parent="." instance=ExtResource("6_2vapn")]
+transform = Transform3D(0.478566, 0, -0.0126153, 0, 0.478733, 0, 0.0126153, 0, 0.478566, 3.85092, 0.17428, 1.72034)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Receba o quarto"]
+transform = Transform3D(2.0984, 0, 0.0553149, 0, 2.09913, 0, -0.0553149, 0, 2.0984, -8.13589, -0.364045, -3.38031)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Receba o quarto/StaticBody3D"]
+transform = Transform3D(-0.561, -6.26633e-08, -2.79397e-09, 8.47086e-08, -0.415, -5.58039e-17, -3.13483e-09, -3.96475e-16, 0.5, 0, 0.234413, 0)
+shape = SubResource("ConvexPolygonShape3D_a0tk4")
+debug_color = Color(0.825502, 0.0979367, 0.923718, 0.42)
