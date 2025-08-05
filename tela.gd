@@ -3,6 +3,7 @@ extends Area3D
 @onready var sprite3d: Sprite3D = $CollisionShape3D/Sprite3D
 @onready var viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
 
+
 var ativo := false
 func _unhandled_input(event) -> void:
 	if not ativo:
