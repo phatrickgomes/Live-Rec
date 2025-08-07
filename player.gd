@@ -16,39 +16,28 @@ const SPEED = 6.0
 const SENSIBILIDADE = 0.003
 
 var mouse = Vector2()
-var HIGH_MOUSE_SPEED = 10
-var LOW_MOUSE_SPEED = 2
-var current_mouse_speed = HIGH_MOUSE_SPEED
+
 var interagindo_com_tela = false
 
 func _ready():
+	print(Global.penis)
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#interacao_gui.ativo = false
-	interact_label.visible = false
-	camera.current = true
-	if camera_monitor != null:
-		camera_monitor.current = false
 
 func iniciar_interacao():
-	camera.current = false
 	camera_monitor.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	current_mouse_speed = LOW_MOUSE_SPEED
 	interagindo_com_tela = true
 	interacao_gui.ativo = true
 	interact_label.visible = false
 
 func terminar_interacao():
-	camera.current = true
 	camera_monitor.current = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	current_mouse_speed = HIGH_MOUSE_SPEED
 	interagindo_com_tela = false
 	interacao_gui.ativo = false
 	interact_label.visible = false
 		#vendo se ele esta interagindo com o monior e quando aperta ESC sair do monitor
-
 func _input(event):
 	if interagindo_com_tela:
 		if event.is_action_pressed("ui_cancel"):
@@ -87,8 +76,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		rotation_degrees.y -= mouse.x * current_mouse_speed * delta
-		camera.rotation_degrees.x -= mouse.y * current_mouse_speed * delta
+		rotation_degrees.y -= mouse.x * delta
+		camera.rotation_degrees.x -= mouse.y * delta
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
 	
 		##interaçao dos raycast com os objetos
@@ -117,13 +106,14 @@ func pegar_objeto():
 		objeto_selecionado.rotation_degrees = Vector3.ZERO
 		objeto_selecionado.angular_velocity = Vector3.ZERO
 		objeto_selecionado.linear_velocity = Vector3.ZERO
-		var shape = objeto_selecionado.get_node("CollisionShape3D")
+		var shape = objeto_selecionado.get_node("cenoura")
+		#var shape = objeto_selecionado.get_node("cenoura")
 		if shape:
 			shape.disabled = true
 
 func soltar_objeto():
 	if objeto_selecionado != null:
-		var shape = objeto_selecionado.get_node("CollisionShape3D")
+		var shape = objeto_selecionado.get_node("cenoura")
 		if shape:
 			shape.disabled = false
 	objeto_selecionado = null

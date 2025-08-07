@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2v3m7ol3sqcr" path="res://carrot.tscn" id="4_jsa3l"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
 [ext_resource type="Script" uid="uid://dyi6m5mq7n7i" path="res://carrot.gd" id="5_xtcex"]
+[ext_resource type="PackedScene" uid="uid://bljgeufjoh6t2" path="res://VHS-Tape.fbx" id="6_lut1e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3fl7"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -56,9 +57,6 @@ points = PackedVector3Array(1.52808, -61.3042, 1.31927, 2.86703, -61.3042, 1.319
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_roidl"]
 points = PackedVector3Array(3.55901, -61.3042, 0.573733, 4.89796, -61.3042, 0.573733, 3.55901, -61.0917, 0.619684, 3.55901, -59.6798, -0.123581, 4.89796, -61.0917, 0.619684, 4.89796, -59.6798, -0.123581, 3.55901, -60.6668, 0.711413, 3.55901, -59.5459, -0.180977, 4.89796, -60.6668, 0.711413, 4.89796, -59.5459, -0.180977, 3.55901, -58.9082, -0.0433841, 4.89796, -58.9082, -0.0433841)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k6m76"]
-points = PackedVector3Array(-2.75295, -61.3042, -2.27967, -1.414, -61.3042, -2.27967, -2.75295, -61.0917, -2.23372, -2.75295, -59.6798, -2.97699, -1.414, -61.0917, -2.23372, -1.414, -59.6798, -2.97699, -2.75295, -60.6668, -2.14199, -2.75295, -59.5459, -3.03438, -1.414, -60.6668, -2.14199, -1.414, -59.5459, -3.03438, -2.75295, -58.9082, -2.89679, -1.414, -58.9082, -2.89679)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chyoy"]
 size = Vector3(5.27173, 25.918, 0.0102539)
@@ -128,10 +126,10 @@ shape = SubResource("BoxShape3D_jka67")
 debug_fill = false
 
 [node name="Monitor" type="Camera3D" parent="GUI"]
-transform = Transform3D(3.80479, 0, 8.56817e-08, 0, 7.35357, 0, -3.35276e-08, 0, 6.29442, 0.132396, 0.176428, 3.89736)
+transform = Transform3D(3.8048, 0, 2.27243e-07, 0, 7.35359, 0, -3.72529e-08, 0, 6.29442, 0.128946, 0.176428, 3.23003)
 
 [node name="Carrot" parent="." groups=["player"] instance=ExtResource("4_jsa3l")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 4.7909, 1.13577, 1.63974)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.50047, 1.13577, 1.56568)
 script = ExtResource("5_xtcex")
 
 [node name="quarto" parent="." instance=ExtResource("5_wwc3q")]
@@ -209,10 +207,8 @@ shape = SubResource("ConvexPolygonShape3D_thyps")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_117/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_roidl")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="quarto/Cube_121" index="0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_121/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_k6m76")
+[node name="Cube_121" parent="quarto" index="41"]
+transform = Transform3D(0, -0.154392, 0, 0.43855, 0, 0, 0, 0, 0.50712, -7.21828, 88.5363, -0.594321)
 
 [node name="cama" type="StaticBody3D" parent="quarto/Cube_127" index="0"]
 
@@ -291,5 +287,8 @@ shape = SubResource("BoxShape3D_a6wpw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_009/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_nmxq2")
+
+[node name="VHS-Tape" parent="." instance=ExtResource("6_lut1e")]
+transform = Transform3D(0.0399863, -0.000982045, -0.000363269, 0, 0.0138774, -0.0375156, 0.00104708, 0.0375027, 0.0138727, 4.745, 0.895734, 0.837069)
 
 [editable path="quarto"]
