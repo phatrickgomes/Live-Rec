@@ -24,7 +24,7 @@ var interagindo_com_tela = false
 func _ready():
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	interacao_gui.ativo = false
+	#interacao_gui.ativo = false
 	interact_label.visible = false
 	camera.current = true
 	if camera_monitor != null:
