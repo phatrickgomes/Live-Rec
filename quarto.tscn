@@ -111,6 +111,7 @@ environment = SubResource("Environment_i5arm")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+sky_mode = 2
 
 [node name="player" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
 transform = Transform3D(0.9, -0.000126576, 6.16785e-07, 0.000170537, 0.667983, -0.00646938, 6.09085e-07, 0.00480172, 0.899977, 1.06133, 1.00526, 0.0279773)
