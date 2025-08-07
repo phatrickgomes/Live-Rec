@@ -8,3 +8,4 @@ func _on_button_pressed() -> void:
 		child.queue_free()
 	var new_scene = labirinto.instantiate()
 	sub_viewport.add_child(new_scene)
+	Global.Ta_no_jogo = true

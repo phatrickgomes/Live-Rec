@@ -15,6 +15,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 	var texture_3d_position = sprite3d.get_global_transform().affine_inverse() * event_position
 	var texture_position: Vector2 = Vector2(texture_3d_position.x, -texture_3d_position.y) / sprite3d.pixel_size - sprite3d.get_item_rect().position
 	var e: InputEvent = event.duplicate()
+	
 	if e is InputEventMouse:
 		e.set_position(texture_position)
 		e.set_global_position(texture_position)

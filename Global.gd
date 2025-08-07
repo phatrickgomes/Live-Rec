@@ -1,3 +1,3 @@
 extends Node
 
-var penis = false
+var Ta_no_jogo = false

@@ -39,7 +39,7 @@ uv1_scale = Vector3(5, 1, 5)
 uv1_triplanar = true
 
 [node name="LABRINTO" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0590897)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.8224, 0.0590897)
 metadata/_edit_group_ = true
 
 [node name="Waypoints" type="Node3D" parent="."]

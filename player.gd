@@ -7,7 +7,7 @@ signal interact_object
 @onready var raycast = $camera_pivot/Camera3D/interacao
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
 @onready var interacao_gui = $"../GUI"
-@onready var interact_label: Label = $CanvasLayer/interact_label 
+@onready var interact_label: Label = $CanvasLayer/interact_label
 
 var objeto_selecionado 
 var forca_braco = 4 
@@ -20,7 +20,6 @@ var mouse = Vector2()
 var interagindo_com_tela = false
 
 func _ready():
-	print(Global.penis)
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -30,6 +29,8 @@ func iniciar_interacao():
 	interagindo_com_tela = true
 	interacao_gui.ativo = true
 	interact_label.visible = false
+	if Global.Ta_no_jogo == true:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func terminar_interacao():
 	camera_monitor.current = false
@@ -37,7 +38,8 @@ func terminar_interacao():
 	interagindo_com_tela = false
 	interacao_gui.ativo = false
 	interact_label.visible = false
-		#vendo se ele esta interagindo com o monior e quando aperta ESC sair do monitor
+	Global.Ta_no_jogo == false
+		#vendo se ele esta interagindo com o monitor e quando aperta ESC sair do monitor
 func _input(event):
 	if interagindo_com_tela:
 		if event.is_action_pressed("ui_cancel"):
