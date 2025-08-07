@@ -12,7 +12,7 @@ signal interact_object
 var objeto_selecionado 
 var forca_braco = 4 
 
-const SPEED = 10.0
+const SPEED = 6.0
 const SENSIBILIDADE = 0.003
 
 var mouse = Vector2()

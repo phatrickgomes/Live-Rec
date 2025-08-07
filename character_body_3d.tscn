@@ -66,7 +66,6 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 1
 
 [node name="CarryObjectMaker" type="Marker3D" parent="camera_pivot/Camera3D"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521607, -0.220083, -0.739527)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
