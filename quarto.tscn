@@ -1,11 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=36 format=3 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://area_3d.tscn" id="3_twob8"]
 [ext_resource type="PackedScene" uid="uid://b2v3m7ol3sqcr" path="res://carrot.tscn" id="4_jsa3l"]
+[ext_resource type="PackedScene" uid="uid://dkgj13t8vk3o7" path="res://jogo12.tscn" id="5_lut1e"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
-[ext_resource type="Script" uid="uid://dyi6m5mq7n7i" path="res://carrot.gd" id="5_xtcex"]
-[ext_resource type="PackedScene" uid="uid://bljgeufjoh6t2" path="res://VHS-Tape.fbx" id="6_lut1e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3fl7"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -74,7 +73,7 @@ points = PackedVector3Array(1.25665, -62.2035, -5.55989, 1.53539, -62.2035, -5.5
 points = PackedVector3Array(3.34438, -62.2035, -5.55989, 3.62311, -62.2035, -5.55989, 3.34438, -62.2035, 1.76003, 3.34438, -58.4758, -5.55989, 3.62311, -58.4758, -5.55989, 3.62311, -62.2035, 1.76003, 3.34438, -58.4758, 1.76003, 3.62311, -58.4758, 1.76003)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_opnvx"]
-size = Vector3(0.319214, 2.41498, 8.43665)
+size = Vector3(0.792995, 4.32835, 8.43665)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lddpm"]
 size = Vector3(6.0414, 1.87012, 1.96894)
@@ -103,6 +102,9 @@ points = PackedVector3Array(-6.99517, 0.0148296, -0.444727, -6.99517, 0.0148296,
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 
+[node name="Fita" parent="." instance=ExtResource("5_lut1e")]
+transform = Transform3D(1, 0, -2.42144e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.81469, 0.940235, 0.839061)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
 
@@ -129,8 +131,7 @@ debug_fill = false
 transform = Transform3D(3.8048, 0, 2.27243e-07, 0, 7.35359, 0, -3.72529e-08, 0, 6.29442, 0.128946, 0.176428, 3.23003)
 
 [node name="Carrot" parent="." groups=["player"] instance=ExtResource("4_jsa3l")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.50047, 1.13577, 1.56568)
-script = ExtResource("5_xtcex")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50047, 1.13577, 1.56568)
 
 [node name="quarto" parent="." instance=ExtResource("5_wwc3q")]
 transform = Transform3D(0.478834, 0, -0.0126223, 0, 0.479, 0, 0.0126223, 0, 0.478834, 3.851, 0.174, 1.72)
@@ -238,7 +239,7 @@ shape = SubResource("ConvexPolygonShape3D_k0s5u")
 [node name="StaticBody3D" type="StaticBody3D" parent="quarto/Cube_141" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_141/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999926, -0.0121995, 0, 0.0121995, 0.999925, -3.34708, -61.4331, -1.24066)
+transform = Transform3D(1, 0, 0, 0, 0.999926, -0.0121995, 0, 0.0121995, 0.999925, -2.661, -60.4765, -1.22899)
 shape = SubResource("BoxShape3D_opnvx")
 
 [node name="cadeira" type="StaticBody3D" parent="quarto/Cube_248" index="0"]
@@ -287,8 +288,5 @@ shape = SubResource("BoxShape3D_a6wpw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_009/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_nmxq2")
-
-[node name="VHS-Tape" parent="." instance=ExtResource("6_lut1e")]
-transform = Transform3D(0.0399863, -0.000982045, -0.000363269, 0, 0.0138774, -0.0375156, 0.00104708, 0.0375027, 0.0138727, 4.745, 0.895734, 0.837069)
 
 [editable path="quarto"]

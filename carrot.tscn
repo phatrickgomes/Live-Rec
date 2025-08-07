@@ -34,9 +34,9 @@ radius = 0.260372
 height = 0.721341
 
 [node name="Carrot" type="RigidBody3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="food_ingredient_carrot2_food_ingredient_carrot#MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_lo2hw")
 surface_material_override/0 = SubResource("StandardMaterial3D_yt1p0")
 
@@ -44,5 +44,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_yt1p0")
 mesh = SubResource("ArrayMesh_ecnhr")
 
 [node name="cenoura" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.999933, -0.0102727, 0.00538766, 0.0102748, 0.999947, -0.00035765, -0.0053837, 0.000412983, 0.999985, 0, 0, 0)
+transform = Transform3D(0.0999933, -0.00102727, 0.000538766, 0.00102748, 0.0999947, -3.5765e-05, -0.00053837, 4.12983e-05, 0.0999985, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ecnhr")

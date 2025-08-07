@@ -3,7 +3,6 @@ extends RigidBody3D
 var player  
 @onready var food_ingredient_carrot_2 = $"food_ingredient_carrot2_food_ingredient_carrot#MeshInstance3D"
 @onready var outlineMesh = $"food_ingredient_carrot2_food_ingredient_carrot#MeshInstance3D/MeshInstance3D"
-
 var selected = false
 var outlineWidth = 0.05
 

@@ -12,7 +12,7 @@ signal interact_object
 var objeto_selecionado 
 var forca_braco = 4 
 
-const SPEED = 6.0
+const SPEED = 5.5
 const SENSIBILIDADE = 0.003
 
 var mouse = Vector2()
@@ -48,7 +48,6 @@ func _input(event):
 		camera_pivot.rotate_y(-event.relative.x * SENSIBILIDADE)
 		camera.rotate_x(-event.relative.y * SENSIBILIDADE)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
-	
 		##verificando se a tecla foi apertado e vai funcionar
 	if event.is_action_pressed("Interacao"):
 		if raycast.is_colliding():
@@ -107,13 +106,18 @@ func pegar_objeto():
 		objeto_selecionado.angular_velocity = Vector3.ZERO
 		objeto_selecionado.linear_velocity = Vector3.ZERO
 		var shape = objeto_selecionado.get_node("cenoura")
-		#var shape = objeto_selecionado.get_node("cenoura")
+		var shape2 = objeto_selecionado.get_node("fita_collision")
 		if shape:
 			shape.disabled = true
+		if shape:
+			shape2.disabled = true
 
 func soltar_objeto():
 	if objeto_selecionado != null:
 		var shape = objeto_selecionado.get_node("cenoura")
+		var shape2 = objeto_selecionado.get_node("fita_collision")
 		if shape:
 			shape.disabled = false
+		if shape:
+			shape2.disabled = false
 	objeto_selecionado = null
