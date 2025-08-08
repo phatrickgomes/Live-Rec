@@ -9,3 +9,8 @@ func _on_button_pressed() -> void:
 	var new_scene = labirinto.instantiate()
 	sub_viewport.add_child(new_scene)
 	Global.Ta_no_jogo = true
+
+
+
+func _on_line_edit_text_submitted(new_text: String) -> void:
+	pass # Replace with function body.

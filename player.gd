@@ -8,6 +8,7 @@ signal interact_object
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
 @onready var interacao_gui = $"../GUI"
 @onready var interact_label: Label = $CanvasLayer/interact_label
+@onready var labrinto: Node3D = $".."
 
 var objeto_selecionado 
 var forca_braco = 4 
@@ -29,8 +30,11 @@ func iniciar_interacao():
 	interagindo_com_tela = true
 	interacao_gui.ativo = true
 	interact_label.visible = false
-	if Global.Ta_no_jogo == true:
+	Global.player_locked = false
+	if Global.Ta_no_jogoss and labrinto:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		
+		
 
 func terminar_interacao():
 	camera_monitor.current = false
@@ -38,7 +42,9 @@ func terminar_interacao():
 	interagindo_com_tela = false
 	interacao_gui.ativo = false
 	interact_label.visible = false
-	Global.Ta_no_jogo == false
+	if labrinto and Global.Ta_no_jogo:
+		Global.player_locked = true
+		
 		#vendo se ele esta interagindo com o monitor e quando aperta ESC sair do monitor
 func _input(event):
 	if interagindo_com_tela:
@@ -66,14 +72,16 @@ func _physics_process(delta: float) -> void:
 		##verifica no começo do jogo se o player esta interagindo
 	if interagindo_com_tela:
 		return 
-		##apenas a movimentaçao
+		##apenas a movimentação
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (camera_pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
+	if direction and Global.player_locked == false:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+	elif not labrinto and Global.Ta_no_jogo == false:
+		Global.player_locked = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)

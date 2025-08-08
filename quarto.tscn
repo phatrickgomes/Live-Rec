@@ -114,10 +114,10 @@ shadow_enabled = true
 sky_mode = 2
 
 [node name="player" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
-transform = Transform3D(0.9, -0.000126576, 6.16785e-07, 0.000170537, 0.667983, -0.00646938, 6.09085e-07, 0.00480172, 0.899977, 1.06133, 1.00526, 0.0279773)
+transform = Transform3D(0.8, -0.000151588, 5.48253e-07, 0.000151588, 0.799979, -0.00575056, 5.41409e-07, 0.00575056, 0.799979, 1.06133, 1.00526, 0.0279773)
 
 [node name="GUI" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("3_twob8")]
-transform = Transform3D(0.0091725, 0, 0.158774, 0, 0.135988, 0, -0.262666, 0, 0.00554452, -1.55665, 1.44273, 1.37178)
+transform = Transform3D(0.00907439, 0, 0.128901, 0, 0.140217, 0, -0.259856, 0, 0.00450134, -1.52136, 1.43578, 1.36423)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GUI" groups=["monitor", "player", "tela_interativa"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0120695, 0, -0.457863)
@@ -128,7 +128,7 @@ shape = SubResource("BoxShape3D_jka67")
 debug_fill = false
 
 [node name="Monitor" type="Camera3D" parent="GUI"]
-transform = Transform3D(3.8048, 0, 2.27243e-07, 0, 7.35359, 0, -3.72529e-08, 0, 6.29442, 0.128946, 0.176428, 3.23003)
+transform = Transform3D(3.84593, 0, -4.84288e-08, 0, 7.33768, 0, -2.98023e-08, 0, 7.75314, 0.130453, 0.271274, 4.04782)
 
 [node name="Carrot" parent="." groups=["player"] instance=ExtResource("4_jsa3l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50047, 1.13577, 1.56568)
