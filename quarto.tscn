@@ -1,9 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=37 format=3 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://area_3d.tscn" id="3_twob8"]
+[ext_resource type="PackedScene" uid="uid://cx56uqtqto44b" path="res://ninja.glb" id="5_chyoy"]
 [ext_resource type="PackedScene" uid="uid://dkgj13t8vk3o7" path="res://jogo12.tscn" id="5_lut1e"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
+[ext_resource type="PackedScene" uid="uid://dxe1v3ukjtdti" path="res://Untitled.glb" id="6_lut1e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3fl7"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -13,7 +15,7 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_r3fl7")
 
 [sub_resource type="Environment" id="Environment_i5arm"]
-background_mode = 2
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_jka67")
 tonemap_mode = 2
 
@@ -107,11 +109,6 @@ transform = Transform3D(1, 0, -2.70084e-08, 0, -0.560639, 0.82806, 0, -0.82806, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
-sky_mode = 2
-
 [node name="player" parent="." groups=["fita", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
 transform = Transform3D(0.8, -0.000151588, 5.48253e-07, 0.000151588, 0.799979, -0.00575056, 5.41409e-07, 0.00575056, 0.799979, 1.06133, 1.00526, 0.0279773)
 
@@ -128,6 +125,13 @@ debug_fill = false
 
 [node name="Monitor" type="Camera3D" parent="GUI"]
 transform = Transform3D(3.84593, 0, -4.84288e-08, 0, 7.33768, 0, -2.98023e-08, 0, 7.75314, 0.130453, 0.271274, 4.04782)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="GUI"]
+transform = Transform3D(-3.83301, -0.199645, -0.243709, -0.563839, 5.79132, 4.12375, 0.166239, 4.50681, -6.30655, -0.486624, 3.24511, -2.23762)
+light_color = Color(0.861408, 0.807431, 0.809525, 1)
+spot_range = 2.33332
+spot_attenuation = -1.25
+spot_angle = 22.71
 
 [node name="quarto" parent="." instance=ExtResource("5_wwc3q")]
 transform = Transform3D(0.478834, 0, -0.0126223, 0, 0.479, 0, 0.0126223, 0, 0.478834, 3.851, 0.174, 1.72)
@@ -285,4 +289,26 @@ shape = SubResource("BoxShape3D_a6wpw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_009/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_nmxq2")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="quarto"]
+transform = Transform3D(-0.523704, 0.914258, -1.8023, -1.48923, 1.08401, 0.982623, 1.36614, 1.53215, 0.380249, -5.92172, 3.78165, -0.158806)
+rotation_order = 5
+light_color = Color(0.841235, 0.898295, 0.825976, 1)
+light_energy = 0.138
+light_indirect_energy = 3.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="quarto"]
+transform = Transform3D(-0.232495, 0, 2.07469, 0, 2.08768, 0, -2.07469, 0, -0.232495, -4.80269, 3.72834, 2.6187)
+light_color = Color(0.843137, 0.898039, 0.827451, 1)
+light_energy = 0.01
+
+[node name="ninja" parent="." instance=ExtResource("5_chyoy")]
+transform = Transform3D(-1.92183e-05, -0.00027497, 0.00298731, -2.6081e-05, 0.00298727, 0.000274799, -0.00299983, -2.42103e-05, -2.15273e-05, -1.47043, 1.81445, 1.11482)
+
+[node name="Ninja_Tpose" parent="ninja" index="0"]
+transform = Transform3D(1, 3.72529e-09, -1.86265e-09, 1.86265e-09, -2.75322e-08, -1, 3.72529e-09, 1, -2.44181e-08, 14.3308, 2.26245, 7.19955)
+
+[node name="computador" parent="." instance=ExtResource("6_lut1e")]
+transform = Transform3D(0.299896, 0, -0.00790542, 0, 0.3, 0, 0.00790542, 0, 0.299896, -0.512522, 1.35913, 2.18198)
+
 [editable path="quarto"]
+[editable path="ninja"]
