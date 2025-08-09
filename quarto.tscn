@@ -101,7 +101,7 @@ points = PackedVector3Array(-6.99517, 0.0148296, -0.444727, -6.99517, 0.0148296,
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 
-[node name="Fita" parent="." instance=ExtResource("5_lut1e")]
+[node name="Fita" parent="." groups=["fita"] instance=ExtResource("5_lut1e")]
 transform = Transform3D(1, 0, -2.70084e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.83216, 0.940235, 0.839522)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -112,7 +112,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 sky_mode = 2
 
-[node name="player" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
+[node name="player" parent="." groups=["fita", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
 transform = Transform3D(0.8, -0.000151588, 5.48253e-07, 0.000151588, 0.799979, -0.00575056, 5.41409e-07, 0.00575056, 0.799979, 1.06133, 1.00526, 0.0279773)
 
 [node name="GUI" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("3_twob8")]

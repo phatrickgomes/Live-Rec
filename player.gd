@@ -67,7 +67,6 @@ func terminar_interacao():
 	Global.player_locked = false
 	camera_monitor.current = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 	tween_atual = create_tween()
 	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -77,19 +76,16 @@ func _on_tween_terminar_interacao_finished():
 	em_transicao = false
 
 func _input(event):
-	##se estiver interagindo com a tela ou em transicao permite apenas sair com esc
 	if interagindo_com_tela or em_transicao:
 		if event.is_action_pressed("ui_cancel"):
 			terminar_interacao()
 		return 
 
-	##rotacao da camera com mouse quando modo captura ativo
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		camera_pivot.rotate_y(-event.relative.x * SENSIBILIDADE)
 		camera.rotate_x(-event.relative.y * SENSIBILIDADE)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
-	##interacao com a tecla E
 	if event.is_action_pressed("Interacao"):
 		if objeto_selecionado == null:
 			if raycast.is_colliding():
@@ -99,7 +95,16 @@ func _input(event):
 				elif collider.is_in_group("tela_interativa"):
 					iniciar_interacao()
 		else:
-			soltar_objeto()
+			if raycast.is_colliding():
+				var collider = raycast.get_collider()
+				##segurando fita e mirando monitor inicia interaçao
+				if collider.is_in_group("tela_interativa") and objeto_selecionado.is_in_group("fita"):
+					iniciar_interacao()
+				else:
+					##se nao estiver mirando no monitor solta
+					soltar_objeto()
+			else:
+				soltar_objeto()
 
 func _physics_process(delta: float) -> void:
 	##bloqueia movimento durante interacao ou transicao
@@ -125,49 +130,42 @@ func _physics_process(delta: float) -> void:
 		rotation_degrees.y -= mouse.x * delta
 		camera.rotation_degrees.x -= mouse.y * delta
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
-
 	##headbob
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
-
 	##exibir label de interacao quando olhar para objeto que seja interativo
-	if raycast.is_colliding() and objeto_selecionado == null:
+	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		interact_object.emit(collider)
-		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel"):
+		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel") or \
+		   (objeto_selecionado != null and objeto_selecionado.is_in_group("fita") and collider.is_in_group("tela_interativa")):
 			interact_label.visible = true
 		else:
 			interact_label.visible = false
 	else: 
 		interact_object.emit(null)
 		interact_label.visible = false
-
 	##segurar objeto carregado na mao
 	if objeto_selecionado != null:
 		objeto_selecionado.global_transform = mao.global_transform
 		objeto_selecionado.linear_velocity = Vector3.ZERO
 		objeto_selecionado.angular_velocity = Vector3.ZERO
-
 	move_and_slide()
-
 ##funcao para o movimento headbob
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO
 	pos.y = sin(time * bob_freq) * bob_amp
 	pos.x = cos(time * bob_freq / 2) * bob_amp
 	return pos
-
 ##pega o objeto em foco
 func pegar_objeto(obj):
 	objeto_selecionado = obj
 	objeto_selecionado.rotation_degrees = Vector3.ZERO
 	objeto_selecionado.angular_velocity = Vector3.ZERO
 	objeto_selecionado.linear_velocity = Vector3.ZERO
-
 	for child in objeto_selecionado.get_children():
 		if child is CollisionShape3D:
 			child.disabled = true
-
 ##solta o objeto selecionado
 func soltar_objeto():
 	if objeto_selecionado != null:
