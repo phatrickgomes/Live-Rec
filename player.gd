@@ -111,7 +111,7 @@ func _physics_process(delta: float) -> void:
 	if interagindo_com_tela or em_transicao:
 		velocity = Vector3.ZERO
 		return 
-
+###dadawdaw
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
