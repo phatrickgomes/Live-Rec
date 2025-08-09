@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cemsn382ds6wt"]
+[gd_scene load_steps=5 format=3 uid="uid://cemsn382ds6wt"]
 
 [ext_resource type="Shader" uid="uid://bora3c3tpu6pq" path="res://control.gdshader" id="1_0fbet"]
 [ext_resource type="Script" uid="uid://dw0psq8rp8dxs" path="res://control.gd" id="1_62e2m"]
+[ext_resource type="Texture2D" uid="uid://dhkk5py82jj6n" path="res://windows-7-background-akqmsawnpm2hbq67.jpg" id="3_qtu10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fbet"]
 shader = ExtResource("1_0fbet")
@@ -31,23 +32,20 @@ offset_bottom = 31.0
 grow_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -106.0
+offset_left = -56.0
 offset_top = -51.0
-offset_right = 106.0
+offset_right = 156.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-
-[node name="Button" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-text = "Button"
 
 [node name="Button2" type="Button" parent="HBoxContainer"]
 layout_mode = 2
@@ -64,9 +62,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -110.5
+offset_left = -24.5
 offset_top = -15.5
-offset_right = 110.5
+offset_right = 196.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -95,5 +93,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Windows-7-background-akqmsawnpm2Hbq67" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(114, 138)
+scale = Vector2(0.444271, 0.393333)
+texture = ExtResource("3_qtu10")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 50.0
+offset_right = 67.0
+offset_bottom = 81.0
+text = "Button"
+
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
