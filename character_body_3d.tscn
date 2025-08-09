@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhvkm866011qa"]
+[gd_scene load_steps=8 format=3 uid="uid://bhvkm866011qa"]
 
 [ext_resource type="Script" uid="uid://d0waherf7c61m" path="res://player.gd" id="1_iwpo4"]
 
@@ -51,13 +51,21 @@ shader_parameter/blur = 0.15
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwpo4"]
 
+[sub_resource type="SystemFont" id="SystemFont_iwpo4"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_fb3t6"]
+font = SubResource("SystemFont_iwpo4")
+font_size = 32
+font_color = Color(0.690196, 0.690196, 0.690196, 1)
+
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_iwpo4")
 
 [node name="camera_pivot" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="camera_pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959865, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.858909, 0)
 
 [node name="interacao" type="RayCast3D" parent="camera_pivot/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999888, -0.0149569, 0, 0.0149569, 0.999888, 0, 0, 0)
@@ -66,7 +74,7 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 1
 
 [node name="CarryObjectMaker" type="Marker3D" parent="camera_pivot/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521607, -0.220083, -0.739527)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448337, -0.220083, -0.462344)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_vd578")
@@ -79,22 +87,25 @@ shape = SubResource("CapsuleShape3D_iwpo4")
 
 [node name="interact_label" type="Label" parent="CanvasLayer"]
 texture_filter = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.501
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+anchor_bottom = 0.501
+offset_left = -25.0
+offset_top = -22.648
+offset_right = 1.0
+offset_bottom = 22.352
 grow_horizontal = 2
 grow_vertical = 2
-text = "E"
+text = "O"
+label_settings = SubResource("LabelSettings_fb3t6")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/interact_label"]
+[node name="Label" type="Label" parent="."]
 texture_filter = 1
-layout_mode = 0
-offset_left = -1.0
-offset_right = 39.0
-offset_bottom = 40.0
+offset_left = 561.0
+offset_top = 309.0
+offset_right = 566.0
+offset_bottom = 358.0
+text = ".
+"

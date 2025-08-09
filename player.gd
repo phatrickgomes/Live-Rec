@@ -1,82 +1,119 @@
 extends CharacterBody3D
 
 signal interact_object
+
+##nos e referencias
 @onready var camera_pivot: Node3D = $camera_pivot
-@onready var camera = $camera_pivot/Camera3D
-@onready var camera_monitor = get_node_or_null("../GUI/Monitor")
+@onready var camera: Camera3D = $camera_pivot/Camera3D
+@onready var camera_monitor: Camera3D = get_node_or_null("../GUI/Monitor")
 @onready var raycast = $camera_pivot/Camera3D/interacao
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
 @onready var interacao_gui = $"../GUI"
 @onready var interact_label: Label = $CanvasLayer/interact_label
+@onready var ponto_da_camera = $Label
 @onready var labrinto: Node3D = $".."
 
-var objeto_selecionado 
-var forca_braco = 4 
-
-const SPEED = 5.5
+##variaveis principais
+var objeto_selecionado = null
+const SPEED = 4.0
 const SENSIBILIDADE = 0.003
-
 var mouse = Vector2()
-
 var interagindo_com_tela = false
+var em_transicao = false
+var tween_atual: Tween = null
+var camera_inicial_transform: Transform3D
+
+ ##variaveis para headbob
+var t_bob: float = 0.0
+var bob_freq: float = 2.0
+var bob_amp: float = 0.07
 
 func _ready():
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	camera_inicial_transform = camera.global_transform
 
+##inicia a interacao exemplo: sentar e olhar para monitor
 func iniciar_interacao():
-	camera_monitor.current = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if tween_atual != null and tween_atual.is_valid():
+		tween_atual.kill()
+	em_transicao = true
 	interagindo_com_tela = true
 	interacao_gui.ativo = true
 	interact_label.visible = false
-	Global.player_locked = false
-	if Global.Ta_no_jogoss and labrinto:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		
-		
+	ponto_da_camera.visible = false
+	Global.player_locked = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	camera_inicial_transform = camera.global_transform
+	tween_atual = create_tween()
+	tween_atual.tween_property(camera, "global_transform", camera_monitor.global_transform, 1.5)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_atual.connect("finished", Callable(self, "_on_tween_iniciar_interacao_finished"))
 
+func _on_tween_iniciar_interacao_finished():
+	em_transicao = false
+	camera_monitor.current = true
+
+##termina a interacao
 func terminar_interacao():
-	camera_monitor.current = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if tween_atual != null and tween_atual.is_valid():
+		tween_atual.kill()
+	em_transicao = true
 	interagindo_com_tela = false
 	interacao_gui.ativo = false
 	interact_label.visible = false
-	if labrinto and Global.Ta_no_jogo:
-		Global.player_locked = true
-		
-		#vendo se ele esta interagindo com o monitor e quando aperta ESC sair do monitor
+	ponto_da_camera.visible = true
+	Global.player_locked = false
+	camera_monitor.current = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	tween_atual = create_tween()
+	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_atual.connect("finished", Callable(self, "_on_tween_terminar_interacao_finished"))
+
+func _on_tween_terminar_interacao_finished():
+	em_transicao = false
+
 func _input(event):
-	if interagindo_com_tela:
+	##se estiver interagindo com a tela ou em transicao permite apenas sair com esc
+	if interagindo_com_tela or em_transicao:
 		if event.is_action_pressed("ui_cancel"):
 			terminar_interacao()
 		return 
-	##camera do jogador
+
+	##rotacao da camera com mouse quando modo captura ativo
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		camera_pivot.rotate_y(-event.relative.x * SENSIBILIDADE)
 		camera.rotate_x(-event.relative.y * SENSIBILIDADE)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
-		##verificando se a tecla foi apertado e vai funcionar
+
+	##interacao com a tecla E
 	if event.is_action_pressed("Interacao"):
-		if raycast.is_colliding():
-			var collider = raycast.get_collider()
-			if collider.is_in_group("tela_interativa"):
-				iniciar_interacao()
-				return
 		if objeto_selecionado == null:
-			pegar_objeto()
+			if raycast.is_colliding():
+				var collider = raycast.get_collider()
+				if collider.is_in_group("pegavel"):
+					pegar_objeto(collider)
+				elif collider.is_in_group("tela_interativa"):
+					iniciar_interacao()
 		else:
 			soltar_objeto()
 
 func _physics_process(delta: float) -> void:
-		##verifica no começo do jogo se o player esta interagindo
-	if interagindo_com_tela:
+	##bloqueia movimento durante interacao ou transicao
+	if interagindo_com_tela or em_transicao:
+		velocity = Vector3.ZERO
 		return 
-		##apenas a movimentação
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+	##movimento do player
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (camera_pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 	if direction and Global.player_locked == false:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -88,19 +125,24 @@ func _physics_process(delta: float) -> void:
 		rotation_degrees.y -= mouse.x * delta
 		camera.rotation_degrees.x -= mouse.y * delta
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
-	
-		##interaçao dos raycast com os objetos
-	if raycast.is_colliding():
+
+	##headbob
+	t_bob += delta * velocity.length() * float(is_on_floor())
+	camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
+
+	##exibir label de interacao quando olhar para objeto que seja interativo
+	if raycast.is_colliding() and objeto_selecionado == null:
 		var collider = raycast.get_collider()
 		interact_object.emit(collider)
-		if collider.is_in_group("tela_interativa"):
+		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel"):
 			interact_label.visible = true
 		else:
 			interact_label.visible = false
 	else: 
 		interact_object.emit(null)
 		interact_label.visible = false
-   ##interaçao com a cenoura/fita
+
+	##segurar objeto carregado na mao
 	if objeto_selecionado != null:
 		objeto_selecionado.global_transform = mao.global_transform
 		objeto_selecionado.linear_velocity = Vector3.ZERO
@@ -108,26 +150,28 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func pegar_objeto():
-	var collider = raycast.get_collider()
-	if collider != null and collider is RigidBody3D:
-		objeto_selecionado = collider
-		objeto_selecionado.rotation_degrees = Vector3.ZERO
-		objeto_selecionado.angular_velocity = Vector3.ZERO
-		objeto_selecionado.linear_velocity = Vector3.ZERO
-		var shape = objeto_selecionado.get_node("cenoura")
-		var shape2 = objeto_selecionado.get_node("fita_collision")
-		if shape:
-			shape.disabled = true
-		if shape:
-			shape2.disabled = true
+##funcao para o movimento headbob
+func _headbob(time: float) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = sin(time * bob_freq) * bob_amp
+	pos.x = cos(time * bob_freq / 2) * bob_amp
+	return pos
 
+##pega o objeto em foco
+func pegar_objeto(obj):
+	objeto_selecionado = obj
+	objeto_selecionado.rotation_degrees = Vector3.ZERO
+	objeto_selecionado.angular_velocity = Vector3.ZERO
+	objeto_selecionado.linear_velocity = Vector3.ZERO
+
+	for child in objeto_selecionado.get_children():
+		if child is CollisionShape3D:
+			child.disabled = true
+
+##solta o objeto selecionado
 func soltar_objeto():
 	if objeto_selecionado != null:
-		var shape = objeto_selecionado.get_node("cenoura")
-		var shape2 = objeto_selecionado.get_node("fita_collision")
-		if shape:
-			shape.disabled = false
-		if shape:
-			shape2.disabled = false
+		for child in objeto_selecionado.get_children():
+			if child is CollisionShape3D:
+				child.disabled = false
 	objeto_selecionado = null

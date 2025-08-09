@@ -45,14 +45,14 @@ shadow_mesh = SubResource("ArrayMesh_fqbhf")
 albedo_color = Color(0.629187, 0.777324, 1.92523e-06, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a8cop"]
-size = Vector3(0.06352, 0.0388204, 0.0109893)
+size = Vector3(0.120433, 0.0786748, 0.019593)
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["player"]]
 lock_rotation = true
 script = ExtResource("1_1afq4")
 
 [node name="fita" type="MeshInstance3D" parent="." groups=["player"]]
-transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 3.91603, 0.815319, 0, -0.815319, 3.91603, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3165j")
 skeleton = NodePath("")
 
@@ -63,5 +63,5 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_a8cop")
 
 [node name="fita_collision" type="CollisionShape3D" parent="." groups=["player"]]
-transform = Transform3D(3, 0, 0, 0, 0.101245, 2.99829, 0, -2.99829, 0.101245, -0.000936087, -5.68383e-05, -0.000113341)
+transform = Transform3D(2.08727, 0, 0, 0, 2.03234, 0.475707, 0, -0.475707, 2.03234, -0.00610699, 0.00188978, -0.000158013)
 shape = SubResource("BoxShape3D_a8cop")

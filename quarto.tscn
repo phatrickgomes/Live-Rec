@@ -1,8 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=35 format=3 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://area_3d.tscn" id="3_twob8"]
-[ext_resource type="PackedScene" uid="uid://b2v3m7ol3sqcr" path="res://carrot.tscn" id="4_jsa3l"]
 [ext_resource type="PackedScene" uid="uid://dkgj13t8vk3o7" path="res://jogo12.tscn" id="5_lut1e"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
 
@@ -103,7 +102,7 @@ points = PackedVector3Array(-6.99517, 0.0148296, -0.444727, -6.99517, 0.0148296,
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 
 [node name="Fita" parent="." instance=ExtResource("5_lut1e")]
-transform = Transform3D(1, 0, -2.42144e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.81469, 0.940235, 0.839061)
+transform = Transform3D(1, 0, -2.70084e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.83216, 0.940235, 0.839522)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
@@ -129,9 +128,6 @@ debug_fill = false
 
 [node name="Monitor" type="Camera3D" parent="GUI"]
 transform = Transform3D(3.84593, 0, -4.84288e-08, 0, 7.33768, 0, -2.98023e-08, 0, 7.75314, 0.130453, 0.271274, 4.04782)
-
-[node name="Carrot" parent="." groups=["player"] instance=ExtResource("4_jsa3l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50047, 1.13577, 1.56568)
 
 [node name="quarto" parent="." instance=ExtResource("5_wwc3q")]
 transform = Transform3D(0.478834, 0, -0.0126223, 0, 0.479, 0, 0.0126223, 0, 0.478834, 3.851, 0.174, 1.72)
