@@ -71,7 +71,6 @@ func terminar_interacao():
 	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_terminar_interacao_finished"))
-
 func _on_tween_terminar_interacao_finished():
 	em_transicao = false
 
@@ -103,9 +102,6 @@ func _input(event):
 				else:
 					##se nao estiver mirando no monitor solta
 					soltar_objeto()
-			else:
-				soltar_objeto()
-
 func _physics_process(delta: float) -> void:
 	##bloqueia movimento durante interacao ou transicao
 	if interagindo_com_tela or em_transicao:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=4 uid="uid://dkgj13t8vk3o7"]
+[gd_scene load_steps=13 format=4 uid="uid://dkgj13t8vk3o7"]
 
 [ext_resource type="Script" uid="uid://dutfvcv38x0jk" path="res://jogo_12.gd" id="1_1afq4"]
 [ext_resource type="Texture2D" uid="uid://c7jnr01ueprct" path="res://VHS-Tape_0.png" id="1_a8cop"]
+[ext_resource type="Texture2D" uid="uid://colrw2h1t3u7" path="res://captura de tela.png" id="3_4e2s7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i81lj"]
 resource_name = "Material.001"
@@ -44,6 +45,17 @@ shadow_mesh = SubResource("ArrayMesh_fqbhf")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8cop"]
 albedo_color = Color(0.629187, 0.777324, 1.92523e-06, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tna7k"]
+albedo_texture = ExtResource("3_4e2s7")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ou5x8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4qym3"]
+texture_filter = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ab1yd"]
+albedo_texture = SubResource("CanvasTexture_4qym3")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_a8cop"]
 size = Vector3(0.120433, 0.0786748, 0.019593)
 
@@ -61,6 +73,12 @@ transform = Transform3D(1.02, 0, 0, 0, 1.02, 3.55271e-15, 0, -3.55271e-15, 1.02,
 mesh = SubResource("ArrayMesh_3165j")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_a8cop")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="fita"]
+transform = Transform3D(0.0267433, 0, 0, 0, 0.0120457, -4.65661e-10, 0, 9.31323e-10, 0.010438, 0, 0.0128625, 0.0052156)
+material_override = SubResource("StandardMaterial3D_tna7k")
+mesh = SubResource("QuadMesh_ou5x8")
+surface_material_override/0 = SubResource("StandardMaterial3D_ab1yd")
 
 [node name="fita_collision" type="CollisionShape3D" parent="." groups=["player"]]
 transform = Transform3D(2.08727, 0, 0, 0, 2.03234, 0.475707, 0, -0.475707, 2.03234, -0.00610699, 0.00188978, -0.000158013)
