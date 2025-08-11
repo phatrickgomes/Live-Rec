@@ -25,7 +25,6 @@ grow_vertical = 2
 script = ExtResource("1_62e2m")
 
 [node name="LineEdit" type="LineEdit" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0

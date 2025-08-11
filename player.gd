@@ -42,8 +42,9 @@ func iniciar_interacao():
 	interacao_gui.ativo = true
 	interact_label.visible = false
 	ponto_da_camera.visible = false
-	Global.player_locked = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if labrinto and Global.Ta_no_jogo == true:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	camera_inicial_transform = camera.global_transform
 	tween_atual = create_tween()
@@ -64,7 +65,7 @@ func terminar_interacao():
 	interacao_gui.ativo = false
 	interact_label.visible = false
 	ponto_da_camera.visible = true
-	Global.player_locked = false
+
 	camera_monitor.current = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	tween_atual = create_tween()
@@ -115,11 +116,10 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (camera_pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if direction and Global.player_locked == false:
+	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-	elif not labrinto and Global.Ta_no_jogo == false:
-		Global.player_locked = true
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)

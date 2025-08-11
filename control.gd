@@ -2,6 +2,8 @@ extends Control
 
 @onready var sub_viewport: SubViewport = $".."
 var labirinto = preload("res://labrinto.tscn")
+@onready var jamv: Control = $"."
+
 
 func _on_button_pressed() -> void:
 	var player = get_tree().get_root().get_node("quarto/player")
@@ -13,3 +15,8 @@ func _on_button_pressed() -> void:
 		Global.Ta_no_jogo = true
 	else:
 		print("voce precisa da fita")
+
+func _on_line_edit_text_submitted(new_text: String) -> void:
+	if new_text == "JAMV":
+		get_tree().change_scene_to_file("res://sprite_2d.tscn")
+		print("CESAR PATROCINA NOIS")
