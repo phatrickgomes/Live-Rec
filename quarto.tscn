@@ -56,7 +56,7 @@ size = Vector3(9.38776, 8.82904, 3.96432)
 albedo_texture = ExtResource("5_jsa3l")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lut1e"]
-size = Vector3(9.44666, 8.84027, 0.391296)
+size = Vector3(9.72626, 8.84027, 0.391296)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7fvgo"]
 points = PackedVector3Array(-0.552343, -61.3042, -2.27967, 0.786606, -61.3042, -2.27967, -0.552343, -61.0917, -2.23372, -0.552343, -59.6798, -2.97699, 0.786606, -61.0917, -2.23372, 0.786606, -59.6798, -2.97699, -0.552343, -60.6668, -2.14199, -0.552343, -59.5459, -3.03438, 0.786606, -60.6668, -2.14199, 0.786606, -59.5459, -3.03438, -0.552343, -58.9082, -2.89679, 0.786606, -58.9082, -2.89679)
@@ -237,7 +237,7 @@ material_override = SubResource("StandardMaterial3D_lddpm")
 [node name="porta_armario2" type="StaticBody3D" parent="quarto/Cube_065" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_065/porta_armario2"]
-transform = Transform3D(1, 0, 8.88178e-16, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, -0.137024, -30.5815, -6.14367)
+transform = Transform3D(1, -6.11998e-16, 7.85132e-16, -1.42109e-14, 0.976672, 0.214735, 0, -0.214735, 0.976672, -0.276824, -30.5815, -6.14367)
 shape = SubResource("BoxShape3D_lut1e")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="quarto/Cube_095" index="0"]

@@ -25,6 +25,7 @@ grow_vertical = 2
 script = ExtResource("1_62e2m")
 
 [node name="LineEdit" type="LineEdit" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -95,8 +96,8 @@ mouse_filter = 2
 
 [node name="Windows-7-background-akqmsawnpm2Hbq67" type="Sprite2D" parent="."]
 show_behind_parent = true
-position = Vector2(114, 138)
-scale = Vector2(0.444271, 0.393333)
+position = Vector2(131, 142)
+scale = Vector2(0.37474, 0.33)
 texture = ExtResource("3_qtu10")
 
 [node name="Button" type="Button" parent="."]
