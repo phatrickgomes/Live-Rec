@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://b8gvhsh0k6cn1"]
+[gd_scene load_steps=20 format=4 uid="uid://b8gvhsh0k6cn1"]
 
 [ext_resource type="Texture2D" uid="uid://c273g7p05edxy" path="res://Dungeon Tile Set.png" id="1_7ycvg"]
 [ext_resource type="Script" uid="uid://v2piqalu6t8a" path="res://sparky_glory.gd" id="2_d5x1h"]
@@ -6,9 +6,9 @@
 [ext_resource type="Shader" uid="uid://dljg3xr3wq3jw" path="res://prototipo.gdshader" id="4_8mm7a"]
 [ext_resource type="Script" uid="uid://b3f2vx0ow7o6v" path="res://darkness_overlay.gd" id="5_hq1ik"]
 [ext_resource type="Script" uid="uid://dm6ywcvnmy4xh" path="res://o_profeta.gd" id="6_hq1ik"]
-[ext_resource type="AudioStream" path="res://TrilhaStalking.tres" id="7_7ycvg"]
-[ext_resource type="AudioStream" path="res://TrilhaPerseguicao.tres" id="8_wr18j"]
-[ext_resource type="AudioStream" path="res://RugidoWendigo.tres" id="9_qwutr"]
+[ext_resource type="AudioStream" uid="uid://ft555vf2x5li" path="res://TrilhaStalking.tres" id="7_7ycvg"]
+[ext_resource type="AudioStream" uid="uid://ckmojs03o3q3w" path="res://TrilhaPerseguicao.tres" id="8_wr18j"]
+[ext_resource type="AudioStream" uid="uid://bu8xkxav4gwam" path="res://RugidoWendigo.tres" id="9_qwutr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wr18j"]
 texture = ExtResource("1_7ycvg")
@@ -295,25 +295,28 @@ texture = ExtResource("1_7ycvg")
 sources/0 = SubResource("TileSetAtlasSource_7ycvg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hq1ik"]
-size = Vector2(67, 64)
+size = Vector2(67, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ycvg"]
+size = Vector2(1889, 108)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfk4m"]
+radius = 887.624
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66tet"]
+size = Vector2(203.125, 168.75)
+
+[sub_resource type="Curve2D" id="Curve2D_7ycvg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -129, 31, 0, 0, 0, 0, 119, 32)
+}
+point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nfk4m"]
 shader = ExtResource("4_8mm7a")
 shader_parameter/darkness_amount = 0.0
 shader_parameter/dark_color = Color(0, 0, 0, 0.7)
 shader_parameter/vignette_strength = 0.5
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nfk4m"]
-radius = 887.624
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_66tet"]
-size = Vector2(203.125, 162.5)
-
-[sub_resource type="Curve2D" id="Curve2D_7ycvg"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 257.955, 105.82, 0, 0, 0, 0, 605.596, 104.799, 0, 0, 0, 0, 1062.41, 106.84)
-}
-point_count = 3
 
 [node name="MainScene" type="Node2D"]
 
@@ -329,51 +332,43 @@ tile_set = SubResource("TileSet_qwutr")
 tile_set = SubResource("TileSet_wr18j")
 
 [node name="SparkyGlory" type="CharacterBody2D" parent="."]
+position = Vector2(160, 791)
 script = ExtResource("2_d5x1h")
 
 [node name="Icon" type="Sprite2D" parent="SparkyGlory"]
-position = Vector2(99, 789)
-scale = Vector2(0.521, 0.5)
+position = Vector2(1.828, -3)
+scale = Vector2(0.533938, 0.5)
 texture = ExtResource("3_8mm7a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SparkyGlory"]
-position = Vector2(99, 787)
+position = Vector2(2, -3.5)
 shape = SubResource("RectangleShape2D_hq1ik")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1052.5, 1475)
+shape = SubResource("RectangleShape2D_7ycvg")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(579, 576)
-scale = Vector2(0.5, 0.5)
-
-[node name="ShaderEffects" type="CanvasLayer" parent="."]
-
-[node name="DarknessOverlay" type="ColorRect" parent="ShaderEffects"]
-visible = false
-material = SubResource("ShaderMaterial_nfk4m")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-color = Color(0, 0, 0, 1)
-script = ExtResource("5_hq1ik")
+position = Vector2(533, 530)
+scale = Vector2(3.37181, 0.3581)
 
 [node name="O Profeta" type="CharacterBody2D" parent="."]
+position = Vector2(849, 790)
+collision_layer = 3
 script = ExtResource("6_hq1ik")
 
 [node name="Texture" type="Sprite2D" parent="O Profeta"]
-position = Vector2(882, 795)
+position = Vector2(-0.999992, 2.00009)
 scale = Vector2(0.5, 0.42)
 texture = ExtResource("3_8mm7a")
 
 [node name="Visao" type="Area2D" parent="O Profeta/Texture"]
+position = Vector2(6, -7.14313)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="O Profeta/Texture/Visao"]
+position = Vector2(-12.0001, 11.9047)
 shape = SubResource("CircleShape2D_nfk4m")
 debug_color = Color(0.571381, 0.0885259, 0.159257, 0.42)
 
@@ -381,21 +376,11 @@ debug_color = Color(0.571381, 0.0885259, 0.159257, 0.42)
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="O Profeta"]
-position = Vector2(882, 796)
+position = Vector2(-2, 2)
 scale = Vector2(0.32, 0.32)
 shape = SubResource("RectangleShape2D_66tet")
 
 [node name="TimerTransformacao" type="Timer" parent="O Profeta"]
-
-[node name="Path2D" type="Path2D" parent="O Profeta"]
-position = Vector2(662.216, 920.704)
-scale = Vector2(0.348061, -0.980009)
-curve = SubResource("Curve2D_7ycvg")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="O Profeta/Path2D"]
-position = Vector2(780.85, 105.582)
-rotation = 0.00446786
-progress = 522.898
 
 [node name="TrilhaStalking" type="AudioStreamPlayer2D" parent="O Profeta"]
 stream = ExtResource("7_7ycvg")
@@ -405,6 +390,32 @@ stream = ExtResource("8_wr18j")
 
 [node name="RugidoWendigo" type="AudioStreamPlayer2D" parent="O Profeta"]
 stream = ExtResource("9_qwutr")
+
+[node name="Path2D" type="Path2D" parent="O Profeta"]
+curve = SubResource("Curve2D_7ycvg")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="O Profeta/Path2D"]
+position = Vector2(-129, 31)
+rotation = 0.00403224
+
+[node name="ShaderEffects" type="CanvasLayer" parent="."]
+
+[node name="DarknessOverlay" type="ColorRect" parent="ShaderEffects"]
+material = SubResource("ShaderMaterial_nfk4m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -925.0
+offset_right = -200.0
+offset_bottom = -925.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.90182, 10.1207)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_hq1ik")
 
 [connection signal="body_entered" from="O Profeta/Texture/Visao" to="O Profeta" method="_on_visao_body_entered"]
 [connection signal="body_exited" from="O Profeta/Texture/Visao" to="O Profeta" method="_on_visao_body_exited"]
