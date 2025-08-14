@@ -91,7 +91,7 @@ func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
 	
-	if input_dir.length() > 0:
+	if input_dir.length() > 0 and Global.Ta_no_jogo:
 		if abs(input_dir.x) > 0.1 and abs(input_dir.y) > 0.1:
 			direction = direction.normalized() * diagonal_speed_multiplier
 	

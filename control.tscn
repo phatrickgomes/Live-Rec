@@ -42,6 +42,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
+scale = Vector2(1, 0.72)
 
 [node name="TextureRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0fbet")
@@ -62,10 +63,12 @@ texture = ExtResource("3_qtu10")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-offset_left = 5.0
-offset_top = 50.0
-offset_right = 781.0
-offset_bottom = 826.0
+offset_left = 16.0
+offset_top = 26.0
+offset_right = 792.0
+offset_bottom = 802.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.0475674, 0.0373506)
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_ee4bf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kbped")
@@ -83,10 +86,12 @@ text = "Jogo1"
 [node name="Button2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 213.0
-offset_top = 7.0
-offset_right = 477.0
-offset_bottom = 271.0
+offset_left = 77.0
+offset_top = 29.0
+offset_right = 341.0
+offset_bottom = 293.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.12092, 0.0986597)
 icon = ExtResource("5_kbped")
 flat = true
@@ -103,10 +108,10 @@ text = "PORTINITE"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 94.0
-offset_top = 89.0
-offset_right = 198.0
-offset_bottom = 193.0
+offset_left = 143.0
+offset_top = 27.0
+offset_right = 247.0
+offset_bottom = 131.0
 scale = Vector2(0.377295, 0.28136)
 
 [node name="Button3" type="Button" parent="VBoxContainer2"]
@@ -128,10 +133,10 @@ text = " VEGAS PRO"
 [node name="Button5" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 117.0
-offset_top = 175.0
-offset_right = 221.0
-offset_bottom = 279.0
+offset_left = 145.0
+offset_top = 87.0
+offset_right = 249.0
+offset_bottom = 191.0
 scale = Vector2(0.452909, 0.358971)
 icon = ExtResource("8_6a6wx")
 flat = true
@@ -149,10 +154,10 @@ text = "Video para upar"
 [node name="Button4" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 129.0
-offset_top = 19.0
-offset_right = 233.0
-offset_bottom = 123.0
+offset_left = 47.0
+offset_top = 93.0
+offset_right = 151.0
+offset_bottom = 197.0
 scale = Vector2(0.303759, 0.258639)
 size_flags_horizontal = 0
 icon = ExtResource("2_iy58a")
@@ -161,20 +166,21 @@ flat = true
 [node name="Label" type="Label" parent="Button4"]
 texture_filter = 1
 layout_mode = 2
-offset_left = -105.347
-offset_top = 92.7935
-offset_right = 147.653
+offset_left = -62.5496
+offset_top = 92.7934
+offset_right = 190.45
 offset_bottom = 165.793
 theme_override_font_sizes/font_size = 50
-text = "      Twitch"
+text = "Twitch"
+horizontal_alignment = 1
 
 [node name="Button6" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 185.0
-offset_top = 128.0
-offset_right = 289.0
-offset_bottom = 232.0
+offset_left = 84.0
+offset_top = 154.0
+offset_right = 188.0
+offset_bottom = 258.0
 scale = Vector2(0.495107, 0.357153)
 icon = ExtResource("9_sky72")
 flat = true

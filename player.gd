@@ -63,7 +63,9 @@ func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	tween_atual.tween_property(camera, "global_transform", target_camera.global_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_monitor_finished"))
-
+	if Global.Ta_no_jogo:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 func _on_tween_monitor_finished():
 	em_transicao = false
 
@@ -82,6 +84,8 @@ func terminar_interacao():
 	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_voltar_jogo_finished"))
+	Global.Ta_no_jogo = false
+	
 
 func _on_tween_voltar_jogo_finished():
 	em_transicao = false
@@ -132,7 +136,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (camera_pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if direction:
+	if direction and Global.Ta_no_jogo == false:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:

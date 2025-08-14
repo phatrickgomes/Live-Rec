@@ -4,8 +4,6 @@ extends Control
 var labirinto = preload("res://labirinto.tscn")
 @onready var jamv: Control = $"."
 
-
-
 func _on_button_pressed() -> void:
 	var player = get_tree().get_root().get_node("quarto/player")
 	if player.objeto_selecionado != null and player.objeto_selecionado.is_in_group("fita"):
