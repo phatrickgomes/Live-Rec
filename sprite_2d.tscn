@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://c3tm6medvv62e" path="res://1528106245788.jpg" id="1_f7cmv"]
 
 [node name="JAMV" type="Sprite2D"]
-scale = Vector2(5.76, 3.24)
+position = Vector2(435.5, 223)
+scale = Vector2(1.405, 1.29)
 texture = ExtResource("1_f7cmv")
 
 [node name="Camera2D" type="Camera2D" parent="."]

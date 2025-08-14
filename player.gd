@@ -12,7 +12,9 @@ signal interact_object
 @onready var interacao_gui = $"../GUI"
 @onready var interact_label: Label = $CanvasLayer/interact_label
 @onready var ponto_da_camera = $Label
-@onready var labrinto: Node3D = $".."
+@onready var main_scene_3d: Node3D = $"."
+@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
+
 
 ## variáveis principais
 var objeto_selecionado = null
@@ -86,7 +88,6 @@ func terminar_interacao():
 	tween_atual.connect("finished", Callable(self, "_on_tween_voltar_jogo_finished"))
 	Global.Ta_no_jogo = false
 	
-
 func _on_tween_voltar_jogo_finished():
 	em_transicao = false
 

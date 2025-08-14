@@ -20,6 +20,8 @@ var bob_amp: float = 0.07
 # Componentes da cena
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
+@onready var main_scene_3d: Node3D = $".."
+@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
 
 # Variáveis de controle
 var current_speed: float = walk_speed
@@ -35,6 +37,8 @@ var qte_shake_intensity: float = 0.3
 var qte_rotation_shake_intensity: float = 0.8
 var qte_mouse_shake_intensity: float = 250.0
 var original_mouse_sensitivity: float = 0.002
+
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -91,14 +95,14 @@ func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
 	
-	if input_dir.length() > 0 and Global.Ta_no_jogo:
+	if input_dir.length() > 0:
 		if abs(input_dir.x) > 0.1 and abs(input_dir.y) > 0.1:
 			direction = direction.normalized() * diagonal_speed_multiplier
 	
 	var target_velocity = direction * current_speed
 	velocity.x = lerp(velocity.x, target_velocity.x, acceleration * delta)
 	velocity.z = lerp(velocity.z, target_velocity.z, acceleration * delta)
-
+		
 # ===== Headbob =====
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO
