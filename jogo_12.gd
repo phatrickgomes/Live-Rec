@@ -12,6 +12,3 @@ func _ready():
 
 func _set_selected(object):
 	selecionado = self == object
-
-func _physics_process(delta: float) -> void:
-	fita_outlinemesh.visible = selecionado

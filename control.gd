@@ -1,7 +1,7 @@
 extends Control
 
 @onready var sub_viewport: SubViewport = $".."
-var labirinto = preload("res://labrinto.tscn")
+var labirinto = preload("res://labirinto.tscn")
 @onready var jamv: Control = $"."
 
 
