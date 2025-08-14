@@ -70,6 +70,7 @@ scale = Vector2(0.0475674, 0.0373506)
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_ee4bf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kbped")
 icon = ExtResource("4_ee4bf")
+flat = true
 
 [node name="Label" type="Label" parent="Button"]
 layout_mode = 0
@@ -88,6 +89,7 @@ offset_right = 477.0
 offset_bottom = 271.0
 scale = Vector2(0.12092, 0.0986597)
 icon = ExtResource("5_kbped")
+flat = true
 
 [node name="Label" type="Label" parent="Button2"]
 texture_filter = 1
@@ -111,6 +113,7 @@ scale = Vector2(0.377295, 0.28136)
 texture_filter = 1
 layout_mode = 2
 icon = ExtResource("6_fj5cn")
+flat = true
 
 [node name="Label" type="Label" parent="VBoxContainer2/Button3"]
 texture_filter = 1
@@ -131,6 +134,7 @@ offset_right = 221.0
 offset_bottom = 279.0
 scale = Vector2(0.452909, 0.358971)
 icon = ExtResource("8_6a6wx")
+flat = true
 
 [node name="Label" type="Label" parent="Button5"]
 texture_filter = 1
@@ -152,6 +156,7 @@ offset_bottom = 123.0
 scale = Vector2(0.303759, 0.258639)
 size_flags_horizontal = 0
 icon = ExtResource("2_iy58a")
+flat = true
 
 [node name="Label" type="Label" parent="Button4"]
 texture_filter = 1
@@ -172,6 +177,7 @@ offset_right = 289.0
 offset_bottom = 232.0
 scale = Vector2(0.495107, 0.357153)
 icon = ExtResource("9_sky72")
+flat = true
 
 [node name="Label" type="Label" parent="Button6"]
 texture_filter = 1
