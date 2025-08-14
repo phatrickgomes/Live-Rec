@@ -23,7 +23,7 @@ var em_transicao = false
 var tween_atual: Tween = null
 var camera_inicial_transform: Transform3D
 
- ##variaveis para headbob
+##variaveis para headbob
 var t_bob: float = 0.0
 var bob_freq: float = 2.0
 var bob_amp: float = 0.07
@@ -35,6 +35,8 @@ func _ready():
 
 ##inicia a interacao exemplo: sentar e olhar para monitor
 func iniciar_interacao():
+	if em_transicao:
+		return # já está em animação
 	if tween_atual != null and tween_atual.is_valid():
 		tween_atual.kill()
 	em_transicao = true
@@ -57,6 +59,8 @@ func _on_tween_iniciar_interacao_finished():
 
 ##termina a interacao
 func terminar_interacao():
+	if em_transicao:
+		return # já está em animação
 	if tween_atual != null and tween_atual.is_valid():
 		tween_atual.kill()
 	em_transicao = true
@@ -71,11 +75,17 @@ func terminar_interacao():
 	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_terminar_interacao_finished"))
+	print("voltando")
+
 func _on_tween_terminar_interacao_finished():
 	em_transicao = false
 
 func _input(event):
-	if interagindo_com_tela or em_transicao:
+	# Bloqueia interações se estiver animando
+	if em_transicao:
+		return
+
+	if interagindo_com_tela:
 		if event.is_action_pressed("ui_cancel"):
 			terminar_interacao()
 		return 
@@ -102,12 +112,13 @@ func _input(event):
 				else:
 					##se nao estiver mirando no monitor solta
 					soltar_objeto()
+
 func _physics_process(delta: float) -> void:
 	##bloqueia movimento durante interacao ou transicao
 	if interagindo_com_tela or em_transicao:
 		velocity = Vector3.ZERO
 		return 
-###dadawdaw
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -126,9 +137,11 @@ func _physics_process(delta: float) -> void:
 		rotation_degrees.y -= mouse.x * delta
 		camera.rotation_degrees.x -= mouse.y * delta
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
+
 	##headbob
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
+
 	##exibir label de interacao quando olhar para objeto que seja interativo
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
@@ -141,18 +154,22 @@ func _physics_process(delta: float) -> void:
 	else: 
 		interact_object.emit(null)
 		interact_label.visible = false
+
 	##segurar objeto carregado na mao
 	if objeto_selecionado != null:
 		objeto_selecionado.global_transform = mao.global_transform
 		objeto_selecionado.linear_velocity = Vector3.ZERO
 		objeto_selecionado.angular_velocity = Vector3.ZERO
+
 	move_and_slide()
+
 ##funcao para o movimento headbob
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO
 	pos.y = sin(time * bob_freq) * bob_amp
 	pos.x = cos(time * bob_freq / 2) * bob_amp
 	return pos
+
 ##pega o objeto em foco
 func pegar_objeto(obj):
 	objeto_selecionado = obj
@@ -162,6 +179,7 @@ func pegar_objeto(obj):
 	for child in objeto_selecionado.get_children():
 		if child is CollisionShape3D:
 			child.disabled = true
+
 ##solta o objeto selecionado
 func soltar_objeto():
 	if objeto_selecionado != null:

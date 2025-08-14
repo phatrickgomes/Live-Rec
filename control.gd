@@ -3,6 +3,7 @@ extends Control
 @onready var sub_viewport: SubViewport = $".."
 var labirinto = preload("res://labrinto.tscn")
 
+
 func _on_button_pressed() -> void:
 	var player = get_tree().get_root().get_node("quarto/player")
 	if player.objeto_selecionado != null and player.objeto_selecionado.is_in_group("fita"):
