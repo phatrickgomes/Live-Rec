@@ -394,9 +394,8 @@ curve = SubResource("Curve2D_7ycvg")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="O Profeta/Path2D"]
 position = Vector2(780.85, 105.582)
-rotation = 0.00446747
+rotation = 0.00446786
 progress = 522.898
-loop = false
 
 [node name="TrilhaStalking" type="AudioStreamPlayer2D" parent="O Profeta"]
 stream = ExtResource("7_7ycvg")

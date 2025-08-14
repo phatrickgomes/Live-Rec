@@ -1,5 +1,6 @@
-[gd_scene load_steps=71 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=72 format=4 uid="uid://o5dd2gttglnj"]
 
+[ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://the last.jpg" id="1_jtej5"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://lucas.jpg" id="1_xtcex"]
@@ -269,6 +270,15 @@ albedo_texture = ExtResource("6_xtcex")
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 
+[node name="monitor2" parent="." instance=ExtResource("1_6wfgo")]
+transform = Transform3D(0.434147, 0, 0.248025, 0, 0.5, 0, -0.248025, 0, 0.434147, 3.6907, 0.150233, -0.601247)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="monitor2"]
+transform = Transform3D(-0.0670264, 1.01867, -1.71983, -0.285285, 1.69831, 1.01704, 1.97841, 0.279406, 0.0883897, -11.5267, 2.81686, -0.505043)
+light_color = Color(0.658824, 1, 1, 1)
+spot_range = 1.3701
+spot_angle = 28.4107
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.0641971, 0, -0.761475, 0, 0.764176, 0, 0.761475, 0, -0.0641971, 2.81057, 1.92614, 3.37251)
 material_override = SubResource("StandardMaterial3D_3t3qu")
@@ -333,6 +343,10 @@ light_color = Color(0.861408, 0.807431, 0.809525, 1)
 spot_range = 2.33332
 spot_attenuation = -1.25
 spot_angle = 22.71
+
+[node name="Monitor2" type="Camera3D" parent="GUI"]
+transform = Transform3D(3.24868, 0, 2.05848, 0, 7.1318, 0, -4.14976, 0, 6.54913, -0.83467, 0.951724, 6.04984)
+fov = 79.525
 
 [node name="quarto" parent="." instance=ExtResource("5_wwc3q")]
 transform = Transform3D(0.478834, 0, -0.0126223, 0, 0.479, 0, 0.0126223, 0, 0.478834, 3.851, 0.174, 1.72)
