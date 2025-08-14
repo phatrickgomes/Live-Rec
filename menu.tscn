@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://w5hl78c4mp7s"]
+
+[ext_resource type="Texture2D" uid="uid://b81omkgkwua3d" path="res://menu_rei.png" id="1_lti8b"]
+[ext_resource type="FontFile" uid="uid://cwf5mf3fbut6c" path="res://Crash Scene.ttf" id="1_ouk20"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ouk20"]
+polygon = PackedVector2Array(-120, 43, -146, 84, -144, 109, 111, 106, 103, 41)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_right = 1158.0
+offset_bottom = 649.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="exit" type="Button" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 521.0
+offset_top = 333.0
+offset_right = 576.0
+offset_bottom = 368.0
+rotation = -0.0698132
+pivot_offset = Vector2(26, 18)
+theme_override_font_sizes/font_size = 18
+text = "exit
+"
+flat = true
+
+[node name="jogar2" type="Button" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 511.0
+offset_top = 302.0
+offset_right = 589.0
+offset_bottom = 329.0
+rotation = 0.186976
+pivot_offset = Vector2(25, 17.5)
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 18
+text = "Jogar
+"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 519.0
+offset_top = 261.0
+offset_right = 570.0
+offset_bottom = 284.0
+rotation = -0.0139737
+theme_override_colors/font_color = Color(0.326143, 0.145833, 0.615106, 1)
+theme_override_fonts/font = ExtResource("1_ouk20")
+text = "X-Mate"
+
+[node name="MenuRei" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(550, 325)
+texture = ExtResource("1_lti8b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(553, 325)
+zoom = Vector2(2.5, 2.5)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(567, 331)
+color = Color(0, 0.85089, 0.855563, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="DirectionalLight2D"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DirectionalLight2D"]
+occluder = SubResource("OccluderPolygon2D_ouk20")
