@@ -5,7 +5,7 @@ enum Estado { PATRULHA, STALKING, TRANSFORMACAO, PERSEGUICAO }
 ### CONFIGURAÇÕES PRINCIPAIS ###
 var estado_atual: Estado = Estado.PATRULHA
 var jogador = null  # Referência fraca ao jogador
-var tempo_stalking = 10  # Tempo em segundos
+var tempo_stalking = 5  # Tempo em segundos
 var velocidade_perseguicao = 80
 var patrol_speed = 40
 var acceleration = 20.0
@@ -15,10 +15,11 @@ var is_on_floor = false
 ### NODES ###
 @onready var timer_fuga = $Texture/Visao/TimerFuga
 @onready var timer_transformacao = $TimerTransformacao
-@onready var darkness_overlay = get_node("/root/MainScene/ShaderEffects/DarknessOverlay")
-@onready var path_follow = $Path2D/PathFollow2D
-@onready var visao = $Texture/Visao
 
+@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
+
+@onready var visao = $Texture/Visao
+@onready var darkness_overlay: ColorRect = $"../ShaderEffects/DarknessOverlay"
 ### SISTEMA DE ÁUDIO SINCRONIZADO ###
 @onready var audio_players = {
 	"stalking": $TrilhaStalking,
