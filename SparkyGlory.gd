@@ -68,26 +68,27 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
-	if qte_active:
-		handle_qte_movement(delta)
-		apply_camera_shake(delta)
-		apply_mouse_shake()
-		return
-	
-	handle_movement(delta)
-	current_speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
-	
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_force
-	
-	if not is_on_floor():
-		velocity.y -= 9.8 * delta
-	
-	move_and_slide()
-	
-	# Headbob só quando no chão e se movendo
-	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
+	if Global.Ta_no_jogo:
+		if qte_active:
+			handle_qte_movement(delta)
+			apply_camera_shake(delta)
+			apply_mouse_shake()
+			return
+		
+		handle_movement(delta)
+		current_speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
+		
+		if is_on_floor() and Input.is_action_just_pressed("jump"):
+			velocity.y = jump_force
+		
+		if not is_on_floor():
+			velocity.y -= 9.8 * delta
+		
+		move_and_slide()
+		
+		# Headbob só quando no chão e se movendo
+		t_bob += delta * velocity.length() * float(is_on_floor())
+		camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
 	
 
 

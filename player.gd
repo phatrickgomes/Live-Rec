@@ -54,6 +54,7 @@ func iniciar_interacao_monitor2():
 	_iniciar_transicao_para(camera_monitor2, 2)
 
 func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
+	Global.Ta_no_jogo = true
 	if em_transicao: return
 	if tween_atual and tween_atual.is_valid():
 		tween_atual.kill()

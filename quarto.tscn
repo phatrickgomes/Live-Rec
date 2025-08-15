@@ -332,7 +332,7 @@ transform = Transform3D(1, 0, -3.07336e-08, 0, -0.560639, 0.82806, 0, -0.82806, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
 
-[node name="SparkyGlory" parent="." groups=["fita", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
+[node name="Streamer" parent="." groups=["fita", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
 transform = Transform3D(0.8, -0.000151588, 5.48253e-07, 0.000151588, 0.799979, -0.00575056, 5.41409e-07, 0.00575056, 0.799979, 1.06133, 1.00526, 0.0279773)
 
 [node name="GUI" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("3_twob8")]

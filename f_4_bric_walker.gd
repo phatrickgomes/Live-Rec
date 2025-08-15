@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var visao: Area3D = $Visao
 @onready var dicas: Area3D = $Dicas
 @onready var debug_path: MeshInstance3D = $DebugPath
+@onready var player_controller: CharacterBody3D = $"../SparkyGlory"
 
 # Referências para os players de áudio
 @onready var audio_dica: AudioStreamPlayer3D = $TrilhaDica
@@ -62,7 +63,6 @@ var qte_time_limit: float = 3.0
 var qte_timer: float = 0.0
 var qte_last_key: String = ""
 var qte_chance: float = 0.6  # 50% de chance inicial
-var player_controller: Node = null
 var camera_shake_intensity: float = 0.1
 
 func _ready():
@@ -71,8 +71,6 @@ func _ready():
 	connect_signals()
 	set_new_patrol_target()
 	
-	# Encontra o jogador e sua câmera
-	player_controller = get_tree().get_root().get_node("MainScene3D/SparkyGlory")
 	
 	var immediate_mesh = ImmediateMesh.new()
 	var material = StandardMaterial3D.new()
