@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://w5hl78c4mp7s"]
+[gd_scene load_steps=19 format=3 uid="uid://w5hl78c4mp7s"]
 
 [ext_resource type="Shader" uid="uid://dr20lk510sspe" path="res://fundo.gdshader" id="1_4hy44"]
 [ext_resource type="Texture2D" uid="uid://b81omkgkwua3d" path="res://menu_rei.png" id="1_lti8b"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://cu3he4snvngss" path="res://FNAF 2_ Main Menu Theme.mp3" id="8_kk3ma"]
 [ext_resource type="Texture2D" uid="uid://eio48bd7arb8" path="res://Screenshot_20250728-173856.png" id="9_g7jxm"]
 [ext_resource type="Texture2D" uid="uid://7upnr2uxqd81" path="res://Screenshot_20250814-220803.jpg" id="10_jspdm"]
+[ext_resource type="FontFile" uid="uid://c1s3nk6m7xalf" path="res://Extreme Glitch.otf" id="12_jspdm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ytr4m"]
 shader = ExtResource("1_4hy44")
@@ -243,11 +244,6 @@ position = Vector2(435.268, 46.9529)
 scale = Vector2(0.39295, 0.50218)
 texture = ExtResource("3_ecwwl")
 
-[node name="NovoProta" type="Sprite2D" parent="screen/monitor"]
-position = Vector2(72.64, 66.4368)
-scale = Vector2(2.38953, 2.43327)
-texture = ExtResource("5_nrnbx")
-
 [node name="Olho" type="Sprite2D" parent="screen/monitor"]
 position = Vector2(125.833, -102.53)
 scale = Vector2(1.57291, 1.4573)
@@ -338,6 +334,11 @@ position = Vector2(425.544, -125.208)
 scale = Vector2(1.263, 0.953339)
 texture = ExtResource("6_nrnbx")
 
+[node name="NovoProta" type="Sprite2D" parent="screen/monitor"]
+position = Vector2(72.64, 66.4368)
+scale = Vector2(2.38953, 2.43327)
+texture = ExtResource("5_nrnbx")
+
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
 offset_left = 348.0
@@ -349,6 +350,108 @@ theme_override_colors/font_color = Color(0.326143, 0.145833, 0.615106, 1)
 theme_override_fonts/font = ExtResource("1_ouk20")
 theme_override_font_sizes/font_size = 72
 text = "X-Mate"
+
+[node name="Label" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 78.1352
+offset_top = 235.319
+offset_right = 189.135
+offset_bottom = 258.319
+rotation = -0.0601099
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "  system error"
+
+[node name="Label2" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 223.986
+offset_top = 147.157
+offset_right = 334.986
+offset_bottom = 170.157
+rotation = 0.0109831
+scale = Vector2(0.645779, 0.951714)
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
+
+[node name="Label3" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 283.84
+offset_top = 112.945
+offset_right = 394.841
+offset_bottom = 135.945
+rotation = 0.00766703
+scale = Vector2(0.645779, 0.951714)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
+
+[node name="Label4" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 228.769
+offset_top = 224.067
+offset_right = 339.769
+offset_bottom = 247.067
+rotation = -0.0601099
+scale = Vector2(0.645779, 0.951714)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
+
+[node name="Label8" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -5.49158
+offset_top = 203.592
+offset_right = 105.508
+offset_bottom = 226.592
+rotation = -0.0601099
+scale = Vector2(0.645779, 0.951714)
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
+
+[node name="Label5" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 262.938
+offset_top = 35.6592
+offset_right = 373.938
+offset_bottom = 58.6592
+rotation = -0.170873
+scale = Vector2(0.645779, 0.951714)
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
+
+[node name="Label6" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -18.2607
+offset_top = 107.39
+offset_right = 92.7393
+offset_bottom = 130.39
+rotation = -0.0601099
+scale = Vector2(0.645779, 0.951714)
+theme_override_colors/font_color = Color(0, 0.498039, 1, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
+
+[node name="Label7" type="Label" parent="Title"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -81.0636
+offset_top = 23.2958
+offset_right = 29.9364
+offset_bottom = 46.2958
+rotation = -0.0601099
+scale = Vector2(0.645779, 0.951714)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_jspdm")
+text = "ERROR"
 
 [node name="ExitButton" type="Button" parent="."]
 texture_filter = 1
