@@ -1,10 +1,11 @@
-[gd_scene load_steps=72 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=75 format=4 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://the last.jpg" id="1_jtej5"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://foto geral.png" id="2_2vapn"]
+[ext_resource type="Texture2D" uid="uid://bwtggvr2buhjp" path="res://WhatsApp Image 2025-08-15 at 11.36.14.jpeg" id="2_a6wpw"]
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://area_3d.tscn" id="3_twob8"]
 [ext_resource type="PackedScene" uid="uid://cx56uqtqto44b" path="res://ninja.glb" id="5_chyoy"]
@@ -14,6 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
 [ext_resource type="PackedScene" uid="uid://dxe1v3ukjtdti" path="res://Untitled.glb" id="6_lut1e"]
 [ext_resource type="Texture2D" uid="uid://dkykexo07c5cl" path="res://WoodFloor064_4K-JPG_Color.jpg" id="6_xtcex"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
+shading_mode = 0
+albedo_texture = ExtResource("2_a6wpw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_6wfgo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3t3qu"]
 albedo_texture = ExtResource("1_jtej5")
@@ -275,9 +282,14 @@ transform = Transform3D(0.434147, 0, 0.248025, 0, 0.5, 0, -0.248025, 0, 0.434147
 
 [node name="SpotLight3D" type="SpotLight3D" parent="monitor2"]
 transform = Transform3D(-0.0670264, 1.01867, -1.71983, -0.285285, 1.69831, 1.01704, 1.97841, 0.279406, 0.0883897, -11.5267, 2.81686, -0.505043)
-light_color = Color(0.658824, 1, 1, 1)
+light_color = Color(0.92443, 0.945497, 0.804011, 1)
 spot_range = 1.3701
 spot_angle = 28.4107
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="monitor2"]
+transform = Transform3D(0, -0.0256895, 0.840095, 0, 1.47175, 0.0146639, -0.748259, 0, 0, -10.8127, 2.76897, -0.508839)
+material_override = SubResource("StandardMaterial3D_teso0")
+mesh = SubResource("QuadMesh_6wfgo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.0641971, 0, -0.761475, 0, 0.764176, 0, 0.761475, 0, -0.0641971, 2.81057, 1.92614, 3.37251)

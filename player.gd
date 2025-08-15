@@ -14,6 +14,8 @@ signal interact_object
 @onready var ponto_da_camera = $Label
 @onready var main_scene_3d: Node3D = $"." 
 #@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
+@onready var interact_monitor: Label = $CanvasLayer/interact_monitor
+@onready var color_rect_MONITOR: ColorRect = $CanvasLayer/ColorRect
 
 ## variáveis principais
 var objeto_selecionado = null
@@ -35,6 +37,8 @@ var bob_amp: float = 0.07
 
 func _ready():
 	add_to_group("player")
+	interact_monitor.visible = false
+	color_rect_MONITOR.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera_inicial_transform = camera.global_transform
 
@@ -62,7 +66,9 @@ func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	monitor_atual = monitor_id
 	interacao_gui.ativo = true
 	interact_label.visible = false
-	ponto_da_camera.visible = false
+	ponto_da_camera.visible = true
+	interact_monitor.visible = true
+	color_rect_MONITOR.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	tween_atual = create_tween()
 	tween_atual.tween_property(camera, "global_transform", target_camera.global_transform, 1.5)\
@@ -82,6 +88,9 @@ func terminar_interacao():
 	interacao_gui.ativo = false
 	interact_label.visible = false
 	ponto_da_camera.visible = true
+	interact_monitor.visible = false
+	color_rect_MONITOR.visible = false
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	tween_atual = create_tween()
 	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
@@ -130,6 +139,7 @@ func _input(event):
 					soltar_objeto()
 
 func _physics_process(delta: float) -> void:
+	
 	if interagindo_com_tela or em_transicao:
 		velocity = Vector3.ZERO
 		return

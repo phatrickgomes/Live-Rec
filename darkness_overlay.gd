@@ -24,7 +24,7 @@ func fade_out(duration: float = 1.0):
 	tween.tween_method(set_darkness, current_darkness, 0.0, duration)
 
 func start_horror_pulse():
-	var pulse_tween = create_tween().set_loops()
+	var pulse_tween = create_tween()
 	pulse_tween.tween_method(set_darkness, 0.7, 0.9, 1.2)
 	pulse_tween.tween_method(set_darkness, 0.9, 0.7, 1.2)
 	current_darkness = 0.7
