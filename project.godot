@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="X-mates-(atualizado-com-o-codigo-do-yan - Labrinto)"
-run/main_scene="res://quarto.tscn"
+run/main_scene="uid://w5hl78c4mp7s"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
