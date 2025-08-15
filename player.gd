@@ -13,9 +13,11 @@ signal interact_object
 @onready var interact_label: Label = $CanvasLayer/interact_label
 @onready var ponto_da_camera = $Label
 @onready var main_scene_3d: Node3D = $"." 
-#@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
 @onready var interact_monitor: Label = $CanvasLayer/interact_monitor
 @onready var color_rect_MONITOR: ColorRect = $CanvasLayer/ColorRect
+@onready var audio_de_fundo = $audio_de_fundo
+@onready var corvo = $"../corvo"
+@onready var passos_som = $passos_som
 
 ## variáveis principais
 var objeto_selecionado = null
@@ -75,6 +77,10 @@ func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	tween_atual.tween_property(camera, "global_transform", target_camera.global_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_monitor_finished"))
+	if audio_de_fundo:
+		audio_de_fundo.stop()
+	if corvo:
+		corvo.stop()
 
 func _on_tween_monitor_finished():
 	em_transicao = false
@@ -91,7 +97,10 @@ func terminar_interacao():
 	ponto_da_camera.visible = true
 	interact_monitor.visible = false
 	color_rect_MONITOR.visible = false
-	
+	if audio_de_fundo:
+		audio_de_fundo.play()
+	if corvo:
+		corvo.stop()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	tween_atual = create_tween()
 	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
@@ -154,12 +163,21 @@ func _physics_process(delta: float) -> void:
 	if direction and Global.Ta_no_jogo == false:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+
+		# tocar som de passos
+		if is_on_floor() and not passos_som.playing:
+			passos_som.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		rotation_degrees.y -= mouse.x * delta
-		camera.rotation_degrees.x -= mouse.y * delta
-		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
+
+		# parar som quando não está andando
+		if passos_som.playing:
+			passos_som.stop()
+
+	rotation_degrees.y -= mouse.x * delta
+	camera.rotation_degrees.x -= mouse.y * delta
+	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
 
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
@@ -180,6 +198,7 @@ func _physics_process(delta: float) -> void:
 		objeto_selecionado.global_transform = mao.global_transform
 		objeto_selecionado.linear_velocity = Vector3.ZERO
 		objeto_selecionado.angular_velocity = Vector3.ZERO
+
 	move_and_slide()
 
 func _headbob(time: float) -> Vector3:

@@ -13,6 +13,7 @@ extends CharacterBody3D
 @onready var audio_irritado: AudioStreamPlayer3D = $TrilhaIrritado
 @onready var audio_enganacao: AudioStreamPlayer3D = $TrilhaEnganação # Novo áudio para o QTE
 
+
 # Configurações
 const SPEED: float = 5.0
 const GRAVITY: float = 1.8

@@ -1,51 +1,41 @@
 extends CharacterBody3D
 
-# Configurações de sensibilidade
 @export var mouse_sensitivity: float = 0.002
 @export var vertical_angle_limit: float = 90.0
-
-
-# Configurações de movimento
 @export var walk_speed: float = 4.0
 @export var sprint_speed: float = 8.0
 @export var acceleration: float = 10.0
 @export var jump_force: float = 4.5
 @export var diagonal_speed_multiplier: float = 1.4
 
-# Configurações do headbob
 var t_bob: float = 0.0
 var bob_freq: float = 2.0
 var bob_amp: float = 0.07
 
-# Componentes da cena
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
-@onready var main_scene_3d: Node3D = $".."
-@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
+@onready var musica_fundo = $musica_fundo
+@onready var passo = $passo
 
-# Variáveis de controle
 var current_speed: float = walk_speed
 var vertical_rotation: float = 0.0
-var camera_original_position: Vector3 = Vector3.ZERO
-var camera_original_rotation: Vector3 = Vector3.ZERO
+var camera_original_position: Vector3
+var camera_original_rotation: Vector3
 
-# Variáveis para QTE
 var qte_active: bool = false
 var qte_target_position: Vector3 = Vector3.ZERO
 var qte_shake_timer: float = 0.0
 var qte_shake_intensity: float = 0.3
 var qte_rotation_shake_intensity: float = 0.8
 var qte_mouse_shake_intensity: float = 250.0
-var original_mouse_sensitivity: float = 0.002
-
-
+var original_mouse_sensitivity: float
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_original_position = camera.position
 	camera_original_rotation = camera.rotation
 	original_mouse_sensitivity = mouse_sensitivity
-	
+
 func _input(event):
 	if qte_active:
 		return
@@ -59,13 +49,11 @@ func _input(event):
 		)
 		camera_pivot.rotation.x = vertical_rotation
 		
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_ESCAPE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
-	if event is InputEventMouseButton and event.pressed:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
 	if Global.Ta_no_jogo:
@@ -86,11 +74,8 @@ func _physics_process(delta):
 		
 		move_and_slide()
 		
-		# Headbob só quando no chão e se movendo
 		t_bob += delta * velocity.length() * float(is_on_floor())
 		camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
-	
-
 
 func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -103,17 +88,21 @@ func handle_movement(delta):
 	var target_velocity = direction * current_speed
 	velocity.x = lerp(velocity.x, target_velocity.x, acceleration * delta)
 	velocity.z = lerp(velocity.z, target_velocity.z, acceleration * delta)
-		
-# ===== Headbob =====
+	
+	if is_on_floor() and input_dir.length() > 0 and !passo.playing and !qte_active:
+		if Input.is_action_pressed("sprint"):
+			passo.pitch_scale = randf_range(1.2, 1.3)
+		else:
+			passo.pitch_scale = randf_range(0.9, 1.1)
+		passo.play()
+
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO
 	pos.y = sin(time * bob_freq) * bob_amp
 	pos.x = cos(time * bob_freq / 2) * bob_amp
 	return pos
 
-# ===== FUNÇÕES PARA QTE =====
 func start_qte(enemy_position: Vector3):
-	print("Jogador iniciando QTE")
 	qte_active = true
 	qte_target_position = enemy_position
 	qte_shake_timer = 0.0
@@ -123,7 +112,6 @@ func start_qte(enemy_position: Vector3):
 	mouse_sensitivity = original_mouse_sensitivity * 2.0
 
 func end_qte():
-	print("Jogador terminando QTE")
 	qte_active = false
 	camera.position = camera_original_position
 	camera.rotation = camera_original_rotation
@@ -136,7 +124,6 @@ func handle_qte_movement(delta):
 	velocity = direction * (walk_speed * 0.5)
 	move_and_slide()
 	
-	var current_rotation = global_transform.basis.get_euler().y
 	var target_rotation = (qte_target_position - global_position).normalized()
 	target_rotation = atan2(target_rotation.x, target_rotation.z)
 	

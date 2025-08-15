@@ -1,7 +1,8 @@
-[gd_scene load_steps=75 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=80 format=4 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://the last.jpg" id="1_jtej5"]
+[ext_resource type="Script" uid="uid://clfat5jp85un4" path="res://quarto.gd" id="1_lddpm"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://foto geral.png" id="2_2vapn"]
@@ -15,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
 [ext_resource type="PackedScene" uid="uid://dxe1v3ukjtdti" path="res://Untitled.glb" id="6_lut1e"]
 [ext_resource type="Texture2D" uid="uid://dkykexo07c5cl" path="res://WoodFloor064_4K-JPG_Color.jpg" id="6_xtcex"]
+[ext_resource type="AudioStream" uid="uid://bd3wt6s2g5mek" path="res://musicas/Relaxe Por 2 Minutos ao som da noite!.mp3" id="9_mckiv"]
+[ext_resource type="AudioStream" uid="uid://cosrrq14s7pra" path="res://musicas/corvo.wav" id="10_lddpm"]
+[ext_resource type="AudioStream" uid="uid://brmxxoi1r6sj0" path="res://musicas/caminhando.wav" id="11_igesp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
 shading_mode = 0
@@ -163,10 +167,13 @@ albedo_texture = ExtResource("6_xtcex")
 size = Vector3(0.927551, 88.7892, 28.0878)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2vapn"]
-size = Vector3(1, 0.157715, 10.4375)
+size = Vector3(1, 0.157715, 10.309)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_od0w4"]
 size = Vector3(3.90796, 15.6546, 0.019165)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rmfy"]
+size = Vector3(0.19165, 16.7018, 10.1665)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2vapn"]
 points = PackedVector3Array(-0.949901, 24.7132, -0.12896, -0.949901, 24.7132, 0.343133, -0.949901, 24.9201, -0.12896, 0.63259, 24.7132, -0.12896, -0.949901, 24.9201, 0.343133, 0.63259, 24.7132, 0.343133, 0.63259, 24.9201, -0.12896, 0.63259, 24.9201, 0.343133)
@@ -276,6 +283,7 @@ albedo_texture = ExtResource("6_xtcex")
 
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
+script = ExtResource("1_lddpm")
 
 [node name="monitor2" parent="." instance=ExtResource("1_6wfgo")]
 transform = Transform3D(0.434147, 0, 0.248025, 0, 0.5, 0, -0.248025, 0, 0.434147, 3.6907, 0.150233, -0.601247)
@@ -287,7 +295,7 @@ spot_range = 1.3701
 spot_angle = 28.4107
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="monitor2"]
-transform = Transform3D(0, -0.0256895, 0.840095, 0, 1.47175, 0.0146639, -0.748259, 0, 0, -10.8127, 2.76897, -0.508839)
+transform = Transform3D(0.000375628, -0.00217304, 0.82814, 0.0225356, 1.38074, 0.0012889, -0.728897, 0.0426879, 0.000466526, -10.8287, 2.84091, -0.505168)
 material_override = SubResource("StandardMaterial3D_teso0")
 mesh = SubResource("QuadMesh_6wfgo")
 
@@ -299,7 +307,7 @@ mesh = SubResource("QuadMesh_teso0")
 [node name="luz_quarto" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.34166, 0, 0.939824, 0, 1, 0, -0.939824, 0, -0.34166, 1.51825, 1.95987, 2.9133)
 light_color = Color(0.843137, 0.898039, 0.827451, 1)
-light_energy = 0.01
+light_energy = 0.1
 
 [node name="quadro_anime" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0017415, 0, 1.7025, 0, 0.968735, 0, 0.860159, 0, -0.00344693, -1.76306, 1.60013, 3.28517)
@@ -334,6 +342,15 @@ environment = SubResource("Environment_i5arm")
 
 [node name="Streamer" parent="." groups=["fita", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
 transform = Transform3D(0.8, -0.000151588, 5.48253e-07, 0.000151588, 0.799979, -0.00575056, 5.41409e-07, 0.00575056, 0.799979, 1.06133, 1.00526, 0.0279773)
+
+[node name="audio_de_fundo" type="AudioStreamPlayer" parent="Streamer"]
+stream = ExtResource("9_mckiv")
+volume_db = -23.909
+autoplay = true
+
+[node name="passos_som" type="AudioStreamPlayer3D" parent="Streamer"]
+transform = Transform3D(1.25, 2.61934e-10, 3.72529e-09, 1.45519e-11, 1.25, -5.58794e-09, -3.72529e-09, 0, 1.25, -0.00022316, -1.17852, 0.0084717)
+stream = ExtResource("11_igesp")
 
 [node name="GUI" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("3_twob8")]
 transform = Transform3D(0.00907439, 0, 0.128901, 0, 0.140217, 0, -0.259856, 0, 0.00450134, -1.52136, 1.43578, 1.36423)
@@ -385,7 +402,7 @@ shape = SubResource("BoxShape3D_jtej5")
 [node name="Mesa_computador" type="StaticBody3D" parent="quarto/Cube_013" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_013/Mesa_computador"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.84217e-14, 0, 0, 0.999999, -1.62903, 9.70063, 0.311493)
+transform = Transform3D(1, 0, 0, 0, 1, 2.84217e-14, 0, 0, 0.999999, -1.62903, 9.70063, 0.247225)
 shape = SubResource("BoxShape3D_2vapn")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="quarto/Cube_013/Mesa_computador"]
@@ -393,8 +410,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96006, 17.5363, -4.8724)
 shape = SubResource("BoxShape3D_od0w4")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="quarto/Cube_013/Mesa_computador"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96, 17.711, 5.52673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96, 17.711, 5.4468)
 shape = SubResource("BoxShape3D_od0w4")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="quarto/Cube_013/Mesa_computador"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.84217e-14, 0, 0, 0.999999, -1.04556, 18.0212, 0.0335889)
+shape = SubResource("BoxShape3D_4rmfy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="quarto/Cube_015" index="0"]
 
@@ -580,6 +601,18 @@ material_override = SubResource("StandardMaterial3D_4rmfy")
 mesh = SubResource("BoxMesh_jsa3l")
 skin = SubResource("Skin_jsa3l")
 skeleton = NodePath("../quarto/Cube_004")
+
+[node name="corvo" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(-0.809652, 0.00437224, 0.586894, 0.000189485, 0.999974, -0.00718821, -0.58691, -0.00570874, -0.809632, -3.4922, 1.41762, 0.742706)
+stream = ExtResource("10_lddpm")
+volume_db = -29.982
+autoplay = true
+
+[node name="Timer" type="Timer" parent="corvo"]
+wait_time = 120.0
+one_shot = true
+
+[connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]
 
 [editable path="quarto"]
 [editable path="ninja"]

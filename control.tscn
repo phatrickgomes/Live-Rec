@@ -40,9 +40,11 @@ script = ExtResource("1_62e2m")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 332.0
+offset_right = -373.0
 offset_bottom = 31.0
 grow_horizontal = 2
-scale = Vector2(1, 0.72)
+scale = Vector2(1.56, 0.72)
 
 [node name="TextureRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0fbet")
