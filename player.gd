@@ -12,9 +12,8 @@ signal interact_object
 @onready var interacao_gui = $"../GUI"
 @onready var interact_label: Label = $CanvasLayer/interact_label
 @onready var ponto_da_camera = $Label
-@onready var main_scene_3d: Node3D = $"."
-@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
-
+@onready var main_scene_3d: Node3D = $"." 
+#@onready var sub_viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
 
 ## variáveis principais
 var objeto_selecionado = null
@@ -25,6 +24,8 @@ var interagindo_com_tela = false
 var em_transicao = false
 var tween_atual: Tween = null
 var camera_inicial_transform: Transform3D
+var saved_pivot_rot: Vector3
+var saved_cam_rot: Vector3
 var monitor_atual: int = 0 
 
 ## headbob
@@ -54,6 +55,8 @@ func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 		tween_atual.kill()
 	if monitor_atual == 0:
 		camera_inicial_transform = camera.global_transform
+		saved_pivot_rot = camera_pivot.rotation
+		saved_cam_rot = camera.rotation
 	em_transicao = true
 	interagindo_com_tela = true
 	monitor_atual = monitor_id
@@ -65,9 +68,7 @@ func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	tween_atual.tween_property(camera, "global_transform", target_camera.global_transform, 1.5)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_monitor_finished"))
-	if Global.Ta_no_jogo:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
+
 func _on_tween_monitor_finished():
 	em_transicao = false
 
@@ -87,9 +88,11 @@ func terminar_interacao():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_voltar_jogo_finished"))
 	Global.Ta_no_jogo = false
-	
+
 func _on_tween_voltar_jogo_finished():
 	em_transicao = false
+	camera_pivot.rotation = saved_pivot_rot
+	camera.rotation = saved_cam_rot
 
 ## entrada
 func _input(event):
@@ -166,7 +169,6 @@ func _physics_process(delta: float) -> void:
 		objeto_selecionado.global_transform = mao.global_transform
 		objeto_selecionado.linear_velocity = Vector3.ZERO
 		objeto_selecionado.angular_velocity = Vector3.ZERO
-
 	move_and_slide()
 
 func _headbob(time: float) -> Vector3:
