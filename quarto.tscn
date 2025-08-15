@@ -295,7 +295,7 @@ spot_range = 1.3701
 spot_angle = 28.4107
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="monitor2"]
-transform = Transform3D(0.000375628, -0.00217304, 0.82814, 0.0225356, 1.38074, 0.0012889, -0.728897, 0.0426879, 0.000466526, -10.8287, 2.84091, -0.505168)
+transform = Transform3D(0.000375628, -0.00217304, 0.82814, 0.0225356, 1.38074, 0.0012889, -0.728897, 0.0426879, 0.000466526, -10.8215, 2.82394, -0.517011)
 material_override = SubResource("StandardMaterial3D_teso0")
 mesh = SubResource("QuadMesh_6wfgo")
 
