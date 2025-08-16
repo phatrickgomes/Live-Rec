@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://rwmv3ram5t1a"]
+
+[ext_resource type="Script" uid="uid://w8auc37jmdkp" path="res://tela.gd" id="1_t1ekm"]
+[ext_resource type="PackedScene" uid="uid://cemsn382ds6wt" path="res://control.tscn" id="2_t1ekm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6xbb"]
+size = Vector3(2.5, 2.5, 2.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o6xbb"]
+viewport_path = NodePath("CollisionShape3D/Sprite3D/SubViewport")
+
+[node name="GUI" type="Area3D"]
+script = ExtResource("1_t1ekm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13216, 0.0562548, 0.0605559)
+shape = SubResource("BoxShape3D_o6xbb")
+
+[node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00294919, -0.013895, 1.35549)
+double_sided = false
+texture = SubResource("ViewportTexture_o6xbb")
+
+[node name="SubViewport" type="SubViewport" parent="CollisionShape3D/Sprite3D"]
+size = Vector2i(256, 256)
+
+[node name="Control" parent="CollisionShape3D/Sprite3D/SubViewport" instance=ExtResource("2_t1ekm")]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

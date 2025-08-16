@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cu3he4snvngss"
+path="res://.godot/imported/FNAF 2_ Main Menu Theme.mp3-0f5887fa788698e8ed0b42d30c8c87f6.mp3str"
+
+[deps]
+
+source_file="res://FNAF 2_ Main Menu Theme.mp3"
+dest_files=["res://.godot/imported/FNAF 2_ Main Menu Theme.mp3-0f5887fa788698e8ed0b42d30c8c87f6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bst1ipstdgmjq"]
+
+[ext_resource type="Texture2D" uid="uid://dq3h6u8r6f11o" path="res://icon.svg" id="1_htcy5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3fl7"]
+albedo_texture = ExtResource("1_htcy5")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_htcy5"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Caixa" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99997, -0.00778409, 0, 0.00778409, 0.99997, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_noarx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.498074, -0.0438474, -1.97798e-09, 0.0438474, 0.498074, 1.22826e-09, 1.86265e-09, -1.39698e-09, 0.5, 5.86733e-08, 1.20349, -4.21759)
+mesh = SubResource("BoxMesh_a0tk4")
+surface_material_override/0 = SubResource("StandardMaterial3D_r3fl7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.498074, -0.0438474, -1.97798e-09, 0.0438474, 0.498074, 1.22826e-09, 1.86265e-09, -1.39698e-09, 0.5, 5.86733e-08, 1.20349, -4.21759)
+shape = SubResource("ConvexPolygonShape3D_htcy5")
