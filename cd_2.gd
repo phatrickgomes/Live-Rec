@@ -1,13 +1,8 @@
 extends RigidBody3D
-
 var player  
-
 @onready var cd = $cd
 
-
 var selecionado = false
-
-
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	add_to_group("pegavel") 

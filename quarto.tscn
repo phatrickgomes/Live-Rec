@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=82 format=4 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://the last.jpg" id="1_jtej5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://foto geral.png" id="2_2vapn"]
+[ext_resource type="PackedScene" uid="uid://j02oml35jvv" path="res://cd_2.tscn" id="2_7fvgo"]
 [ext_resource type="Texture2D" uid="uid://bwtggvr2buhjp" path="res://WhatsApp Image 2025-08-15 at 11.36.14.jpeg" id="2_a6wpw"]
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://area_3d.tscn" id="3_twob8"]
@@ -286,6 +287,9 @@ albedo_texture = ExtResource("6_xtcex")
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 script = ExtResource("1_lddpm")
 
+[node name="cd2" parent="." instance=ExtResource("2_7fvgo")]
+transform = Transform3D(0.0612192, -0.535736, -0.842163, -0.0105, -0.844045, 0.536169, -0.998068, -0.0239812, -0.057297, 4.89692, 0.27412, 1.55558)
+
 [node name="monitor2" parent="." instance=ExtResource("1_6wfgo")]
 transform = Transform3D(0.434147, 0, 0.248025, 0, 0.5, 0, -0.248025, 0, 0.434147, 3.6907, 0.150233, -0.601247)
 
@@ -335,7 +339,7 @@ transform = Transform3D(1.87201, -8.19564e-08, 1.45286e-07, 4.65661e-09, 2.48034
 material_override = SubResource("StandardMaterial3D_yx88i")
 mesh = SubResource("QuadMesh_yx88i")
 
-[node name="Fita" parent="." groups=["fita"] instance=ExtResource("5_lut1e")]
+[node name="Fita" parent="." instance=ExtResource("5_lut1e")]
 transform = Transform3D(0.999942, -0.00769315, 0.00747155, -0.0105, -0.844045, 0.536169, 0.00218153, -0.536217, -0.844077, 4.84169, 0.864797, 0.854756)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
