@@ -138,17 +138,12 @@ func _input(event):
 				var collider = raycast.get_collider()
 				if collider.is_in_group("pegavel"):
 					pegar_objeto(collider)
-				var colli = raycast.get_collider()
+				elif collider.is_in_group("tela_interativa"):
+					iniciar_interacao_monitor1()
 		else:
 			if raycast.is_colliding():
 				var collider = raycast.get_collider()
-				if collider.is_in_group("tela_interativa") and objeto_selecionado.is_in_group("fita2"):
-					iniciar_interacao_monitor1()
-				else:
-					soltar_objeto()
-			if raycast.is_colliding():
-				var collider = raycast.get_collider()
-				if collider.is_in_group("tela_interativa") and objeto_selecionado.is_in_group("fita2"):
+				if collider.is_in_group("tela_interativa") and objeto_selecionado.is_in_group("fita"):
 					iniciar_interacao_monitor1()
 				else:
 					soltar_objeto()
@@ -191,7 +186,7 @@ func _physics_process(delta: float) -> void:
 		var collider = raycast.get_collider()
 		interact_object.emit(collider)
 		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel") or \
-		(objeto_selecionado != null and objeto_selecionado.is_in_group("fita2") and collider.is_in_group("tela_interativa")):
+		   (objeto_selecionado != null and objeto_selecionado.is_in_group("fita") and collider.is_in_group("tela_interativa")):
 			interact_label.visible = true
 		else:
 			interact_label.visible = false
@@ -203,7 +198,7 @@ func _physics_process(delta: float) -> void:
 		objeto_selecionado.global_transform = mao.global_transform
 		objeto_selecionado.linear_velocity = Vector3.ZERO
 		objeto_selecionado.angular_velocity = Vector3.ZERO
-	
+
 	move_and_slide()
 
 func _headbob(time: float) -> Vector3:
