@@ -13,11 +13,11 @@ config_version=5
 config/name="X-mates-(atualizado-com-o-codigo-do-yan - Labrinto)"
 run/main_scene="uid://w5hl78c4mp7s"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Imagens/icon.svg"
 
 [autoload]
 
-Global="*res://Global.gd"
+Global="*res://Assets/Script/Global.gd"
 
 [filesystem]
 
