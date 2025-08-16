@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=81 format=4 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://the last.jpg" id="1_jtej5"]
@@ -14,11 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://dkgj13t8vk3o7" path="res://jogo12.tscn" id="5_lut1e"]
 [ext_resource type="Texture2D" uid="uid://oi5yt67t0ys3" path="res://texturaparede.jpg" id="5_twob8"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://quarto.glb" id="5_wwc3q"]
-[ext_resource type="PackedScene" uid="uid://dxe1v3ukjtdti" path="res://Untitled.glb" id="6_lut1e"]
 [ext_resource type="Texture2D" uid="uid://dkykexo07c5cl" path="res://WoodFloor064_4K-JPG_Color.jpg" id="6_xtcex"]
 [ext_resource type="AudioStream" uid="uid://bd3wt6s2g5mek" path="res://musicas/Relaxe Por 2 Minutos ao som da noite!.mp3" id="9_mckiv"]
 [ext_resource type="AudioStream" uid="uid://cosrrq14s7pra" path="res://musicas/corvo.wav" id="10_lddpm"]
 [ext_resource type="AudioStream" uid="uid://brmxxoi1r6sj0" path="res://musicas/caminhando.wav" id="11_igesp"]
+[ext_resource type="PackedScene" uid="uid://dmv2ooeugq6ov" path="res://xbox_360_s.glb" id="20_4rmfy"]
+[ext_resource type="PackedScene" uid="uid://bm1lvkgax6uya" path="res://musicas/bmo___adventure_time_fan_art.glb" id="20_7fvgo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
 shading_mode = 0
@@ -335,7 +336,7 @@ material_override = SubResource("StandardMaterial3D_yx88i")
 mesh = SubResource("QuadMesh_yx88i")
 
 [node name="Fita" parent="." groups=["fita"] instance=ExtResource("5_lut1e")]
-transform = Transform3D(1, 0, -3.07336e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.84365, 0.841873, 0.862671)
+transform = Transform3D(0.999942, -0.00769315, 0.00747155, -0.0105, -0.844045, 0.536169, 0.00218153, -0.536217, -0.844077, 4.84169, 0.864797, 0.854756)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
@@ -592,9 +593,6 @@ transform = Transform3D(-1.92183e-05, -0.00027497, 0.00298731, -2.6081e-05, 0.00
 [node name="Ninja_Tpose" parent="ninja" index="0"]
 transform = Transform3D(1, 3.72529e-09, -1.86265e-09, 1.86265e-09, -2.75322e-08, -1, 3.72529e-09, 1, -2.44181e-08, 14.3308, 2.26245, 7.19955)
 
-[node name="computador" parent="." instance=ExtResource("6_lut1e")]
-transform = Transform3D(0.299896, 0, -0.00790542, 0, 0.3, 0, 0.00790542, 0, 0.299896, -0.512522, 1.35913, 2.18198)
-
 [node name="chao" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -2.13018, -0.0522756, 0.00210066, 0, 0, 0, -0.0561526, 1.98311, 4.17063, 0.177507, 1.02577)
 material_override = SubResource("StandardMaterial3D_4rmfy")
@@ -606,13 +604,19 @@ skeleton = NodePath("../quarto/Cube_004")
 transform = Transform3D(-0.809652, 0.00437224, 0.586894, 0.000189485, 0.999974, -0.00718821, -0.58691, -0.00570874, -0.809632, -3.4922, 1.41762, 0.742706)
 stream = ExtResource("10_lddpm")
 volume_db = -29.982
-autoplay = true
 
 [node name="Timer" type="Timer" parent="corvo"]
 wait_time = 120.0
 one_shot = true
 
+[node name="bimo" parent="." instance=ExtResource("20_7fvgo")]
+transform = Transform3D(0.000543402, 0, 0.00998521, 0, 0.01, 0, -0.00998521, 0, 0.000543402, -1.37751, 1.95541, 1.21024)
+
+[node name="Sketchfab_Scene" parent="bimo/Sketchfab_model/6520a23aaf4e42ef95114794f429eb91_fbx/RootNode/Cube" index="5" instance=ExtResource("20_4rmfy")]
+transform = Transform3D(-149.969, 5.01277e-06, -3.02369, -3.02369, -2.42825e-05, 149.969, 4.52233e-06, 150, 2.43786e-05, -96.943, -70.9605, -80.4184)
+
 [connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]
 
 [editable path="quarto"]
 [editable path="ninja"]
+[editable path="bimo"]
