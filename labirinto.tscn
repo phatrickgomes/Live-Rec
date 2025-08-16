@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnt8rovyhr42l"]
+[gd_scene load_steps=20 format=3 uid="uid://cx3jg0kbuy1bj"]
 
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://foto geral.png" id="1_tqif8"]
 [ext_resource type="Script" uid="uid://c4gynsrn3v5s8" path="res://SparkyGlory.gd" id="2_pdiug"]

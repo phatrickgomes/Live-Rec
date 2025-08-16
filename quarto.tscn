@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=81 format=4 uid="uid://pr6827hoy8ek"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://the last.jpg" id="1_jtej5"]
