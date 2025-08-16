@@ -14,7 +14,7 @@ var bob_amp: float = 0.07
 
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
-@onready var musica_fundo = $musica_fundo
+@onready var musica_fundo = $"../musica_fundo"
 @onready var passo = $passo
 
 var current_speed: float = walk_speed

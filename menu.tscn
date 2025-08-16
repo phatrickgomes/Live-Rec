@@ -310,9 +310,9 @@ position = Vector2(258.601, 184.538)
 scale = Vector2(0.0822287, 0.0440085)
 texture = ExtResource("8_h1wq0")
 
-[node name="Olho11" type="Sprite2D" parent="screen/monitor"]
-position = Vector2(257.958, 185.257)
-scale = Vector2(1.263, 0.953339)
+[node name="Olho11" type="Sprite2D" parent="screen/monitor/Fabbri1"]
+position = Vector2(-7.82007, 16.3389)
+scale = Vector2(15.3596, 21.6626)
 texture = ExtResource("6_nrnbx")
 
 [node name="Screenshot20250728-173856" type="Sprite2D" parent="screen/monitor"]

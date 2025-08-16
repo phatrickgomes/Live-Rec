@@ -6,9 +6,9 @@
 [ext_resource type="Shader" uid="uid://dljg3xr3wq3jw" path="res://prototipo.gdshader" id="4_8mm7a"]
 [ext_resource type="Script" uid="uid://b3f2vx0ow7o6v" path="res://darkness_overlay.gd" id="5_hq1ik"]
 [ext_resource type="Script" uid="uid://dm6ywcvnmy4xh" path="res://o_profeta.gd" id="6_hq1ik"]
-[ext_resource type="AudioStream" path="res://TrilhaStalking.tres" id="7_7ycvg"]
-[ext_resource type="AudioStream" path="res://TrilhaPerseguicao.tres" id="8_wr18j"]
-[ext_resource type="AudioStream" path="res://RugidoWendigo.tres" id="9_qwutr"]
+[ext_resource type="AudioStream" uid="uid://ft555vf2x5li" path="res://TrilhaStalking.tres" id="7_7ycvg"]
+[ext_resource type="AudioStream" uid="uid://ckmojs03o3q3w" path="res://TrilhaPerseguicao.tres" id="8_wr18j"]
+[ext_resource type="AudioStream" uid="uid://bu8xkxav4gwam" path="res://RugidoWendigo.tres" id="9_qwutr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wr18j"]
 texture = ExtResource("1_7ycvg")
@@ -342,15 +342,16 @@ texture = ExtResource("3_8mm7a")
 position = Vector2(2, -3.5)
 shape = SubResource("RectangleShape2D_hq1ik")
 
+[node name="Camera2D" type="Camera2D" parent="SparkyGlory"]
+position = Vector2(57, -88)
+scale = Vector2(10.6178, -1.48567)
+zoom = Vector2(0.6, 0.6)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1052.5, 1475)
 shape = SubResource("RectangleShape2D_7ycvg")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(533, 530)
-scale = Vector2(3.37181, 0.3581)
 
 [node name="O Profeta" type="CharacterBody2D" parent="."]
 position = Vector2(849, 790)
