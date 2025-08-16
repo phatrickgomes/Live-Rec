@@ -39,7 +39,7 @@ radius = 32.4052
 [node name="MainScene3D" type="Node3D"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.084, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.9218, 0)
 navigation_mesh = SubResource("NavigationMesh_pdiug")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
@@ -58,7 +58,7 @@ shadow_enabled = true
 environment = SubResource("Environment_bnwo1")
 
 [node name="SparkyGlory" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -4.9214, -28.2019)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 10.8945, -28.2019)
 script = ExtResource("2_pdiug")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SparkyGlory"]
@@ -75,12 +75,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0160082, 1.54942, -0.20313
 [node name="Camera3D" type="Camera3D" parent="SparkyGlory/CameraPivot"]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 5.49108e-05, 0.569105, 0.00571823)
 
-[node name="musica_fundo" type="AudioStreamPlayer3D" parent="SparkyGlory"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.873168, 31.0048, 33.8739)
-stream = ExtResource("3_lrpia")
-volume_db = 11.989
-autoplay = true
-
 [node name="passo" type="AudioStreamPlayer" parent="SparkyGlory"]
 stream = ExtResource("4_24x0x")
 volume_db = -20.613
@@ -94,7 +88,7 @@ transform = Transform3D(0.148465, 0, -0.988918, 0, 1, 0, 0.988918, 0, 0.148465, 
 size = Vector3(17.1148, 8.87793, 7.62781)
 
 [node name="F4bricWalker" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.993171, 0, 0.116671, 0, 1, 0, -0.116671, 0, 0.993171, 22.513, -3.49607, 41.103)
+transform = Transform3D(0.993171, 0, 0.116671, 0, 1, 0, -0.116671, 0, 0.993171, 22.513, 12.7028, 41.103)
 script = ExtResource("3_d4mo2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="F4bricWalker"]
@@ -142,3 +136,9 @@ stream = ExtResource("8_evn37")
 volume_db = 15.238
 
 [node name="DebugPath" type="MeshInstance3D" parent="F4bricWalker"]
+
+[node name="musica_fundo" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.698534, 19.0336, -1.10277)
+stream = ExtResource("3_lrpia")
+volume_db = 11.989
+autoplay = true
