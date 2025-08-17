@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dj27nwkaeno80"
-path="res://.godot/imported/cd_3d_model.glb-fe556d32c258a008d0e45d09dcc09098.scn"
+uid="uid://cxvih0wmp1pok"
+path="res://.godot/imported/3d_tube_lamp.glb-bafdf07ed799273ac42ed5234e65f47c.scn"
 
 [deps]
 
-source_file="res://cd_3d_model.glb"
-dest_files=["res://.godot/imported/cd_3d_model.glb-fe556d32c258a008d0e45d09dcc09098.scn"]
+source_file="res://Assets/Modelos/3d_tube_lamp.glb"
+dest_files=["res://.godot/imported/3d_tube_lamp.glb-bafdf07ed799273ac42ed5234e65f47c.scn"]
 
 [params]
 
