@@ -17,11 +17,7 @@ var bob_amp: float = 0.07
 ### Componentes ###
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
-@onready var musica_fundo = $"../musica_fundo"
 @onready var passo = $passo
-@onready var qte_ui = $QTE_UI
-@onready var qte_a_label = $QTE_UI/CenterContainer/VBoxContainer/HBoxContainer/A/Label
-@onready var qte_d_label = $QTE_UI/CenterContainer/VBoxContainer/HBoxContainer/D/Label
 
 ### Variáveis de estado ###
 var current_speed: float = walk_speed
@@ -42,13 +38,28 @@ var qte_presses_required: int = 20
 var qte_current_presses: int = 0
 var qte_enemy_ref: Node = null
 
+# Referências para a UI do QTE
+var qte_ui: Control
+var qte_a_label: Label
+var qte_d_label: Label
+
 func _ready():
+	PlayerManager.register_internal_player(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_original_position = camera.position
 	camera_original_rotation = camera.rotation
 	original_mouse_sensitivity = mouse_sensitivity
-	qte_ui.visible = false
-	update_qte_ui()
+	
+	# Buscar a UI do QTE na cena do jogo interno
+	qte_ui = get_node("QTE_UI")  # Caminho relativo corrigido
+	
+	if qte_ui:
+		qte_ui.visible = false
+		qte_a_label = qte_ui.get_node("CenterContainer/VBoxContainer/HBoxContainer/A/Label")
+		qte_d_label = qte_ui.get_node("CenterContainer/VBoxContainer/HBoxContainer/D/Label")
+		update_qte_ui()
+	else:
+		printerr("QTE_UI não encontrada!")
 
 func _input(event):
 	if qte_active:
@@ -129,17 +140,32 @@ func start_qte(enemy_position: Vector3, enemy_ref: Node):
 	qte_target_position = enemy_position
 	qte_enemy_ref = enemy_ref
 	qte_shake_timer = 0.0
-	qte_ui.visible = true
+	
+	if qte_ui:
+		qte_ui.visible = true
+	
 	qte_current_key = "A"
 	update_qte_ui()
-	look_at(qte_target_position, Vector3.UP)
+	
+	# Fazer o jogador olhar diretamente para o inimigo
+	var direction_to_enemy = (qte_target_position - global_position).normalized()
+	direction_to_enemy.y = 0  # Manter na horizontal
+	
+	# Calcular a rotação necessária
+	rotation.y = atan2(direction_to_enemy.x, direction_to_enemy.z)
+	
+	# Resetar a rotação vertical da câmera
 	vertical_rotation = 0
 	camera_pivot.rotation.x = 0
+	
 	mouse_sensitivity = original_mouse_sensitivity * 2.0
 
 func end_qte():
 	qte_active = false
-	qte_ui.visible = false
+	
+	if qte_ui:
+		qte_ui.visible = false
+	
 	camera.position = camera_original_position
 	camera.rotation = camera_original_rotation
 	camera_pivot.rotation = Vector3.ZERO
@@ -194,7 +220,7 @@ func on_qte_key_pressed(key: String):
 		return
 	
 	# Feedback visual IMEDIATO
-	if key == "A":
+	if key == "A" and qte_a_label:
 		qte_a_label.add_theme_color_override("font_color", Color.GREEN)
 		var tween = create_tween()
 		tween.tween_property(qte_a_label, "scale", Vector2(1.3, 1.3), 0.1)
@@ -205,7 +231,7 @@ func on_qte_key_pressed(key: String):
 			else:
 				qte_a_label.add_theme_color_override("font_color", Color.WHITE)
 		)
-	elif key == "D":
+	elif key == "D" and qte_d_label:
 		qte_d_label.add_theme_color_override("font_color", Color.GREEN)
 		var tween = create_tween()
 		tween.tween_property(qte_d_label, "scale", Vector2(1.3, 1.3), 0.1)
@@ -227,12 +253,13 @@ func update_qte_key(next_key: String):
 
 func update_qte_ui():
 	# Atualiza cores das teclas
-	if qte_current_key == "A":
-		qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-		qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
-	else:
-		qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-		qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	if qte_a_label and qte_d_label:
+		if qte_current_key == "A":
+			qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
+			qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		else:
+			qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
+			qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 
 func is_in_qte() -> bool:
 	return qte_active

@@ -18,10 +18,19 @@ config/icon="res://Assets/Imagens/icon.svg"
 [autoload]
 
 Global="*res://Assets/Script/Global.gd"
+PlayerManager="*res://Assets/Script/PlayerManager.gd"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [filesystem]
 
 import/blender/enabled=false
+
+[global]
+
+PlayerManager=true
 
 [global_group]
 

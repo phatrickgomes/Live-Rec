@@ -38,6 +38,7 @@ var bob_freq: float = 2.0
 var bob_amp: float = 0.07
 
 func _ready():
+	PlayerManager.register_main_player(self)
 	add_to_group("player")
 	interact_monitor.visible = false
 	color_rect_MONITOR.visible = false

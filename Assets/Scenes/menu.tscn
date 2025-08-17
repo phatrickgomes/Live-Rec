@@ -310,17 +310,10 @@ position = Vector2(258.601, 184.538)
 scale = Vector2(0.0822287, 0.0440085)
 texture = ExtResource("7_ak4n3")
 
-<<<<<<< HEAD:menu.tscn
-[node name="Olho11" type="Sprite2D" parent="screen/monitor/Fabbri1"]
-position = Vector2(-7.82007, 16.3389)
-scale = Vector2(15.3596, 21.6626)
-texture = ExtResource("6_nrnbx")
-=======
 [node name="Olho11" type="Sprite2D" parent="screen/monitor"]
 position = Vector2(257.958, 185.257)
 scale = Vector2(1.263, 0.953339)
 texture = ExtResource("4_qv81a")
->>>>>>> 47f70930864b9dcd9c99675eade61c87a42ab70b:Assets/Scenes/menu.tscn
 
 [node name="Screenshot20250728-173856" type="Sprite2D" parent="screen/monitor"]
 modulate = Color(0.136826, 0.136826, 0.136826, 1)

@@ -16,11 +16,11 @@ const SPEED: float = 5.0
 const GRAVITY: float = 1.8
 const CHASE_DURATION: float = 30.0
 const INVESTIGATE_DURATION: float = 15.0
-const PATROL_DURATION: float = 10.0
+const PATROL_DURATION: float = 35.0
 const MIN_DISTANCE: float = 1.0
 const ROTATION_SPEED: float = 8.0
-const PATH_UPDATE_THRESHOLD: float = 2.0
-const DICA_UPDATE_INTERVAL: float = 10.0
+const PATH_UPDATE_THRESHOLD: float = 0.5
+const DICA_UPDATE_INTERVAL: float = 60.0
 const ENRAGED_DURATION: float = 60.0
 const TURN_THRESHOLD: float = deg_to_rad(15.0)
 
@@ -62,24 +62,33 @@ var qte_active: bool = false
 var qte_success: bool = false
 var qte_presses_required: int = 20
 var qte_presses_count: int = 0
-var qte_time_limit: float = 3.0
+var qte_time_limit: float = 2.0
 var qte_timer: float = 0.0
 var qte_last_key: String = ""
-var qte_chance: float = 0.9
+var qte_chance: float = 0
 var player_controller: Node = null
-var camera_shake_intensity: float = 10.0
+var camera_shake_intensity: float = 2.0
 var qte_current_key: String = "A"  # Tecla atual que o jogador deve pressionar
 
 func _ready():
+	# Busca o jogador através do PlayerManager
+	player = PlayerManager.get_current_player()
+	
+	if player:
+		print("Jogador encontrado: ", player.name)
+	else:
+		printerr("Jogador não encontrado! Tentando novamente em 1 segundo...")
+		# Tenta novamente após 1 segundo
+		get_tree().create_timer(1.0).timeout.connect(_ready)
+		return
+	
 	rng.randomize()
 	setup_navigation()
 	connect_signals()
 	set_new_patrol_target()
 	
 	# Encontra o jogador de forma mais robusta
-	player_controller = get_tree().get_first_node_in_group("player")
-	if player_controller == null:
-		player_controller = get_tree().get_root().find_child("SparkyGlory", true, false)
+	player_controller = player
 	
 	var immediate_mesh = ImmediateMesh.new()
 	var material = StandardMaterial3D.new()
@@ -93,7 +102,7 @@ func setup_navigation():
 	nav_agent.target_desired_distance = 1.0
 	nav_agent.avoidance_enabled = true
 	nav_agent.path_max_distance = 50.0
-	nav_agent.avoidance_layers = 1
+	nav_agent.avoidance_layers = 3
 
 func connect_signals():
 	visao.body_entered.connect(_on_Visao_body_entered)
@@ -103,6 +112,22 @@ func connect_signals():
 	nav_agent.navigation_finished.connect(_on_navigation_finished)
 
 func _physics_process(delta):
+	# Atualiza a referência do jogador a cada frame
+	player = PlayerManager.get_current_player()
+	
+	if not player:
+		printerr("Jogador não encontrado!")
+		return
+	
+	# Se o jogador estiver visível, começar/continuar perseguição
+	if is_player_visible() and current_state != CHASE and current_state != ENRAGED and current_state != QTE:
+		current_state = CHASE
+		chase_timer = CHASE_DURATION
+		last_known_position = player.global_position
+		nav_agent.target_position = last_known_position
+		last_path_update_pos = global_position
+		print("Jogador detectado - iniciando perseguição")
+	
 	if qte_active:
 		handle_qte(delta)
 		return
@@ -279,7 +304,7 @@ func enter_patrol_state():
 		failed_investigate_count += 1
 		print("Investigações fracassadas: ", failed_investigate_count)
 		
-		qte_chance = min(qte_chance + 0.1, 1.0)
+		qte_chance = min(qte_chance + 0.05, 1.0)
 		print("Nova chance de QTE: ", qte_chance * 100, "%")
 		
 		if failed_investigate_count >= 3:
@@ -308,7 +333,26 @@ func enter_enraged_state():
 	play_irritado_sound()
 
 func is_player_visible() -> bool:
-	return player != null and player in visao.get_overlapping_bodies()
+	if not player:
+		return false
+	
+	# Verificar se o jogador está na área de visão
+	if not player in visao.get_overlapping_bodies():
+		return false
+	
+	# Verificar linha de visada direta
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.new()
+	query.from = global_position + Vector3(0, 1, 0)  # Altura dos olhos
+	query.to = player.global_position + Vector3(0, 1, 0)
+	query.exclude = [self]
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result and result.collider == player:
+		return true
+	
+	return false
 
 func get_state_name() -> String:
 	match current_state:
@@ -407,7 +451,6 @@ func start_qte():
 
 func end_qte():
 	qte_active = false
-	current_state = PATROL
 	investigacao_sound_played = false
 	straight_frames = 0
 	
@@ -419,11 +462,20 @@ func end_qte():
 		print("QTE falhou!")
 		failed_investigate_count += 1
 		qte_chance = min(1.0, qte_chance + 0.1)  # Aumenta chance de QTE após falha
+		
+		# Voltar a perseguir imediatamente se o jogador estiver visível
+		if player and is_player_visible():
+			current_state = CHASE
+			chase_timer = CHASE_DURATION
+			print("Voltando a perseguir após falha no QTE")
 	
 	if player_controller and player_controller.has_method("end_qte"):
 		player_controller.end_qte()
 	
-	enter_patrol_state()
+	# Não forçar entrar em patrulha se estiver perseguindo
+	if current_state != CHASE:
+		current_state = PATROL
+		enter_patrol_state()
 
 func handle_qte(delta):
 	qte_timer = max(0.0, qte_timer - delta)
@@ -481,7 +533,7 @@ func _on_Visao_body_entered(body: Node3D):
 		last_path_update_pos = global_position
 		is_investigating_position = false
 		failed_investigate_count = 0
-		qte_chance = 0.1
+		qte_chance = 0.05
 		straight_frames = 0
 		play_encontra_sound()
 
