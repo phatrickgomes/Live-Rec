@@ -6,6 +6,8 @@ var labirinto = preload("res://Assets/Scenes/labirinto.tscn")
 var jamv = preload("res://Assets/Scenes/sprite_2d.tscn")
 var jogo2d = preload("res://Assets/Scenes/Memories of Zerous.tscn")
 
+var jamv_chupetao = preload("res://jamv_chupetao.tscn")
+
 func _on_button_pressed() -> void:
 	var player = PlayerManager.get_current_player()
 	if player and player.objeto_selecionado != null and player.objeto_selecionado.is_in_group("fita"):
@@ -44,3 +46,16 @@ func _on_sair_do_jogo_pressed():
 	for child in sub_viewport.get_children():
 		child.queue_free()
 	print("Saiu do jogo interno")
+	
+func _on_line_edit_text_changed(new_text):
+	if new_text == "jamv_chupetao":
+		for child in sub_viewport.get_children():
+			child.queue_free()
+		var jamv = jamv_chupetao.instantiate()
+		sub_viewport.add_child(jamv)
+		var internal_player = jamv.find_child("SparkyGlory")
+		if internal_player:
+			PlayerManager.register_internal_player(internal_player)
+		else:
+			printerr("Jogador interno não encontrado!")
+		print("CESAR PATROCINA NOIS")

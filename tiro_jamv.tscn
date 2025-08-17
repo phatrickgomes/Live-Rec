@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvcdovm0x8n4x"]
+
+[ext_resource type="Script" uid="uid://bmiebywbmfnpg" path="res://tirojamv.gd" id="1_ybnv8"]
+[ext_resource type="Texture2D" uid="uid://c3tm6medvv62e" path="res://Assets/Imagens/1528106245788.jpg" id="2_c6s67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrff0"]
+size = Vector2(388.867, 243.873)
+
+[node name="Tiro_jamv" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, 1)
+rotation = 3.14159
+scale = Vector2(0.367735, 0.0299308)
+collision_layer = 4
+collision_mask = 4
+up_direction = Vector2(0, 1)
+script = ExtResource("1_ybnv8")
+
+[node name="1528106245788" type="Sprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(193.214, 108.444)
+scale = Vector2(1.93214, 1.13444)
+texture = ExtResource("2_c6s67")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D" groups=["chupetinha_player", "tiro_jamv"]]
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(194.434, 111.936)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_nrff0")
+
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_area_entered"]
