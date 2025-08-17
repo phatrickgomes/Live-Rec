@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://Assets/Scenes/area_3d.tscn" id="3_twob8"]
 [ext_resource type="PackedScene" uid="uid://cx56uqtqto44b" path="res://Assets/Modelos/ninja.glb" id="5_chyoy"]
 [ext_resource type="Texture2D" uid="uid://dbnilyx5nb7pv" path="res://Assets/Texture/WoodSiding008_4K-JPG_Color.jpg" id="5_jsa3l"]
-[ext_resource type="PackedScene" uid="uid://dkgj13t8vk3o7" path="res://Assets/Scenes/jogo12.tscn" id="5_lut1e"]
 [ext_resource type="Texture2D" uid="uid://oi5yt67t0ys3" path="res://Assets/Texture/texturaparede.jpg" id="5_twob8"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://Assets/Modelos/quarto.glb" id="5_wwc3q"]
 [ext_resource type="Texture2D" uid="uid://dkykexo07c5cl" path="res://Assets/Texture/WoodFloor064_4K-JPG_Color.jpg" id="6_xtcex"]
@@ -20,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://brmxxoi1r6sj0" path="res://Assets/musicas/caminhando.wav" id="11_igesp"]
 [ext_resource type="PackedScene" uid="uid://dmv2ooeugq6ov" path="res://xbox_360_s.glb" id="20_4rmfy"]
 [ext_resource type="PackedScene" uid="uid://bm1lvkgax6uya" path="res://musicas/bmo___adventure_time_fan_art.glb" id="20_7fvgo"]
+[ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://cd1.tscn" id="20_yx88i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
 shading_mode = 0
@@ -286,6 +286,9 @@ albedo_texture = ExtResource("6_xtcex")
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 script = ExtResource("1_lddpm")
 
+[node name="cd1" parent="." groups=["fita"] instance=ExtResource("20_yx88i")]
+transform = Transform3D(-0.992012, 0.0756692, 0.100937, 0.111538, 0.899916, 0.421558, -0.058936, 0.429449, -0.901166, 4.82475, 0.869644, 0.86511)
+
 [node name="monitor2" parent="." instance=ExtResource("1_6wfgo")]
 transform = Transform3D(0.434147, 0, 0.248025, 0, 0.5, 0, -0.248025, 0, 0.434147, 3.6907, 0.150233, -0.601247)
 
@@ -334,9 +337,6 @@ skeleton = NodePath("")
 transform = Transform3D(1.87201, -8.19564e-08, 1.45286e-07, 4.65661e-09, 2.48034, 7.03585e-07, -2.23517e-08, -1.15877e-06, 2.06765, 0.0193691, 0.0361328, 0.0696244)
 material_override = SubResource("StandardMaterial3D_yx88i")
 mesh = SubResource("QuadMesh_yx88i")
-
-[node name="Fita" parent="." groups=["fita"] instance=ExtResource("5_lut1e")]
-transform = Transform3D(0.999942, -0.00769315, 0.00747155, -0.0105, -0.844045, 0.536169, 0.00218153, -0.536217, -0.844077, 4.84169, 0.864797, 0.854756)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")

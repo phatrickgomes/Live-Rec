@@ -1,0 +1,267 @@
+[gd_scene load_steps=17 format=3 uid="uid://dj2o0v6y7d8o0"]
+
+[ext_resource type="Texture2D" uid="uid://c273g7p05edxy" path="res://Dungeon Tile Set.png" id="1_s4hy4"]
+[ext_resource type="Script" uid="uid://bwu8a8kvam511" path="res://Assets/Scenes/sparky_glory.gd" id="2_4vu3s"]
+[ext_resource type="Texture2D" uid="uid://dq3h6u8r6f11o" path="res://Assets/Imagens/icon.svg" id="3_1vgba"]
+[ext_resource type="Script" uid="uid://572yfqpjj4kc" path="res://Assets/Scenes/o_profeta.gd" id="4_qjka6"]
+[ext_resource type="AudioStream" uid="uid://ft555vf2x5li" path="res://Assets/musicas/TrilhaStalking.tres" id="5_5g5ur"]
+[ext_resource type="AudioStream" uid="uid://bu8xkxav4gwam" path="res://Assets/musicas/RugidoWendigo.tres" id="6_rv36g"]
+[ext_resource type="Shader" uid="uid://biul04mq6d03a" path="res://Assets/Scenes/prototipo.gdshader" id="7_cxmrt"]
+[ext_resource type="Script" uid="uid://bmauasodjb2bq" path="res://Assets/Scenes/darkness_overlay.gd" id="8_r7ew4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jrw1h"]
+texture = ExtResource("1_s4hy4")
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+5:8/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+5:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+5:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+10:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+5:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+2:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+13:14/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+11:15/0 = 0
+12:15/0 = 0
+3:4/0 = 0
+4:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_b5mht"]
+sources/0 = SubResource("TileSetAtlasSource_jrw1h")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjka6"]
+size = Vector2(1151, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g5ur"]
+size = Vector2(67, 62)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b43kd"]
+radius = 450.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5mbh"]
+size = Vector2(66, 64)
+
+[sub_resource type="Curve2D" id="Curve2D_v8phh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -161, 10, 0, 0, 0, 0, 127, 12)
+}
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ke0i"]
+shader = ExtResource("7_cxmrt")
+shader_parameter/darkness_amount = 0.0
+shader_parameter/dark_color = Color(0, 0, 0, 0.7)
+shader_parameter/vignette_strength = 0.5
+
+[node name="Memories_of_Zerous" type="Node2D"]
+
+[node name="Tileset" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Tileset"]
+position = Vector2(564, 242)
+scale = Vector2(-11.648, 6.32)
+tile_set = SubResource("TileSet_b5mht")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(558, 622)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(19.5, 0)
+shape = SubResource("RectangleShape2D_qjka6")
+
+[node name="SparkyGlory" type="CharacterBody2D" parent="."]
+position = Vector2(92, 577)
+script = ExtResource("2_4vu3s")
+
+[node name="Icon" type="Sprite2D" parent="SparkyGlory"]
+position = Vector2(-2, -15)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_1vgba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SparkyGlory"]
+position = Vector2(-3, -15)
+shape = SubResource("RectangleShape2D_5g5ur")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 323)
+
+[node name="O Profeta" type="CharacterBody2D" parent="."]
+position = Vector2(912, 582)
+script = ExtResource("4_qjka6")
+
+[node name="Icon" type="Sprite2D" parent="O Profeta"]
+position = Vector2(-1, -18)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_1vgba")
+
+[node name="Visao" type="Area2D" parent="O Profeta/Icon"]
+position = Vector2(2, 36)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="O Profeta/Icon/Visao"]
+position = Vector2(-4, -14)
+shape = SubResource("CircleShape2D_b43kd")
+debug_color = Color(0.460509, 0.124636, 0.163103, 0.42)
+
+[node name="TimerFuga" type="Timer" parent="O Profeta/Icon/Visao"]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="O Profeta"]
+position = Vector2(-1, -17)
+shape = SubResource("RectangleShape2D_h5mbh")
+
+[node name="TimerTransformacao" type="Timer" parent="O Profeta"]
+
+[node name="TrilhaStalking" type="AudioStreamPlayer2D" parent="O Profeta"]
+stream = ExtResource("5_5g5ur")
+
+[node name="TrilhaPerseguicao" type="AudioStreamPlayer2D" parent="O Profeta"]
+stream = ExtResource("5_5g5ur")
+
+[node name="RugidoWendigo" type="AudioStreamPlayer2D" parent="O Profeta"]
+stream = ExtResource("6_rv36g")
+
+[node name="Path2D" type="Path2D" parent="O Profeta"]
+curve = SubResource("Curve2D_v8phh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="O Profeta/Path2D"]
+position = Vector2(-161, 10)
+rotation = 0.00694433
+
+[node name="ShaderEffects" type="CanvasLayer" parent="."]
+
+[node name="DarknessOverlay" type="ColorRect" parent="ShaderEffects"]
+material = SubResource("ShaderMaterial_2ke0i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("8_r7ew4")
+
+[connection signal="body_entered" from="O Profeta/Icon/Visao" to="O Profeta" method="_on_visao_body_entered"]
+[connection signal="body_exited" from="O Profeta/Icon/Visao" to="O Profeta" method="_on_visao_body_exited"]
+[connection signal="timeout" from="O Profeta/Icon/Visao/TimerFuga" to="O Profeta" method="_on_timer_fuga_timeout"]
