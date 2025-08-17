@@ -203,8 +203,9 @@ texture = ExtResource("3_1vgba")
 position = Vector2(-3, -15)
 shape = SubResource("RectangleShape2D_5g5ur")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(577, 323)
+[node name="Camera2D" type="Camera2D" parent="SparkyGlory"]
+position = Vector2(75, -30)
+zoom = Vector2(0.4, 0.4)
 
 [node name="O Profeta" type="CharacterBody2D" parent="."]
 position = Vector2(912, 582)
