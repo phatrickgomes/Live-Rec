@@ -1,6 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhvkm866011qa"]
+[gd_scene load_steps=13 format=3 uid="uid://bhvkm866011qa"]
 
 [ext_resource type="Script" uid="uid://d0waherf7c61m" path="res://Assets/Script/player.gd" id="1_iwpo4"]
+[ext_resource type="Texture2D" uid="uid://b703gaphrgjqc" path="res://Assets/Imagens/360_F_471697584_TiR5pd2ougeD71LjfST1OtPGWrZvxpOZ-removebg-preview.png" id="2_b65pp"]
+[ext_resource type="Script" uid="uid://dgphrs6wsxbbh" path="res://Assets/Scenes/icone_tutorial.gd" id="2_syrs6"]
+[ext_resource type="Texture2D" uid="uid://sujf2adqkq22" path="res://Assets/Imagens/Captura_de_tela_2025-08-17_232118-removebg-preview.png" id="3_gsoyd"]
+[ext_resource type="FontFile" uid="uid://dmh7ufx2seoum" path="res://Assets/Fonts/alagard.ttf" id="4_h0edo"]
+[ext_resource type="Texture2D" uid="uid://csdwsmgncxyou" path="res://Assets/Imagens/Captura_de_tela_2025-08-17_232130-removebg-preview.png" id="4_syrs6"]
 
 [sub_resource type="Shader" id="Shader_iwpo4"]
 code = "shader_type canvas_item;
@@ -130,6 +135,50 @@ theme_override_colors/font_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0)
 theme_override_font_sizes/font_size = 21
 text = "F"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+script = ExtResource("2_syrs6")
+
+[node name="360F471697584TiR5Pd2OugeD71LjfSt1OtPgWrZvxpOz-removebg-preview" type="Sprite2D" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(813, 158)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_b65pp")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/360F471697584TiR5Pd2OugeD71LjfSt1OtPgWrZvxpOz-removebg-preview"]
+texture_filter = 1
+offset_left = -177.5
+offset_top = 147.5
+offset_right = 177.5
+offset_bottom = 201.5
+theme_override_fonts/font = ExtResource("4_h0edo")
+theme_override_font_sizes/font_size = 39
+text = "use para se mover "
+
+[node name="CapturaDeTela2025-08-17232118-removebg-preview" type="Sprite2D" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(903, 174)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_gsoyd")
+
+[node name="CapturaDeTela2025-08-17232130-removebg-preview" type="Sprite2D" parent="CanvasLayer/Control/CapturaDeTela2025-08-17232118-removebg-preview"]
+texture_filter = 1
+position = Vector2(68.5, -1)
+texture = ExtResource("4_syrs6")
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/CapturaDeTela2025-08-17232118-removebg-preview"]
+texture_filter = 1
+offset_left = -21.2499
+offset_top = 28.75
+offset_right = 92.7501
+offset_bottom = 51.75
+theme_override_fonts/font = ExtResource("4_h0edo")
+theme_override_font_sizes/font_size = 16
+text = "para interaçoes"
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
