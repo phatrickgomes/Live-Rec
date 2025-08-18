@@ -1,8 +1,8 @@
-[gd_scene load_steps=81 format=4 uid="uid://pr6827hoy8ek"]
+[gd_scene load_steps=83 format=4 uid="uid://pr6827hoy8ek"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
-[ext_resource type="Script" uid="uid://clfat5jp85un4" path="res://quarto.gd" id="1_lddpm"]
+[ext_resource type="Script" uid="uid://bi57kwwy1lta8" path="res://quarto.gd" id="1_lddpm"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://Assets/Imagens/anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://Assets/Imagens/lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://Assets/Imagens/foto geral.png" id="2_2vapn"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dmv2ooeugq6ov" path="res://xbox_360_s.glb" id="20_4rmfy"]
 [ext_resource type="PackedScene" uid="uid://bm1lvkgax6uya" path="res://musicas/bmo___adventure_time_fan_art.glb" id="20_7fvgo"]
 [ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://cd1.tscn" id="20_yx88i"]
+[ext_resource type="PackedScene" uid="uid://bp0h3p7pknogf" path="res://papel.tscn" id="21_7fvgo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
 shading_mode = 0
@@ -282,6 +283,9 @@ albedo_texture = ExtResource("6_xtcex")
 
 [sub_resource type="Skin" id="Skin_jsa3l"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fvgo"]
+size = Vector3(0.157063, 0.0335159, 0.298706)
+
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
 script = ExtResource("1_lddpm")
@@ -311,7 +315,7 @@ mesh = SubResource("QuadMesh_teso0")
 [node name="luz_quarto" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.34166, 0, 0.939824, 0, 1, 0, -0.939824, 0, -0.34166, 1.51825, 1.95987, 2.9133)
 light_color = Color(0.843137, 0.898039, 0.827451, 1)
-light_energy = 0.1
+light_energy = 0.01
 
 [node name="quadro_anime" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0017415, 0, 1.7025, 0, 0.968735, 0, 0.860159, 0, -0.00344693, -1.76306, 1.60013, 3.28517)
@@ -614,6 +618,18 @@ transform = Transform3D(0.000543402, 0, 0.00998521, 0, 0.01, 0, -0.00998521, 0, 
 
 [node name="Sketchfab_Scene" parent="bimo/Sketchfab_model/6520a23aaf4e42ef95114794f429eb91_fbx/RootNode/Cube" index="5" instance=ExtResource("20_4rmfy")]
 transform = Transform3D(-149.969, 5.01277e-06, -3.02369, -3.02369, -2.42825e-05, 149.969, 4.52233e-06, 150, 2.43786e-05, -96.943, -70.9605, -80.4184)
+
+[node name="folha" parent="." groups=["folha"] instance=ExtResource("21_7fvgo")]
+transform = Transform3D(-1.48793, -0.0166022, 0.189142, 0.0644784, 1.36127, 0.626725, -0.178585, 0.629815, -1.34961, 1.21923, 0.319806, 2.81137)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="folha" groups=["folha"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="folha/StaticBody3D"]
+transform = Transform3D(0.990132, 0.102141, -0.0954456, -0.102139, 0.0624387, -0.992798, -0.0954463, 0.992805, 0.0722586, -0.0192678, -0.00149906, 0.0155733)
+shape = SubResource("BoxShape3D_7fvgo")
+
+[node name="camera_folha" type="Camera3D" parent="folha"]
+transform = Transform3D(0.66286, 0.0506033, -0.050006, -0.052965, 0.663869, -0.0302845, 0.0474975, 0.0340845, 0.664098, -0.0352859, -0.00338566, 0.200323)
 
 [connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]
 

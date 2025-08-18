@@ -19,6 +19,9 @@ signal interact_object
 @onready var corvo = $"../corvo"
 @onready var passos_som = $passos_som
 
+@onready var camera_folha: Camera3D = $"../folha/camera_folha"
+
+
 ## variáveis principais
 var objeto_selecionado = null
 const SPEED = 4.0
@@ -141,6 +144,7 @@ func _input(event):
 					pegar_objeto(collider)
 				elif collider.is_in_group("tela_interativa"):
 					iniciar_interacao_monitor1()
+				
 		else:
 			if raycast.is_colliding():
 				var collider = raycast.get_collider()
@@ -148,6 +152,7 @@ func _input(event):
 					iniciar_interacao_monitor1()
 				else:
 					soltar_objeto()
+
 
 func _physics_process(delta: float) -> void:
 	

@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=4 uid="uid://bp0h3p7pknogf"]
+
+[ext_resource type="Texture2D" uid="uid://bmjkb1831i6rx" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_0.png" id="1_1rjgs"]
+[ext_resource type="Texture2D" uid="uid://bdlwlua0duh2" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_1.png" id="2_75jnf"]
+[ext_resource type="FontFile" uid="uid://bud3epf48w464" path="res://Assets/HorrorFont-Regular.ttf" id="3_08lsh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi5a7"]
+resource_name = "Metal"
+cull_mode = 2
+albedo_texture = ExtResource("1_1rjgs")
+roughness = 0.892971
+normal_enabled = true
+normal_texture = ExtResource("2_75jnf")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ujnav"]
+_surfaces = [{
+"aabb": AABB(-3.78581, -5.25661, 0, 7.57161, 10.5132, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "Metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("qkpywDA2qMAAAAAAqkpyQDA2qEAAAAAAqkpyQDA2qMAAAAAAqkpywDA2qEAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mpd6g"]
+resource_name = "Sketchfab_Scene_Paper_Metal_0"
+_surfaces = [{
+"aabb": AABB(-3.78581, -5.25661, 0, 7.57161, 10.5132, 1e-05),
+"attribute_data": PackedByteArray("KIZ8P/oSJD+CQv0+Mr5+PyiGfD8wvn4/gkL9PvwSJD8="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_xi5a7"),
+"name": "Metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("qkpywDA2qMAAAAAAqkpyQDA2qEAAAAAAqkpyQDA2qMAAAAAAqkpywDA2qEAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AIA=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ujnav")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Paper_Metal_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, -4.13819e-09, 0, 4.13819e-09, 0.0254, -0.000146091, -0.00737281, 0.0135718)
+mesh = SubResource("ArrayMesh_mpd6g")
+skeleton = NodePath("")
+
+[node name="Label3D" type="Label3D" parent="Paper_Metal_0"]
+transform = Transform3D(0.50293, -0.864328, 1.40817e-07, 0.864328, 0.50293, 8.09831e-08, -1.40817e-07, 8.09832e-08, 1, 1.17724, -0.915239, 0.0364488)
+text = "jamv_chupetao"
+font = ExtResource("3_08lsh")
+font_size = 281
+outline_size = 20
+
+[node name="Label3D2" type="Label3D" parent="Paper_Metal_0"]
+transform = Transform3D(0.50293, -0.864329, 1.40817e-07, 0.864329, 0.50293, 8.0983e-08, -1.40817e-07, 8.09833e-08, 1, -1.28487, 1.52049, 0.037542)
+text = "o melhor game
+ de todos os 
+tempos com 
+uma arte abistrata antiga "
+font = ExtResource("3_08lsh")
+font_size = 185
+outline_size = 20
