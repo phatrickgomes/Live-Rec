@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvwwucd4oqk1w"]
+
+[ext_resource type="Script" uid="uid://d3qmwk5swwst1" path="res://tiro.gd" id="1_gp2hl"]
+[ext_resource type="Texture2D" uid="uid://ccfbyxs4bko7d" path="res://Assets/Imagens/fabbri1.png" id="2_gp2hl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4dry"]
+size = Vector2(85.2239, 10.0654)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gp2hl"]
+size = Vector2(84, 10)
+
+[node name="Tiro" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["jamv", "tiro"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_gp2hl")
+
+[node name="Fabbri1" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.190242, 0.0191995)
+texture = ExtResource("2_gp2hl")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D" groups=["jamv", "tiro"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(0, 1)
+scale = Vector2(0.985639, 0.993498)
+shape = SubResource("RectangleShape2D_a4dry")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_gp2hl")
+debug_color = Color(0.746945, 0.232451, 0.357236, 0.42)
+
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_area_entered"]

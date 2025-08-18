@@ -85,7 +85,7 @@ offset_bottom = 1131.88
 theme_override_font_sizes/font_size = 300
 text = "Jogo1"
 
-[node name="Button2" type="Button" parent="."]
+[node name="jogo2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
 offset_left = 77.0
@@ -98,7 +98,7 @@ scale = Vector2(0.12092, 0.0986597)
 icon = ExtResource("5_kbped")
 flat = true
 
-[node name="Label" type="Label" parent="Button2"]
+[node name="Label" type="Label" parent="jogo2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = -57.8897
@@ -197,5 +197,7 @@ offset_bottom = 124.217
 scale = Vector2(2.01865, 2.02029)
 text = "Obs Studio"
 
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="jogo2" to="." method="_on_jogo_2_pressed"]
