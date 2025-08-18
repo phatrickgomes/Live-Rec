@@ -7,6 +7,8 @@ signal interact_object
 @onready var camera: Camera3D = $camera_pivot/Camera3D
 @onready var camera_monitor: Camera3D = get_node_or_null("../GUI/Monitor")
 @onready var camera_monitor2: Camera3D = get_node_or_null("../GUI/Monitor2")
+@onready var camera_folha: Camera3D = $"../camera_folha/camera_folha"
+
 @onready var raycast = $camera_pivot/Camera3D/interacao
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
 @onready var interacao_gui = $"../GUI"
@@ -19,15 +21,13 @@ signal interact_object
 @onready var corvo = $"../corvo"
 @onready var passos_som = $passos_som
 
-@onready var camera_folha: Camera3D = $"../folha/camera_folha"
-
-
 ## variáveis principais
 var objeto_selecionado = null
 const SPEED = 4.0
 const SENSIBILIDADE = 0.003
 var mouse = Vector2()
 var interagindo_com_tela = false
+var interagindo_com_folha = false
 var em_transicao = false
 var tween_atual: Tween = null
 var camera_inicial_transform: Transform3D
@@ -59,6 +59,10 @@ func iniciar_interacao_monitor2():
 		return
 	_iniciar_transicao_para(camera_monitor2, 2)
 
+func iniciar_interacao_folha():
+	if not camera_folha: return
+	_iniciar_transicao_para_folha(camera_folha)
+
 func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	Global.Ta_no_jogo = true
 	if em_transicao: return
@@ -86,7 +90,28 @@ func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	if corvo:
 		corvo.stop()
 
+func _iniciar_transicao_para_folha(target_camera: Camera3D):
+	Global.Ta_no_jogo = true
+	if em_transicao: return
+	if tween_atual and tween_atual.is_valid():
+		tween_atual.kill()
+	camera_inicial_transform = camera.global_transform
+	saved_pivot_rot = camera_pivot.rotation
+	saved_cam_rot = camera.rotation
+	em_transicao = true
+	interagindo_com_folha = true
+	interact_label.visible = false
+	ponto_da_camera.visible = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	tween_atual = create_tween()
+	tween_atual.tween_property(camera, "global_transform", target_camera.global_transform, 1.0)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_atual.connect("finished", Callable(self, "_on_tween_folha_finished"))
+
 func _on_tween_monitor_finished():
+	em_transicao = false
+
+func _on_tween_folha_finished():
 	em_transicao = false
 
 func terminar_interacao():
@@ -94,20 +119,27 @@ func terminar_interacao():
 	if tween_atual and tween_atual.is_valid():
 		tween_atual.kill()
 	em_transicao = true
-	interagindo_com_tela = false
-	monitor_atual = 0
-	interacao_gui.ativo = false
+	
+	if interagindo_com_tela:
+		interagindo_com_tela = false
+		monitor_atual = 0
+		interacao_gui.ativo = false
+		interact_monitor.visible = false
+		color_rect_MONITOR.visible = false
+	elif interagindo_com_folha:
+		interagindo_com_folha = false
+	
 	interact_label.visible = false
 	ponto_da_camera.visible = true
-	interact_monitor.visible = false
-	color_rect_MONITOR.visible = false
+	
 	if audio_de_fundo:
 		audio_de_fundo.play()
 	if corvo:
 		corvo.stop()
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	tween_atual = create_tween()
-	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.5)\
+	tween_atual.tween_property(camera, "global_transform", camera_inicial_transform, 1.0)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween_atual.connect("finished", Callable(self, "_on_tween_voltar_jogo_finished"))
 	Global.Ta_no_jogo = false
@@ -120,17 +152,21 @@ func _on_tween_voltar_jogo_finished():
 ## entrada
 func _input(event):
 	if em_transicao: return
+	
 	if event.is_action_pressed("ui_cancel"):
-		if monitor_atual != 0:
+		if monitor_atual != 0 or interagindo_com_folha:
 			terminar_interacao()
 		return
+	
 	if event.is_action_pressed("F"):
 		if monitor_atual == 1:
 			iniciar_interacao_monitor2()
 		elif monitor_atual == 2:
 			iniciar_interacao_monitor1()
-	if interagindo_com_tela:
+	
+	if interagindo_com_tela or interagindo_com_folha:
 		return 
+	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		camera_pivot.rotate_y(-event.relative.x * SENSIBILIDADE)
 		camera.rotate_x(-event.relative.y * SENSIBILIDADE)
@@ -144,7 +180,8 @@ func _input(event):
 					pegar_objeto(collider)
 				elif collider.is_in_group("tela_interativa"):
 					iniciar_interacao_monitor1()
-				
+				elif collider.is_in_group("folha"):
+					iniciar_interacao_folha()
 		else:
 			if raycast.is_colliding():
 				var collider = raycast.get_collider()
@@ -153,10 +190,8 @@ func _input(event):
 				else:
 					soltar_objeto()
 
-
 func _physics_process(delta: float) -> void:
-	
-	if interagindo_com_tela or em_transicao:
+	if interagindo_com_tela or interagindo_com_folha or em_transicao:
 		velocity = Vector3.ZERO
 		return
 
@@ -170,14 +205,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 
-		# tocar som de passos
 		if is_on_floor() and not passos_som.playing:
 			passos_som.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-		# parar som quando não está andando
 		if passos_som.playing:
 			passos_som.stop()
 
@@ -192,6 +225,7 @@ func _physics_process(delta: float) -> void:
 		var collider = raycast.get_collider()
 		interact_object.emit(collider)
 		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel") or \
+		   collider.is_in_group("folha") or \
 		   (objeto_selecionado != null and objeto_selecionado.is_in_group("fita") and collider.is_in_group("tela_interativa")):
 			interact_label.visible = true
 		else:

@@ -42,6 +42,7 @@ jamv=""
 tiro_jamv=""
 chupetinha_player=""
 folha=""
+obstacle=""
 
 [input]
 

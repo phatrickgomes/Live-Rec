@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bp0h3p7pknogf"]
+[gd_scene load_steps=8 format=4 uid="uid://bp0h3p7pknogf"]
 
 [ext_resource type="Texture2D" uid="uid://bmjkb1831i6rx" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_0.png" id="1_1rjgs"]
 [ext_resource type="Texture2D" uid="uid://bdlwlua0duh2" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_1.png" id="2_75jnf"]
@@ -44,6 +44,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ujnav")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1rjgs"]
+points = PackedVector3Array(3.80707, 5.34004, 0.0834381, -3.86924, -5.34004, -0.0834381, -3.86924, -5.34004, 0.0834381, -3.86924, 5.34004, -0.0834381, 3.80707, -5.34004, -0.0834381, 3.80707, -5.34004, 0.0834381, -3.86924, 5.34004, 0.0834381, 3.80707, 5.34004, -0.0834381)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Paper_Metal_0" type="MeshInstance3D" parent="."]
@@ -67,3 +70,7 @@ uma arte abistrata antiga "
 font = ExtResource("3_08lsh")
 font_size = 185
 outline_size = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, -4.13819e-09, 0, 4.13819e-09, 0.0254, -0.000146091, -0.00737281, 0.0135718)
+shape = SubResource("ConvexPolygonShape3D_1rjgs")

@@ -6,9 +6,10 @@ signal interact_object
 @onready var camera: Camera3D = $camera_pivot/Camera3D
 @onready var raycast = $camera_pivot/Camera3D/interacao
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
-
 var objeto_selecionado 
 var forca_braco = 4 
+
+
 
 const SPEED = 0.0000001
 const JUMP_VELOCITY = 5.5
