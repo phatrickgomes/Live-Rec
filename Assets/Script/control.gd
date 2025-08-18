@@ -28,7 +28,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 		if internal_player:
 			PlayerManager.register_internal_player(internal_player)
 		else:
-			printerr("Jogador interno não encontrado!")
+			print("Jogador interno não encontrado!")
 		
 		print("CESAR PATROCINA NOIS")
 

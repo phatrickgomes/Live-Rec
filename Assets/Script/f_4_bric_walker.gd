@@ -12,17 +12,18 @@ extends CharacterBody3D
 @onready var audio_enganacao: AudioStreamPlayer3D = $TrilhaEnganação
 
 ### Configurações ###
-const SPEED: float = 5.0
+const SPEED: float = 10.0
 const GRAVITY: float = 1.8
 const CHASE_DURATION: float = 30.0
-const INVESTIGATE_DURATION: float = 15.0
-const PATROL_DURATION: float = 35.0
+const INVESTIGATE_DURATION: float = 5.0
+const PATROL_DURATION: float = 5.0
 const MIN_DISTANCE: float = 1.0
 const ROTATION_SPEED: float = 8.0
-const PATH_UPDATE_THRESHOLD: float = 0.5
+const PATH_UPDATE_THRESHOLD: float = 0.1
 const DICA_UPDATE_INTERVAL: float = 60.0
 const ENRAGED_DURATION: float = 60.0
 const TURN_THRESHOLD: float = deg_to_rad(15.0)
+const PATROL_RADIUS: float = 50.0  # Raio máximo para buscar pontos aleatórios
 
 ### Sistema de Velocidade Dinâmica ###
 var straight_frames: int = 0
@@ -47,6 +48,7 @@ var is_moving_to_patrol_target: bool = false
 var is_investigating_position: bool = false
 var dica_update_timer: float = 0.0
 var show_path: bool = true
+var navigation_region: NavigationRegion3D  # Referência para a região de navegação
 
 ### Modo enfurecido ###
 var failed_investigate_count: int = 0
@@ -82,6 +84,11 @@ func _ready():
 		get_tree().create_timer(1.0).timeout.connect(_ready)
 		return
 	
+	# Tenta encontrar a região de navegação
+	navigation_region = find_navigation_region()
+	if not navigation_region:
+		printerr("NavigationRegion3D não encontrado! Certifique-se de adicionar uma região de navegação ao nível.")
+	
 	rng.randomize()
 	setup_navigation()
 	connect_signals()
@@ -96,6 +103,17 @@ func _ready():
 	material.vertex_color_use_as_albedo = true
 	debug_path.mesh = immediate_mesh
 	debug_path.material_override = material
+
+# Tenta encontrar a região de navegação na cena
+func find_navigation_region() -> NavigationRegion3D:
+	# Primeiro tenta encontrar no mesmo nível
+	var region = get_parent().find_child("NavigationRegion3D", true, false)
+	
+	# Se não encontrou, procura em toda a árvore
+	if not region:
+		region = get_tree().get_root().find_child("NavigationRegion3D", true, false)
+	
+	return region
 
 func setup_navigation():
 	nav_agent.path_desired_distance = 1.0
@@ -289,11 +307,25 @@ func get_current_target() -> Vector3:
 			return patrol_target
 
 func set_new_patrol_target():
-	var random_angle = rng.randf_range(0, TAU)
-	var random_radius = rng.randf_range(15.0, 25.0)
-	patrol_target = global_position + Vector3(cos(random_angle), 0, sin(random_angle)) * random_radius
-	patrol_timer = PATROL_DURATION
+	if navigation_region:
+		# Gera um ponto aleatório dentro do raio de patrulha
+		var random_offset = Vector3(
+			rng.randf_range(-PATROL_RADIUS, PATROL_RADIUS),
+			0,
+			rng.randf_range(-PATROL_RADIUS, PATROL_RADIUS)
+		)
+		var target_position = global_position + random_offset
+		
+		# Usa o NavigationServer para encontrar o ponto válido mais próximo
+		var nav_map = navigation_region.get_navigation_map()
+		patrol_target = NavigationServer3D.map_get_closest_point(nav_map, target_position)
+	else:
+		# Fallback caso não encontre a região de navegação
+		var random_angle = rng.randf_range(0, TAU)
+		var random_radius = rng.randf_range(15.0, 25.0)
+		patrol_target = global_position + Vector3(cos(random_angle), 0, sin(random_angle)) * random_radius
 	
+	patrol_timer = PATROL_DURATION
 	print("Novo destino de patrulha: ", patrol_target)
 	nav_agent.target_position = patrol_target
 	last_path_update_pos = global_position

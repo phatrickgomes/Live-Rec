@@ -18,6 +18,9 @@ var bob_amp: float = 0.07
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
 @onready var passo = $passo
+@onready var qte_ui = $QTE_UI  # Agora como filho direto
+@onready var qte_a_label = $QTE_UI/CenterContainer/VBoxContainer/HBoxContainer/A/Label
+@onready var qte_d_label = $QTE_UI/CenterContainer/VBoxContainer/HBoxContainer/D/Label
 
 ### Variáveis de estado ###
 var current_speed: float = walk_speed
@@ -38,11 +41,6 @@ var qte_presses_required: int = 20
 var qte_current_presses: int = 0
 var qte_enemy_ref: Node = null
 
-# Referências para a UI do QTE
-var qte_ui: Control
-var qte_a_label: Label
-var qte_d_label: Label
-
 func _ready():
 	PlayerManager.register_internal_player(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -50,16 +48,12 @@ func _ready():
 	camera_original_rotation = camera.rotation
 	original_mouse_sensitivity = mouse_sensitivity
 	
-	# Buscar a UI do QTE na cena do jogo interno
-	qte_ui = get_node("QTE_UI")  # Caminho relativo corrigido
-	
+	# Configuração inicial da UI do QTE
 	if qte_ui:
 		qte_ui.visible = false
-		qte_a_label = qte_ui.get_node("CenterContainer/VBoxContainer/HBoxContainer/A/Label")
-		qte_d_label = qte_ui.get_node("CenterContainer/VBoxContainer/HBoxContainer/D/Label")
 		update_qte_ui()
 	else:
-		printerr("QTE_UI não encontrada!")
+		printerr("ERRO: QTE_UI não encontrada como filho do SparkyGlory")
 
 func _input(event):
 	if qte_active:
@@ -136,28 +130,34 @@ func _headbob(time: float) -> Vector3:
 
 ### Sistema QTE ###
 func start_qte(enemy_position: Vector3, enemy_ref: Node):
+	if not qte_ui:
+		printerr("QTE_UI não disponível!")
+		return
+	
 	qte_active = true
 	qte_target_position = enemy_position
 	qte_enemy_ref = enemy_ref
 	qte_shake_timer = 0.0
 	
-	if qte_ui:
-		qte_ui.visible = true
+	# Mostra a UI do QTE
+	qte_ui.visible = true
+	qte_ui.raise()  # Garante que está na frente
 	
+	# Configuração inicial
 	qte_current_key = "A"
 	update_qte_ui()
 	
-	# Fazer o jogador olhar diretamente para o inimigo
-	var direction_to_enemy = (qte_target_position - global_position).normalized()
-	direction_to_enemy.y = 0  # Manter na horizontal
+	# Rotação para olhar para o inimigo
+	var direction = (qte_target_position - global_position).normalized()
+	direction.y = 0  # Ignora componente vertical
+	rotation.y = atan2(direction.x, direction.z)
 	
-	# Calcular a rotação necessária
-	rotation.y = atan2(direction_to_enemy.x, direction_to_enemy.z)
-	
-	# Resetar a rotação vertical da câmera
+	# Reseta a rotação vertical
 	vertical_rotation = 0
 	camera_pivot.rotation.x = 0
+	camera.rotation = camera_original_rotation
 	
+	# Aumenta sensibilidade do mouse
 	mouse_sensitivity = original_mouse_sensitivity * 2.0
 
 func end_qte():
@@ -166,6 +166,7 @@ func end_qte():
 	if qte_ui:
 		qte_ui.visible = false
 	
+	# Restaura configurações da câmera
 	camera.position = camera_original_position
 	camera.rotation = camera_original_rotation
 	camera_pivot.rotation = Vector3.ZERO
@@ -177,11 +178,9 @@ func handle_qte_movement(delta):
 	velocity = direction * (walk_speed * 0.5)
 	move_and_slide()
 	
-	var target_rotation = (qte_target_position - global_position).normalized()
-	target_rotation = atan2(target_rotation.x, target_rotation.z)
-	
+	# Efeito de tremer enquanto se move
 	var body_shake = randf_range(-qte_rotation_shake_intensity, qte_rotation_shake_intensity)
-	rotation.y = target_rotation + body_shake
+	rotation.y += body_shake
 	camera_pivot.rotation.x = randf_range(-0.1, 0.1)
 
 func apply_camera_shake(delta):
@@ -216,10 +215,10 @@ func apply_qte_effects(delta):
 	camera.position += shake_offset
 
 func on_qte_key_pressed(key: String):
-	if !qte_active:
+	if !qte_active or !qte_ui:
 		return
 	
-	# Feedback visual IMEDIATO
+	# Feedback visual
 	if key == "A" and qte_a_label:
 		qte_a_label.add_theme_color_override("font_color", Color.GREEN)
 		var tween = create_tween()
@@ -252,14 +251,16 @@ func update_qte_key(next_key: String):
 	update_qte_ui()
 
 func update_qte_ui():
+	if not qte_ui or not qte_a_label or not qte_d_label:
+		return
+	
 	# Atualiza cores das teclas
-	if qte_a_label and qte_d_label:
-		if qte_current_key == "A":
-			qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-			qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
-		else:
-			qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-			qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	if qte_current_key == "A":
+		qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
+		qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	else:
+		qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
+		qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
 
 func is_in_qte() -> bool:
 	return qte_active
