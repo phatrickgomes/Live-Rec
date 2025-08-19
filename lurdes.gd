@@ -1,16 +1,19 @@
 extends CharacterBody2D
+
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+func _ready():
+	anim.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
 	pass
+	move_and_slide()
 
 func _input(event):
-	if event.is_action_pressed("tiro"):
+	if event.is_action_pressed("tiro") and anim.animation != "direto":
 		anim.play("direto")
-		
-
-func _input2(event):
-	if event.is_action_pressed("socojab"):
+	elif event.is_action_pressed("socojab") and anim.animation != "jab":
 		anim.play("jab")
-	
-	move_and_slide()
+
+func _on_animation_finished():
+	if anim.animation == "direto" or anim.animation == "jab":
+		anim.play("idle") 

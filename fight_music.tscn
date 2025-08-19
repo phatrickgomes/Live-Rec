@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=19 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
@@ -62,15 +62,15 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_711bf")
 }],
-"loop": false,
+"loop": true,
 "name": &"direto",
-"speed": 7.0
+"speed": 13.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_46de6")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -89,11 +89,22 @@ animations = [{
 }],
 "loop": false,
 "name": &"jab",
-"speed": 7.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7g5e1"]
 size = Vector2(29, 51)
+
+[sub_resource type="Animation" id="Animation_qetxy"]
+resource_name = "porrada"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y85iy"]
+_data = {
+&"porrada": SubResource("Animation_qetxy")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qk7xc"]
+size = Vector2(31, 20)
 
 [node name="FightMusic" type="Node2D"]
 
@@ -114,8 +125,24 @@ script = ExtResource("2_cauy1")
 texture_filter = 1
 position = Vector2(-1, -13)
 sprite_frames = SubResource("SpriteFrames_k7i15")
-animation = &"jab"
+animation = &"direto"
+autoplay = "idle"
+frame = 2
+frame_progress = 0.454735
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-0.5, -0.5)
+position = Vector2(3.5, -0.5)
 shape = SubResource("RectangleShape2D_7g5e1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_y85iy")
+}
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(3.5, -23)
+shape = SubResource("RectangleShape2D_qk7xc")
+disabled = true
+debug_color = Color(0.0140328, 0, 0.000464635, 0.42)
