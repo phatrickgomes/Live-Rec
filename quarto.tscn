@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
-[ext_resource type="Script" uid="uid://bi57kwwy1lta8" path="res://quarto.gd" id="1_lddpm"]
+[ext_resource type="Script" uid="uid://clfat5jp85un4" path="res://quarto.gd" id="1_lddpm"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://Assets/Imagens/anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://Assets/Imagens/lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://Assets/Imagens/foto geral.png" id="2_2vapn"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dmv2ooeugq6ov" path="res://xbox_360_s.glb" id="20_4rmfy"]
 [ext_resource type="PackedScene" uid="uid://bm1lvkgax6uya" path="res://musicas/bmo___adventure_time_fan_art.glb" id="20_7fvgo"]
 [ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://cd1.tscn" id="20_yx88i"]
-[ext_resource type="PackedScene" uid="uid://bp0h3p7pknogf" path="res://papel.tscn" id="21_7fvgo"]
+[ext_resource type="PackedScene" path="res://papel.tscn" id="21_7fvgo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
 shading_mode = 0

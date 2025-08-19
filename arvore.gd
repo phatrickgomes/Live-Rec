@@ -1,9 +1,7 @@
-# Para os obstáculos (adicione este script a eles)
-extends RigidBody3D
+extends Node3D
+@export var speed := 30.0
 
-var speed = 20.0  # Deve corresponder ao forward_speed do jogador
-
-func _physics_process(delta):
-	position.z -= speed * delta
-	if position.z < -20:  # Destruir obstáculos que passaram
+func _process(delta: float) -> void:
+	translate(Vector3(0, 0, speed * delta))
+	if position.z > 100:
 		queue_free()

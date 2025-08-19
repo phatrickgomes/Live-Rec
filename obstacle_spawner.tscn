@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://de3li86lmryby"]
+
+[ext_resource type="Script" uid="uid://808wipg0lpw2" path="res://obstacle_spawner.gd" id="1_asyhu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vjehr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asyhu"]
+size = Vector3(7.61139, 1.01025, 1.30029)
+
+[node name="ObstacleSpawner" type="Node3D"]
+script = ExtResource("1_asyhu")
+
+[node name="parede" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -17.5339, 0, 1, -7.66429e-07, 0, 0, 0, 1, -10.702, 0.442903, -3.82123)
+mesh = SubResource("BoxMesh_vjehr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="parede"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30569, -0.00512695, 0.00706196)
+shape = SubResource("BoxShape3D_asyhu")
+
+[node name="Area3D" type="Area3D" parent="parede"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="parede/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30569, -0.00512695, 0.00706196)
+shape = SubResource("BoxShape3D_asyhu")
