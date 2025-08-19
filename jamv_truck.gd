@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
-@export var max_forward_speed := 60.0   # Velocidade máxima para frente
-@export var forward_acceleration := 20.0 # Aceleração para frente
-@export var side_speed := 25.0          # velocidade para os lados
+@export var max_forward_speed := 60.0  
+@export var forward_acceleration := 20.0 
+@export var side_speed := 25.0         
 
 var forward_velocity := 0.0
 

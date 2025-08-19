@@ -227,10 +227,11 @@ shape = SubResource("BoxShape3D_rwda5")
 [node name="Camera3D" type="Camera3D" parent="jamv"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12951, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="jamv" node_paths=PackedStringArray("volante", "mao")]
+[node name="CanvasLayer" type="CanvasLayer" parent="jamv" node_paths=PackedStringArray("volante", "mao", "carro")]
 script = ExtResource("5_4jcav")
 volante = NodePath("../Sprite2D_Volante")
 mao = NodePath("Sprite2D_Mao")
+carro = NodePath("../Carro")
 
 [node name="Sprite2D_Mao" type="Sprite2D" parent="jamv/CanvasLayer"]
 texture_filter = 1
@@ -240,8 +241,8 @@ texture = ExtResource("5_etnrv")
 
 [node name="Carro" type="Sprite2D" parent="jamv"]
 texture_filter = 1
-position = Vector2(471, 332)
-scale = Vector2(2.7, 2.7)
+position = Vector2(471.175, 308)
+scale = Vector2(2.85378, 2.9)
 texture = ExtResource("5_lvt7x")
 
 [node name="Sprite2D_Volante" type="Sprite2D" parent="jamv"]

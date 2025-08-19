@@ -1,12 +1,12 @@
 extends Node3D
 
-@export var tree_scene: PackedScene         # Árvores laterais
-@export var arvore_centro: PackedScene     # Árvore central
-@export var min_spawn_rate := 0.5          # Tempo mínimo entre spawns
-@export var max_spawn_rate := 0.6          # Tempo máximo entre spawns
+@export var tree_scene: PackedScene      
+@export var arvore_centro: PackedScene   
+@export var min_spawn_rate := 0.5         
+@export var max_spawn_rate := 0.6         
 @export var road_width := 57.5
 @export var distance_from_road := -6
-@export var chance_centro := 0.35          # 20% de chance para árvore central
+@export var chance_centro := 0.35          
 
 var timer := 0.0
 var next_side := 1
@@ -24,18 +24,14 @@ func _process(delta: float) -> void:
 func spawn_tree() -> void:
 	if tree_scene == null:
 		return
-	
-	# Spawn de árvore central
 	if arvore_centro != null and randf() < chance_centro:
 		spawn_center()
-		
-		# Spawn lateral também aleatório
 		if randi() % 2 == 0:
 			spawn_side(1)
 		else:
 			spawn_side(-1)
 	else:
-		# Spawn lateral alternando lados
+
 		spawn_side(next_side)
 		next_side *= -1
 
@@ -43,8 +39,7 @@ func spawn_side(side: int) -> void:
 	var tree = tree_scene.instantiate()
 	var x = side * (road_width / 2.0 + distance_from_road)
 	tree.position = Vector3(x, 4.5, -500)
-	
-	# Espelha horizontalmente se for lado esquerdo
+
 	if side == -1:
 		tree.scale.x *= -1
 	
