@@ -1,15 +1,15 @@
 extends Control
 
-@onready var sub_viewport: SubViewport = $".."
+@onready var sub_viewport
 
 var labirinto = preload("res://Assets/Scenes/labirinto.tscn")
 var jamv = preload("res://Assets/Scenes/sprite_2d.tscn")
 var jogo2d = preload("res://Assets/Scenes/Memories of Zerous.tscn")
-
 var jamv_truck = preload("res://jamv_truck.tscn")
-
 var jamv_chupetao = preload("res://jamv_chupetao.tscn")
-
+func _ready() -> void:
+	if get_parent() != null:
+		sub_viewport = get_parent()
 func _on_button_pressed() -> void:
 	var player = PlayerManager.get_current_player()
 	if player and player.objeto_selecionado != null and player.objeto_selecionado.is_in_group("fita"):

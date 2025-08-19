@@ -2,6 +2,9 @@ extends Area3D
 
 @onready var sprite3d: Sprite3D = $CollisionShape3D/Sprite3D
 @onready var viewport: SubViewport = $CollisionShape3D/Sprite3D/SubViewport
+@onready var control: Control = $CollisionShape3D/Sprite3D/SubViewport/Control
+var controle = preload("res://Assets/Scenes/control.tscn")
+
 var ativo := false
 
 func _unhandled_input(event) -> void:
@@ -19,3 +22,12 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		e.set_position(texture_position)
 		e.set_global_position(texture_position)
 		viewport.push_input(e)
+
+func _input(event) -> void:
+	if event.is_action_pressed("retornar") and Global.Ta_no_jogo == true:
+		$CollisionShape3D/Sprite3D/SubViewport.get_child(0).queue_free()
+		var tela_inst = controle.instantiate()
+		$CollisionShape3D/Sprite3D/SubViewport.add_child(tela_inst)
+		Global.Ta_no_jogo = false
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
