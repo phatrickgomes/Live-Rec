@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://xx4euhsc5uht"
+path="res://.godot/imported/so sabe correr (online-audio-converter.com).mp3-d12267a8b0d1fb0f0e10ee602edf45a7.mp3str"
+
+[deps]
+
+source_file="res://Assets/musicas/so sabe correr (online-audio-converter.com).mp3"
+dest_files=["res://.godot/imported/so sabe correr (online-audio-converter.com).mp3-d12267a8b0d1fb0f0e10ee602edf45a7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

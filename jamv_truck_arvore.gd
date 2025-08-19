@@ -6,7 +6,7 @@ extends Node3D
 @export var max_spawn_rate := 0.6         
 @export var road_width := 57.5
 @export var distance_from_road := -6
-@export var chance_centro := 0.35          
+@export var chance_centro := 0.28         
 
 var timer := 0.0
 var next_side := 1

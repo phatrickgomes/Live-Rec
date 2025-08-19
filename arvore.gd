@@ -1,5 +1,5 @@
 extends Node3D
-@export var speed := 130.0
+@export var speed := 170.0
 
 func _ready():
 	add_to_group("arvores")
