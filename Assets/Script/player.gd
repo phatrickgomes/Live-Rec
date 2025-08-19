@@ -8,6 +8,7 @@ signal interact_object
 @onready var camera_monitor: Camera3D = get_node_or_null("../GUI/Monitor")
 @onready var camera_monitor2: Camera3D = get_node_or_null("../GUI/Monitor2")
 @onready var camera_folha: Camera3D = $"../camera_folha/camera_folha"
+@onready var camera_folha_2: Camera3D = $"../camera_folha/camera_folha2/camera_folha2"
 
 @onready var raycast = $camera_pivot/Camera3D/interacao
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
@@ -62,6 +63,10 @@ func iniciar_interacao_monitor2():
 func iniciar_interacao_folha():
 	if not camera_folha: return
 	_iniciar_transicao_para_folha(camera_folha)
+
+func iniciar_interacao_folha2():
+	if not camera_folha_2: return
+	_iniciar_transicao_para_folha(camera_folha_2)
 
 func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	Global.Ta_no_jogo = true
@@ -182,6 +187,8 @@ func _input(event):
 					iniciar_interacao_monitor1()
 				elif collider.is_in_group("folha"):
 					iniciar_interacao_folha()
+				elif collider.is_in_group("folha2"):
+					iniciar_interacao_folha2()
 		else:
 			if raycast.is_colliding():
 				var collider = raycast.get_collider()
@@ -225,7 +232,7 @@ func _physics_process(delta: float) -> void:
 		var collider = raycast.get_collider()
 		interact_object.emit(collider)
 		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel") or \
-		   collider.is_in_group("folha") or \
+		   collider.is_in_group("folha") or collider.is_in_group("folha2") or \
 		   (objeto_selecionado != null and objeto_selecionado.is_in_group("fita") and collider.is_in_group("tela_interativa")):
 			interact_label.visible = true
 		else:

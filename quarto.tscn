@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://pr6827hoy8ek"]
+[gd_scene load_steps=85 format=4 uid="uid://pr6827hoy8ek"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bm1lvkgax6uya" path="res://musicas/bmo___adventure_time_fan_art.glb" id="20_7fvgo"]
 [ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://cd1.tscn" id="20_yx88i"]
 [ext_resource type="PackedScene" uid="uid://bp0h3p7pknogf" path="res://papel.tscn" id="21_7fvgo"]
+[ext_resource type="PackedScene" uid="uid://c6ua03fradtk2" path="res://folha_truck.tscn" id="22_yx88i"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yx88i"]
 viewport_path = NodePath("monitor2/Viewport")
@@ -637,6 +638,18 @@ transform = Transform3D(0.990132, 0.102141, -0.0954456, -0.102139, 0.0624387, -0
 shape = SubResource("BoxShape3D_7fvgo")
 
 [node name="camera_folha" type="Camera3D" parent="camera_folha"]
+transform = Transform3D(0.66286, 0.0506033, -0.050006, -0.052965, 0.663869, -0.0302845, 0.0474975, 0.0340845, 0.664098, -0.0352859, -0.00338566, 0.200323)
+
+[node name="camera_folha2" parent="camera_folha" instance=ExtResource("22_yx88i")]
+transform = Transform3D(0.998673, 0.0498661, -0.0129026, -0.0498661, 0.873262, -0.484692, -0.0129024, 0.484692, 0.874591, 0.567652, 1.04143, -0.773459)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="camera_folha/camera_folha2" groups=["folha", "folha2"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="camera_folha/camera_folha2/StaticBody3D"]
+transform = Transform3D(0.990132, 0.102141, -0.0954456, -0.102139, 0.0624387, -0.992798, -0.0954463, 0.992805, 0.0722586, 0, 0, 0)
+shape = SubResource("BoxShape3D_7fvgo")
+
+[node name="camera_folha2" type="Camera3D" parent="camera_folha/camera_folha2"]
 transform = Transform3D(0.66286, 0.0506033, -0.050006, -0.052965, 0.663869, -0.0302845, 0.0474975, 0.0340845, 0.664098, -0.0352859, -0.00338566, 0.200323)
 
 [connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]

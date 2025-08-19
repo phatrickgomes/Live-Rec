@@ -1,18 +1,18 @@
-[gd_scene load_steps=8 format=4 uid="uid://bp0h3p7pknogf"]
+[gd_scene load_steps=8 format=4 uid="uid://c6ua03fradtk2"]
 
-[ext_resource type="Texture2D" uid="uid://bmjkb1831i6rx" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_0.png" id="1_1rjgs"]
-[ext_resource type="Texture2D" uid="uid://bdlwlua0duh2" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_1.png" id="2_75jnf"]
-[ext_resource type="FontFile" uid="uid://bud3epf48w464" path="res://Assets/HorrorFont-Regular.ttf" id="3_08lsh"]
+[ext_resource type="Texture2D" uid="uid://bmjkb1831i6rx" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_0.png" id="1_ekjg8"]
+[ext_resource type="Texture2D" uid="uid://bdlwlua0duh2" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_1.png" id="2_he25l"]
+[ext_resource type="FontFile" uid="uid://bud3epf48w464" path="res://Assets/HorrorFont-Regular.ttf" id="3_pttxr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi5a7"]
 resource_name = "Metal"
 cull_mode = 2
-albedo_texture = ExtResource("1_1rjgs")
+albedo_texture = ExtResource("1_ekjg8")
 roughness = 0.892971
 normal_enabled = true
-normal_texture = ExtResource("2_75jnf")
+normal_texture = ExtResource("2_he25l")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1rjgs"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ujnav"]
 _surfaces = [{
 "aabb": AABB(-3.78581, -5.25661, 0, 7.57161, 10.5132, 1e-05),
 "format": 34359742465,
@@ -26,7 +26,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_mpd6g"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_paxqm"]
 resource_name = "Sketchfab_Scene_Paper_Metal_0"
 _surfaces = [{
 "aabb": AABB(-3.78581, -5.25661, 0, 7.57161, 10.5132, 1e-05),
@@ -42,35 +42,34 @@ _surfaces = [{
 "vertex_data": PackedByteArray("qkpywDA2qMAAAAAAqkpyQDA2qEAAAAAAqkpyQDA2qMAAAAAAqkpywDA2qEAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AIA=")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_1rjgs")
+shadow_mesh = SubResource("ArrayMesh_ujnav")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1rjgs"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3cu2f"]
 points = PackedVector3Array(3.80707, 5.34004, 0.0834381, -3.86924, -5.34004, -0.0834381, -3.86924, -5.34004, 0.0834381, -3.86924, 5.34004, -0.0834381, 3.80707, -5.34004, -0.0834381, 3.80707, -5.34004, 0.0834381, -3.86924, 5.34004, 0.0834381, 3.80707, 5.34004, -0.0834381)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Paper_Metal_0" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0254, 0, 0, 0, 0.0254, -4.13819e-09, 0, 4.13819e-09, 0.0254, -0.000146091, -0.00737281, 0.0135718)
-mesh = SubResource("ArrayMesh_mpd6g")
+mesh = SubResource("ArrayMesh_paxqm")
 skeleton = NodePath("")
 
 [node name="Label3D" type="Label3D" parent="Paper_Metal_0"]
 transform = Transform3D(0.50293, -0.864328, 1.40817e-07, 0.864328, 0.50293, 8.09831e-08, -1.40817e-07, 8.09832e-08, 1, 1.17724, -0.915239, 0.0364488)
-text = "jamv_chupetao"
-font = ExtResource("3_08lsh")
+text = "jamv_truck"
+font = ExtResource("3_pttxr")
 font_size = 281
 outline_size = 20
 
 [node name="Label3D2" type="Label3D" parent="Paper_Metal_0"]
-transform = Transform3D(0.50293, -0.864329, 1.40817e-07, 0.864329, 0.50293, 8.0983e-08, -1.40817e-07, 8.09833e-08, 1, -1.28487, 1.52049, 0.037542)
-text = "o melhor game
- de todos os 
-tempos com 
-uma arte abistrata antiga "
-font = ExtResource("3_08lsh")
+transform = Transform3D(0.50293, -0.864329, 1.40817e-07, 0.864329, 0.50293, 8.0983e-08, -1.40817e-07, 8.09833e-08, 1, -0.70667, 0.906519, 0.0375421)
+text = "acabou de sair do bar
+e o fabbri nao quer 
+trabalhar"
+font = ExtResource("3_pttxr")
 font_size = 185
 outline_size = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.0254, 0, 0, 0, 0.0254, -4.13819e-09, 0, 4.13819e-09, 0.0254, -0.000146091, -0.00737281, 0.0135718)
-shape = SubResource("ConvexPolygonShape3D_1rjgs")
+shape = SubResource("ConvexPolygonShape3D_3cu2f")

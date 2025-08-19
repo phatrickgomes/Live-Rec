@@ -240,14 +240,14 @@ zoom = Vector2(0.3, 0.3)
 
 [node name="Carro" type="Sprite2D" parent="jamv"]
 texture_filter = 1
-position = Vector2(471.175, 308)
-scale = Vector2(2.85378, 2.9)
+position = Vector2(404, 252)
+scale = Vector2(3.7, 3.91)
 texture = ExtResource("5_lvt7x")
 
 [node name="Sprite2D_Volante" type="Sprite2D" parent="jamv"]
 texture_filter = 1
-position = Vector2(323, 490)
-scale = Vector2(0.55, 0.55)
+position = Vector2(199, 489)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_dkpos")
 
 [node name="Area3D" type="Area3D" parent="jamv"]
@@ -260,8 +260,8 @@ debug_color = Color(0.477945, 0.0574232, 0.151927, 0.42)
 
 [node name="Sprite2D_Mao" type="Sprite2D" parent="jamv"]
 texture_filter = 1
-position = Vector2(394, 413)
-scale = Vector2(2.3, 2.3)
+position = Vector2(317, 408)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("5_etnrv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
