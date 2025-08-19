@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=79 format=4 uid="uid://d18kujw3oc0ss"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
@@ -338,19 +338,6 @@ skeleton = NodePath("")
 transform = Transform3D(1.87201, -8.19564e-08, 1.45286e-07, 4.65661e-09, 2.48034, 7.03585e-07, -2.23517e-08, -1.15877e-06, 2.06765, 0.0193691, 0.0361328, 0.0696244)
 material_override = SubResource("StandardMaterial3D_yx88i")
 mesh = SubResource("QuadMesh_yx88i")
-
-[node name="Fita" parent="." groups=["fita"]]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(1, 0, -3.07336e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.84365, 0.841873, 0.862671)
-script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")

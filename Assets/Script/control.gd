@@ -15,6 +15,7 @@ func _on_button_pressed() -> void:
 			child.queue_free()
 		var maze_inst = labirinto.instantiate()
 		sub_viewport.add_child(maze_inst)
+		Global.chat_on = true
 	else:
 		print("voce precisa da fita")
 

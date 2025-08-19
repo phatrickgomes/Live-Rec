@@ -4,7 +4,7 @@ var slapoha = false
 func _physics_process(delta: float) -> void:
 	
 	if slapoha == false:
-		if Global.Ta_no_jogo == true:
+		if Global.chat_on == true:
 			$"../../Timer".start()
 			slapoha = true
 			print("FOI")

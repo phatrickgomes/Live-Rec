@@ -43,8 +43,8 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 47.0
 offset_top = -235.0
-offset_right = 342.0
-offset_bottom = 148.0
+offset_right = 343.0
+offset_bottom = 150.0
 grow_vertical = 2
 scale = Vector2(1.01755, 1.03593)
 theme_override_fonts/normal_font = ExtResource("2_t67cl")
@@ -54,6 +54,5 @@ justification_flags = 0
 script = ExtResource("1_dg5i7")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="Timer" to="Control/Label" method="_on_timer_timeout"]
