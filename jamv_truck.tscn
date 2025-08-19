@@ -209,6 +209,7 @@ shadow_mesh = SubResource("ArrayMesh_xl3tf")
 size = Vector3(7.57129, 9.87415, 3.80219)
 
 [node name="TreeSpawner" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.7204, 0)
 script = ExtResource("1_3vgtj")
 tree_scene = ExtResource("2_3vgtj")
 arvore_centro = ExtResource("3_ng0hk")
@@ -230,14 +231,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12951, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="jamv" node_paths=PackedStringArray("volante", "mao", "carro")]
 script = ExtResource("5_4jcav")
 volante = NodePath("../Sprite2D_Volante")
-mao = NodePath("Sprite2D_Mao")
+mao = NodePath("../Sprite2D_Mao")
 carro = NodePath("../Carro")
 
-[node name="Sprite2D_Mao" type="Sprite2D" parent="jamv/CanvasLayer"]
-texture_filter = 1
-position = Vector2(394, 413)
-scale = Vector2(2.3, 2.3)
-texture = ExtResource("5_etnrv")
+[node name="Camera2D" type="Camera2D" parent="jamv/CanvasLayer"]
+position = Vector2(417, 271)
+zoom = Vector2(0.3, 0.3)
 
 [node name="Carro" type="Sprite2D" parent="jamv"]
 texture_filter = 1
@@ -258,6 +257,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.23178)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.483337, 1.99931, 2.03802)
 shape = SubResource("BoxShape3D_luxwo")
 debug_color = Color(0.477945, 0.0574232, 0.151927, 0.42)
+
+[node name="Sprite2D_Mao" type="Sprite2D" parent="jamv"]
+texture_filter = 1
+position = Vector2(394, 413)
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("5_etnrv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(58.815, 0, 0, 0, 0.0889231, 0, 0, 0, 645.856, 0, 0, 0)

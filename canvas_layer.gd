@@ -10,7 +10,7 @@ extends CanvasLayer
 @export var tremor_intensidade: float = 0.5
 @export var tamanho_base_mao: float = 2.4
 @export var efeito_escala_curva: float = 0.05
-@export var posicao_vertical_mao: float = 430.0
+@export var posicao_vertical_mao: float = 413.0
 
 # Novos parâmetros para o tremor do carro
 @export var tremor_carro_intensidade: float = 3.0
@@ -37,7 +37,7 @@ func _process(delta):
 	volante.rotation_degrees = lerp(volante.rotation_degrees, rotacao_alvo, delta * suavizacao)
 	
 	mao.rotation_degrees = -rotacao_alvo * -0.3
-	mao.position.x = (direcao * movimento_lateral) + 420
+	mao.position.x = (direcao * movimento_lateral) + 394.0
 	mao.position.y = posicao_vertical_mao
 	
 	# Aplica efeitos de tremor no carro
