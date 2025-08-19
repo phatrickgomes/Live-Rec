@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://kx1k6tr8xq6w"]
+
+[ext_resource type="Script" uid="uid://dl82l4cgsaluf" path="res://label.gd" id="1_dg5i7"]
+[ext_resource type="Texture2D" uid="uid://cu5gh0ya5s2d0" path="res://Salva carai.png" id="1_yj8al"]
+[ext_resource type="FontFile" uid="uid://pd4b02kyjp7f" path="res://RoobertMonoTRIAL-Heavy-BF67243fd243d39.otf" id="2_t67cl"]
+
+[node name="Chat" type="Node2D"]
+scale = Vector2(1.28, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 398.0
+offset_bottom = 648.0
+scale = Vector2(1, 0.800001)
+mouse_filter = 2
+
+[node name="SalvaCarai" type="Sprite2D" parent="Control"]
+position = Vector2(199.42, 325)
+rotation = 1.5708
+scale = Vector2(0.336937, 0.369923)
+texture = ExtResource("1_yj8al")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 87.0
+offset_right = 345.0
+offset_bottom = 481.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 80.0
+offset_right = 350.0
+offset_bottom = 492.0
+mouse_filter = 2
+
+[node name="Label" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = -235.0
+offset_right = 342.0
+offset_bottom = 148.0
+grow_vertical = 2
+scale = Vector2(1.01755, 1.03593)
+theme_override_fonts/normal_font = ExtResource("2_t67cl")
+scroll_active = false
+scroll_following = true
+justification_flags = 0
+script = ExtResource("1_dg5i7")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Control/Label" method="_on_timer_timeout"]

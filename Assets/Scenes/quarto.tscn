@@ -1,17 +1,15 @@
-[gd_scene load_steps=80 format=4 uid="uid://o5dd2gttglnj"]
+[gd_scene load_steps=79 format=4 uid="uid://o5dd2gttglnj"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
-[ext_resource type="Script" uid="uid://clfat5jp85un4" path="res://Assets/Script/quarto.gd" id="1_lddpm"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://Assets/Imagens/anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://Assets/Imagens/lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://Assets/Imagens/foto geral.png" id="2_2vapn"]
-[ext_resource type="Texture2D" uid="uid://bwtggvr2buhjp" path="res://Assets/Imagens/WhatsApp Image 2025-08-15 at 11.36.14.jpeg" id="2_a6wpw"]
+[ext_resource type="PackedScene" uid="uid://kx1k6tr8xq6w" path="res://chat.tscn" id="2_88s47"]
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://Assets/Scenes/character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://Assets/Scenes/area_3d.tscn" id="3_twob8"]
 [ext_resource type="PackedScene" uid="uid://cx56uqtqto44b" path="res://Assets/Modelos/ninja.glb" id="5_chyoy"]
 [ext_resource type="Texture2D" uid="uid://dbnilyx5nb7pv" path="res://Assets/Texture/WoodSiding008_4K-JPG_Color.jpg" id="5_jsa3l"]
-[ext_resource type="PackedScene" uid="uid://dkgj13t8vk3o7" path="res://Assets/Scenes/jogo12.tscn" id="5_lut1e"]
 [ext_resource type="Texture2D" uid="uid://oi5yt67t0ys3" path="res://Assets/Texture/texturaparede.jpg" id="5_twob8"]
 [ext_resource type="PackedScene" uid="uid://mr7y7s75vk5m" path="res://Assets/Modelos/quarto.glb" id="5_wwc3q"]
 [ext_resource type="PackedScene" uid="uid://dxe1v3ukjtdti" path="res://Assets/Modelos/Untitled.glb" id="6_lut1e"]
@@ -20,9 +18,13 @@
 [ext_resource type="AudioStream" uid="uid://cosrrq14s7pra" path="res://Assets/musicas/corvo.wav" id="10_lddpm"]
 [ext_resource type="AudioStream" uid="uid://brmxxoi1r6sj0" path="res://Assets/musicas/caminhando.wav" id="11_igesp"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_vnwy0"]
+viewport_path = NodePath("monitor2/Viewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teso0"]
+resource_local_to_scene = true
 shading_mode = 0
-albedo_texture = ExtResource("2_a6wpw")
+albedo_texture = SubResource("ViewportTexture_vnwy0")
 
 [sub_resource type="QuadMesh" id="QuadMesh_6wfgo"]
 
@@ -283,7 +285,6 @@ albedo_texture = ExtResource("6_xtcex")
 
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
-script = ExtResource("1_lddpm")
 
 [node name="monitor2" parent="." instance=ExtResource("1_6wfgo")]
 transform = Transform3D(0.434147, 0, 0.248025, 0, 0.5, 0, -0.248025, 0, 0.434147, 3.6907, 0.150233, -0.601247)
@@ -298,6 +299,10 @@ spot_angle = 28.4107
 transform = Transform3D(0.000375628, -0.00217304, 0.82814, 0.0225356, 1.38074, 0.0012889, -0.728897, 0.0426879, 0.000466526, -10.8215, 2.82394, -0.517011)
 material_override = SubResource("StandardMaterial3D_teso0")
 mesh = SubResource("QuadMesh_6wfgo")
+
+[node name="Viewport" type="SubViewport" parent="monitor2"]
+
+[node name="Chat" parent="monitor2/Viewport" instance=ExtResource("2_88s47")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.0641971, 0, -0.761475, 0, 0.764176, 0, 0.761475, 0, -0.0641971, 2.81057, 1.92614, 3.37251)
@@ -334,8 +339,18 @@ transform = Transform3D(1.87201, -8.19564e-08, 1.45286e-07, 4.65661e-09, 2.48034
 material_override = SubResource("StandardMaterial3D_yx88i")
 mesh = SubResource("QuadMesh_yx88i")
 
-[node name="Fita" parent="." groups=["fita"] instance=ExtResource("5_lut1e")]
+[node name="Fita" parent="." groups=["fita"]]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(1, 0, -3.07336e-08, 0, -0.560639, 0.82806, 0, -0.82806, -0.560639, 4.84365, 0.841873, 0.862671)
+script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
