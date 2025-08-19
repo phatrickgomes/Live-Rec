@@ -289,7 +289,7 @@ albedo_texture = ExtResource("6_xtcex")
 [sub_resource type="Skin" id="Skin_jsa3l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7fvgo"]
-size = Vector3(0.157063, 0.0335159, 0.298706)
+size = Vector3(0.187337, 0.0335159, 0.302185)
 
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
@@ -629,21 +629,21 @@ transform = Transform3D(0.000543402, 0, 0.00998521, 0, 0.01, 0, -0.00998521, 0, 
 transform = Transform3D(-149.969, 5.01277e-06, -3.02369, -3.02369, -2.42825e-05, 149.969, 4.52233e-06, 150, 2.43786e-05, -96.943, -70.9605, -80.4184)
 
 [node name="camera_folha" parent="." groups=["folha"] instance=ExtResource("21_7fvgo")]
-transform = Transform3D(-1.48793, -0.0166022, 0.189142, 0.0644784, 1.36127, 0.626725, -0.178585, 0.629815, -1.34961, 1.21923, 0.319806, 2.81137)
+transform = Transform3D(-1.48789, -0.0156676, 0.189558, 0.0608488, 1.37713, 0.591446, -0.180208, 0.594362, -1.36538, 2.10991, 0.319806, 2.78982)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="camera_folha" groups=["folha"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="camera_folha/StaticBody3D"]
-transform = Transform3D(0.990132, 0.102141, -0.0954456, -0.102139, 0.0624387, -0.992798, -0.0954463, 0.992805, 0.0722586, 0, 0, 0)
+transform = Transform3D(0.990131, 0.102141, -0.0954458, -0.10214, 0.0624387, -0.992802, -0.0954467, 0.992805, 0.0722583, 0.000238895, -0.0246395, 0.015614)
 shape = SubResource("BoxShape3D_7fvgo")
 
 [node name="camera_folha" type="Camera3D" parent="camera_folha"]
 transform = Transform3D(0.66286, 0.0506033, -0.050006, -0.052965, 0.663869, -0.0302845, 0.0474975, 0.0340845, 0.664098, -0.0352859, -0.00338566, 0.200323)
 
 [node name="camera_folha2" parent="camera_folha" instance=ExtResource("22_yx88i")]
-transform = Transform3D(0.998673, 0.0498661, -0.0129026, -0.0498661, 0.873262, -0.484692, -0.0129024, 0.484692, 0.874591, 0.567652, 1.04143, -0.773459)
+transform = Transform3D(0.997044, 0.0239799, 0.0730225, -0.0145465, 0.991787, -0.127069, -0.0754697, 0.125631, 0.989205, 1.85842, -0.0404547, -0.0993606)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="camera_folha/camera_folha2" groups=["folha", "folha2"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="camera_folha/camera_folha2" groups=["folha2"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="camera_folha/camera_folha2/StaticBody3D"]
 transform = Transform3D(0.990132, 0.102141, -0.0954456, -0.102139, 0.0624387, -0.992798, -0.0954463, 0.992805, 0.0722586, 0, 0, 0)
