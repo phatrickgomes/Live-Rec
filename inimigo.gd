@@ -44,12 +44,9 @@ func _physics_process(delta):
 
 func soco():
 	anima.play("soco_inimigo")     
-	anim.play("soco_1")             
-	await anim.animation_finished     
+	anim.play("soco_1")              
 	anim.play("soco_2")             
-	await anim.animation_finished    
 	print("attack")
-
 
 func desviar():
 	var chance = randi_range(0,100)
