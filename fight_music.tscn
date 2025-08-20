@@ -1,20 +1,70 @@
-[gd_scene load_steps=37 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=40 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
 [ext_resource type="Script" uid="uid://dmkh584t37eih" path="res://inimigo.gd" id="2_qk7xc"]
 [ext_resource type="Texture2D" uid="uid://dq3h6u8r6f11o" path="res://Assets/Imagens/icon.svg" id="3_gt0wg"]
 [ext_resource type="Texture2D" uid="uid://dbaje7nxa7b17" path="res://Assets/Imagens/sprites_png.png" id="3_qetxy"]
+[ext_resource type="Texture2D" uid="uid://bfhbiy702pkmm" path="res://lurdes_diretos2.png" id="4_711bf"]
 [ext_resource type="Texture2D" uid="uid://dbuku5juvep65" path="res://sprites_esquiva.png" id="6_gt0wg"]
+[ext_resource type="Texture2D" uid="uid://f8mop8phon8w" path="res://Assets/Imagens/barra_energia.png" id="7_quwim"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46de6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gt0wg")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}],
+"loop": false,
+"name": &"soco_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_711bf")
+}],
+"loop": false,
+"name": &"soco_2",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk7xc"]
 bg_color = Color(0.552497, 0.207628, 0.305367, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gt0wg"]
 bg_color = Color(0.303506, 0.702569, 0.266621, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_quwim"]
-size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_711bf"]
 size = Vector2(36, 20)
@@ -48,7 +98,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Icon/hurt_box/CollisionShape2D:disabled")
+tracks/2/path = NodePath("hurt_box/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -64,7 +114,7 @@ length = 0.45
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Icon/hurt_box/CollisionShape2D:disabled")
+tracks/0/path = NodePath("hurt_box/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -108,6 +158,9 @@ _data = {
 &"desvio": SubResource("Animation_quwim"),
 &"soco_inimigo": SubResource("Animation_qk7xc")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_quwim"]
+size = Vector2(113.589, 67.8579)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wblu2"]
 atlas = ExtResource("6_gt0wg")
@@ -316,14 +369,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qk7xc"]
 size = Vector2(31, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gt0wg"]
+size = Vector2(36, 23.5)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qetxy"]
 bg_color = Color(0.522505, 0.251798, 0.15631, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y85iy"]
 bg_color = Color(0.369285, 0.64143, 0.911841, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gt0wg"]
-size = Vector2(36, 23.5)
 
 [node name="FightMusic" type="Node2D"]
 
@@ -339,6 +392,15 @@ zoom = Vector2(5, 5)
 [node name="inimigo" type="CharacterBody2D" parent="." groups=["soco_inimigo"]]
 script = ExtResource("2_qk7xc")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="inimigo"]
+texture_filter = 1
+position = Vector2(-4.22969, -0.68677)
+scale = Vector2(0.361484, 0.178314)
+sprite_frames = SubResource("SpriteFrames_46de6")
+animation = &"soco_2"
+frame = 4
+frame_progress = 1.0
+
 [node name="progress_inimigo" type="ProgressBar" parent="inimigo"]
 texture_filter = 1
 offset_left = 9.0
@@ -351,18 +413,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gt0wg")
 value = 100.0
 fill_mode = 2
 show_percentage = false
-
-[node name="Icon" type="Sprite2D" parent="inimigo"]
-position = Vector2(-3, 5)
-scale = Vector2(0.25, 0.242188)
-texture = ExtResource("3_gt0wg")
-
-[node name="hurt_box" type="Area2D" parent="inimigo/Icon" groups=["socao"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="inimigo/Icon/hurt_box"]
-position = Vector2(0, -2.06452)
-shape = SubResource("RectangleShape2D_quwim")
-debug_color = Color(0.260471, 0.535382, 0.898275, 0.42)
 
 [node name="hit_box_inimigo" type="Area2D" parent="inimigo" groups=["soco_inimigo"]]
 
@@ -386,6 +436,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_quwim")
 }
 
+[node name="hurt_box" type="Area2D" parent="inimigo" groups=["socao"]]
+position = Vector2(-12.3189, 3.41502)
+scale = Vector2(0.404458, 0.331135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inimigo/hurt_box"]
+position = Vector2(19.5943, -12.9217)
+shape = SubResource("RectangleShape2D_quwim")
+debug_color = Color(0.260471, 0.535382, 0.898275, 0.42)
+
+[node name="Resfriamento" type="Timer" parent="inimigo"]
+wait_time = 4.0
+one_shot = true
+
 [node name="Lurdes" type="CharacterBody2D" parent="."]
 position = Vector2(3, 40)
 script = ExtResource("2_cauy1")
@@ -394,8 +457,10 @@ script = ExtResource("2_cauy1")
 texture_filter = 1
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_k7i15")
-animation = &"desvio"
+animation = &"direto"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {
@@ -410,18 +475,6 @@ shape = SubResource("RectangleShape2D_qk7xc")
 disabled = true
 debug_color = Color(0.0140328, 0, 0.000464635, 0.42)
 
-[node name="ProgressBar" type="ProgressBar" parent="Lurdes"]
-texture_filter = 1
-offset_left = -103.0
-offset_top = -6.0
-offset_right = -97.0
-offset_bottom = 25.0
-theme_override_styles/background = SubResource("StyleBoxFlat_qetxy")
-theme_override_styles/fill = SubResource("StyleBoxFlat_y85iy")
-value = 100.0
-fill_mode = 3
-show_percentage = false
-
 [node name="tempo_soco" type="Timer" parent="Lurdes"]
 wait_time = 0.6
 one_shot = true
@@ -433,14 +486,33 @@ position = Vector2(-3, -8.25)
 shape = SubResource("RectangleShape2D_gt0wg")
 debug_color = Color(0.975706, 0.627735, 0.200882, 0.42)
 
-[node name="vida" type="Label" parent="Lurdes"]
+[node name="vida" type="Label" parent="."]
 texture_filter = 1
-offset_left = -90.0
-offset_top = -17.0
-offset_right = -80.0
-offset_bottom = 6.0
+offset_left = -87.0
+offset_top = 23.0
+offset_right = -77.0
+offset_bottom = 46.0
 text = "0"
 
-[connection signal="area_entered" from="inimigo/Icon/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
+[node name="ProgressBar" type="ProgressBar" parent="."]
+texture_filter = 1
+offset_left = -38.0
+offset_top = 52.0
+offset_right = -29.0
+offset_bottom = 120.0
+rotation = 1.5708
+theme_override_styles/background = SubResource("StyleBoxFlat_qetxy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y85iy")
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="BarraEnergia" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-75, 58)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_quwim")
+
+[connection signal="area_entered" from="inimigo/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Lurdes/tempo_soco" to="Lurdes" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Lurdes/hurt" to="Lurdes" method="_on_hurt_area_entered"]
