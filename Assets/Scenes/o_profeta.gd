@@ -5,21 +5,24 @@ enum Estado { PATRULHA, STALKING, TRANSFORMACAO, PERSEGUICAO }
 ### CONFIGURAÇÕES PRINCIPAIS ###
 var estado_atual: Estado = Estado.PATRULHA
 var jogador = null  # Referência fraca ao jogador
-var tempo_stalking = 5  # Tempo em segundos
+var tempo_stalking = 38  # Tempo em segundos
 var velocidade_perseguicao = 80
 var patrol_speed = 40
 var acceleration = 20.0
 var gravity = 1200
 var is_on_floor = false
+var ultima_direcao = 1  # 1 para direita, -1 para esquerda
 
 ### NODES ###
-@onready var timer_fuga = $Icon/Visao/TimerFuga
+@onready var timer_fuga = $Visao/TimerFuga
 @onready var timer_transformacao = $TimerTransformacao
-
 @onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
-
-@onready var visao = $Icon/Visao
+@onready var visao = $Visao
 @onready var darkness_overlay: ColorRect = $"../ShaderEffects/DarknessOverlay"
+@onready var icon = $AnimatedSprite2D
+@onready var point_light = $PointLight2D  # Nó da PointLight2D
+@onready var animated_sprite = $AnimatedSprite2D  # Nó do AnimatedSprite2D
+
 ### SISTEMA DE ÁUDIO SINCRONIZADO ###
 @onready var audio_players = {
 	"stalking": $TrilhaStalking,
@@ -33,10 +36,9 @@ func _ready():
 	timer_fuga.one_shot = true
 	timer_transformacao.one_shot = true
 	timer_transformacao.wait_time = 0.1
-
-	# Configura volumes iniciais (opcional)
-	audio_players["rugido"].volume_db = 0      # Volume máximo
-	audio_players["perseguicao"].volume_db = -5  # Levemente mais baixo
+	
+	# Inicia com animação Idle
+	play_animation("Idle")
 
 ### FÍSICA E MOVIMENTO ###
 func _physics_process(delta):
@@ -57,6 +59,12 @@ func _physics_process(delta):
 				perseguir_jogador(delta)
 			else:
 				retornar_patrulha()
+	
+	# Aplicar rotação do ícone baseado na velocidade
+	virar_icon()
+	
+	# Controlar animações baseado no movimento
+	controlar_animacoes()
 	
 	move_and_slide()
 
@@ -85,6 +93,43 @@ func jogador_eh_visivel() -> bool:
 		if body.name == "SparkyGlory":
 			return true
 	return false
+
+### SISTEMA DE ANIMAÇÕES ###
+func controlar_animacoes():
+	match estado_atual:
+		Estado.PATRULHA, Estado.PERSEGUICAO:
+			if abs(velocity.x) > 0.1:
+				play_animation("Walk")
+			else:
+				play_animation("Idle")
+		Estado.STALKING, Estado.TRANSFORMACAO:
+			play_animation("Idle")
+
+func play_animation(anim_name: String):
+	if animated_sprite.sprite_frames.has_animation(anim_name) and animated_sprite.animation != anim_name:
+		animated_sprite.play(anim_name)
+
+### SISTEMA DE FLIP E ILUMINAÇÃO ###
+func virar_icon():
+	var direcao_anterior = ultima_direcao
+	
+	if velocity.x > 0:
+		icon.scale.x = -abs(icon.scale.x)  # Esquerda (invertido)
+		ultima_direcao = 1
+	elif velocity.x < 0:
+		icon.scale.x = abs(icon.scale.x)   # Direita (invertido)
+		ultima_direcao = -1
+	
+	# Ajustar a PointLight2D apenas se a direção mudou
+	if direcao_anterior != ultima_direcao:
+		ajustar_point_light()
+
+func ajustar_point_light():
+	if ultima_direcao == 1:  # Virado para direita
+		point_light.position.x = 47  # Posição original
+	else:  # Virado para esquerda
+		point_light.position.x = -47   # Posição invertida no eixo X
+	point_light.position.y = 8       # Mantém a posição Y
 
 ### SISTEMA DE ÁUDIO ###
 func iniciar_transformacao():
