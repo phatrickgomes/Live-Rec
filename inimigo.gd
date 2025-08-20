@@ -13,7 +13,6 @@ extends CharacterBody2D
 func desviar():
 	var chance = randi_range(0,100)
 	if chance > 70: $AnimationPlayer.play("desvio")
-	
 
 var max_health = 100
 var current_health = max_health
