@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var oxigenio = $ProgressBar
 var tempo_regeneracao = 0.0
 var intervalo_regeneracao = 0.8  ##intervalo da regeneraçao de stamina
-
+var tempo_soco = true
 func _ready():
 	anim.animation_finished.connect(_on_animation_finished)
 	
@@ -19,18 +19,24 @@ func _physics_process(delta: float) -> void:
 		regenerar_folego(10)  ##regenera 10% a cada segundo
 
 func _input(event):
-	if event.is_action_pressed("tiro") and anim.animation != "direto":
+	if event.is_action_pressed("tiro") and anim.animation != "direto" and tempo_soco == true:
 		if oxigenio.value > 0:
 			anim.play("direto")
 			anima.play("porrada")
+			$"../inimigo".desviar()
+			$tempo_soco.start()
+			tempo_soco = false
 			# Reduz 10% do folego
 			reduzir_folego(10)
 		else:
 			print("sem folego")
-	elif event.is_action_pressed("socojab") and anim.animation != "jab":
+	elif event.is_action_pressed("socojab") and anim.animation != "jab" and tempo_soco == true:
 		##verifica se tem folego
 		if oxigenio.value > 0:
 			anim.play("jab")
+			$"../inimigo".desviar()
+			$tempo_soco.start()
+			tempo_soco = false
 			anima.play("porrada")
 			##reduz 10% do folego
 			reduzir_folego(10)
@@ -50,3 +56,7 @@ func regenerar_folego(percentual: float):
 func _on_animation_finished():
 	if anim.animation == "direto" or anim.animation == "jab":
 		anim.play("idle")
+
+
+func _on_timer_timeout() -> void:
+	tempo_soco = true	

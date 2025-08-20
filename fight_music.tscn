@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=32 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
@@ -17,6 +17,45 @@ size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_711bf"]
 size = Vector2(36, 20)
+
+[sub_resource type="Animation" id="Animation_gt0wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_box_inimigo/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_box_inimigo:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon/hurt_box/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_qk7xc"]
 resource_name = "soco_inimigo"
@@ -46,36 +85,26 @@ tracks/1/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_gt0wg"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_quwim"]
+resource_name = "desvio"
+length = 0.45
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("hit_box_inimigo/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Icon/hurt_box/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("hit_box_inimigo:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_quwim"]
 _data = {
 &"RESET": SubResource("Animation_gt0wg"),
+&"desvio": SubResource("Animation_quwim"),
 &"soco_inimigo": SubResource("Animation_qk7xc")
 }
 
@@ -170,6 +199,33 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7g5e1"]
 size = Vector2(29, 51)
 
+[sub_resource type="Animation" id="Animation_y85iy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_box/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_box:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_qetxy"]
 resource_name = "porrada"
 length = 0.3433
@@ -196,33 +252,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_y85iy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("hit_box/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("hit_box:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y85iy"]
@@ -284,6 +313,7 @@ debug_color = Color(0.260471, 0.535382, 0.898275, 0.42)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="inimigo/hit_box_inimigo"]
 position = Vector2(1, 20)
 shape = SubResource("RectangleShape2D_711bf")
+disabled = true
 debug_color = Color(0.870436, 0.000498057, 0.848942, 0.42)
 
 [node name="Label" type="Label" parent="inimigo"]
@@ -310,8 +340,6 @@ position = Vector2(-1, -13)
 sprite_frames = SubResource("SpriteFrames_k7i15")
 animation = &"direto"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lurdes"]
 position = Vector2(-3.5, -0.5)
@@ -342,4 +370,9 @@ value = 100.0
 fill_mode = 3
 show_percentage = false
 
+[node name="tempo_soco" type="Timer" parent="Lurdes"]
+wait_time = 0.7
+one_shot = true
+
 [connection signal="area_entered" from="inimigo/Icon/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="Lurdes/tempo_soco" to="Lurdes" method="_on_timer_timeout"]

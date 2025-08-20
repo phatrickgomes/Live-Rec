@@ -3,7 +3,17 @@ extends CharacterBody2D
 
 @onready var anima = $AnimationPlayer
 
+	#maqui de estado#
+#estado ataque
+#resfriando
+#recuperado
 
+#var escolher soco = randi_range(0,2)
+
+func desviar():
+	var chance = randi_range(0,100)
+	if chance > 25: $AnimationPlayer.play("desvio")
+	
 
 var max_health = 100
 var current_health = max_health
@@ -14,7 +24,10 @@ func _ready():
 	vida_inimigo.max_value = max_health
 	vida_inimigo.value = current_health
 	update_health_bar()
-
+func soco():
+	$AnimationPlayer.play("soco_inimigo")
+	
+	pass
 func take_damage(damage):
 	current_health -= damage
 	current_health = max(0, current_health) 
