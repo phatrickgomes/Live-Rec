@@ -1,7 +1,7 @@
 extends CharacterBody2D
 @onready var vida_inimigo = $progress_inimigo
-
 @onready var anima = $AnimationPlayer
+
 
 	#maqui de estado#
 #estado ataque
@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 func desviar():
 	var chance = randi_range(0,100)
-	if chance > 25: $AnimationPlayer.play("desvio")
+	if chance > 70: $AnimationPlayer.play("desvio")
 	
 
 var max_health = 100
@@ -49,9 +49,8 @@ func update_health_bar_color():
 		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.RED
 
 func die():
-	print("Inimigo morreu!")
 	##colocar animaçao de morte depois
-	queue_free() 
+	get_tree().reload_current_scene()
 
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("socao"):  

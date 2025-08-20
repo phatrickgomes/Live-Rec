@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var oxigenio = $ProgressBar
 var tempo_regeneracao = 0.0
-var intervalo_regeneracao = 0.8  ##intervalo da regeneraçao de stamina
+var intervalo_regeneracao = 4  ##intervalo da regeneraçao de stamina
 var tempo_soco = true
 func _ready():
 	anim.animation_finished.connect(_on_animation_finished)
@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	tempo_regeneracao += delta
 	if tempo_regeneracao >= intervalo_regeneracao:
 		tempo_regeneracao = 0.0
-		regenerar_folego(10)  ##regenera 10% a cada segundo
+		regenerar_folego(30)  ##regenera 10% a cada segundo
 
 func _input(event):
 	if event.is_action_pressed("tiro") and anim.animation != "direto" and tempo_soco == true:

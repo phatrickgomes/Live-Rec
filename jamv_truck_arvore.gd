@@ -50,7 +50,3 @@ func spawn_center() -> void:
 	centro.position = Vector3(0, 0, -500)
 	add_child(centro)
 	
-
-
-func _on_area_3d_body_entered(body):
-	pass # Replace with function body.
