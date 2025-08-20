@@ -1,8 +1,83 @@
-[gd_scene load_steps=19 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=31 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
+[ext_resource type="Script" uid="uid://dmkh584t37eih" path="res://inimigo.gd" id="2_qk7xc"]
+[ext_resource type="Texture2D" uid="uid://dq3h6u8r6f11o" path="res://Assets/Imagens/icon.svg" id="3_gt0wg"]
 [ext_resource type="Texture2D" uid="uid://dbaje7nxa7b17" path="res://Assets/Imagens/sprites_png.png" id="3_qetxy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk7xc"]
+bg_color = Color(0.552497, 0.207628, 0.305367, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gt0wg"]
+bg_color = Color(0.303506, 0.702569, 0.266621, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_quwim"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_711bf"]
+size = Vector2(36, 20)
+
+[sub_resource type="Animation" id="Animation_qk7xc"]
+resource_name = "soco_inimigo"
+length = 0.3433
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_box_inimigo:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_box_inimigo/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_gt0wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_box_inimigo/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_box_inimigo:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_quwim"]
+_data = {
+&"RESET": SubResource("Animation_gt0wg"),
+&"soco_inimigo": SubResource("Animation_qk7xc")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y85iy"]
 atlas = ExtResource("3_qetxy")
@@ -62,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_711bf")
 }],
-"loop": true,
+"loop": false,
 "name": &"direto",
 "speed": 13.0
 }, {
@@ -97,14 +172,73 @@ size = Vector2(29, 51)
 
 [sub_resource type="Animation" id="Animation_qetxy"]
 resource_name = "porrada"
+length = 0.3433
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_box:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_box/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_y85iy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_box/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_box:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y85iy"]
 _data = {
+&"RESET": SubResource("Animation_y85iy"),
 &"porrada": SubResource("Animation_qetxy")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qk7xc"]
 size = Vector2(31, 20)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qetxy"]
+bg_color = Color(0.522505, 0.251798, 0.15631, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y85iy"]
+bg_color = Color(0.369285, 0.64143, 0.911841, 1)
 
 [node name="FightMusic" type="Node2D"]
 
@@ -117,32 +251,95 @@ texture = ExtResource("1_oklet")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="inimigo" type="CharacterBody2D" parent="."]
+script = ExtResource("2_qk7xc")
+
+[node name="progress_inimigo" type="ProgressBar" parent="inimigo"]
+texture_filter = 1
+offset_left = 9.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 36.0
+rotation = -1.57352
+theme_override_styles/background = SubResource("StyleBoxFlat_qk7xc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gt0wg")
+value = 100.0
+fill_mode = 2
+show_percentage = false
+
+[node name="Icon" type="Sprite2D" parent="inimigo"]
+position = Vector2(-3, 5)
+scale = Vector2(0.25, 0.242188)
+texture = ExtResource("3_gt0wg")
+
+[node name="hurt_box" type="Area2D" parent="inimigo/Icon" groups=["socao"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inimigo/Icon/hurt_box"]
+position = Vector2(0, -2.06452)
+shape = SubResource("RectangleShape2D_quwim")
+debug_color = Color(0.260471, 0.535382, 0.898275, 0.42)
+
+[node name="hit_box_inimigo" type="Area2D" parent="inimigo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inimigo/hit_box_inimigo"]
+position = Vector2(1, 20)
+shape = SubResource("RectangleShape2D_711bf")
+debug_color = Color(0.870436, 0.000498057, 0.848942, 0.42)
+
+[node name="Label" type="Label" parent="inimigo"]
+texture_filter = 1
+offset_left = -50.0
+offset_top = -43.0
+offset_right = 43.0
+offset_bottom = -26.0
+theme_override_font_sizes/font_size = 12
+text = "Mauricio Juinior"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="inimigo"]
+libraries = {
+&"": SubResource("AnimationLibrary_quwim")
+}
+
+[node name="Lurdes" type="CharacterBody2D" parent="."]
 position = Vector2(3, 40)
 script = ExtResource("2_cauy1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Lurdes"]
 texture_filter = 1
 position = Vector2(-1, -13)
 sprite_frames = SubResource("SpriteFrames_k7i15")
 animation = &"direto"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.454735
+frame = 4
+frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(3.5, -0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lurdes"]
+position = Vector2(-3.5, -0.5)
 shape = SubResource("RectangleShape2D_7g5e1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {
 &"": SubResource("AnimationLibrary_y85iy")
 }
 
-[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+[node name="hit_box" type="Area2D" parent="Lurdes" groups=["socao"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
-position = Vector2(3.5, -23)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lurdes/hit_box"]
+position = Vector2(-0.5, -23)
 shape = SubResource("RectangleShape2D_qk7xc")
 disabled = true
 debug_color = Color(0.0140328, 0, 0.000464635, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="Lurdes"]
+texture_filter = 1
+offset_left = -103.0
+offset_top = -6.0
+offset_right = -97.0
+offset_bottom = 25.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qetxy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y85iy")
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[connection signal="area_entered" from="inimigo/Icon/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
