@@ -47,20 +47,20 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_byr0e")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8qrgq"]
-size = Vector3(11.0857, 8.20001, 4.80422)
+size = Vector3(13.8866, 10.3821, 7.92023)
 
 [node name="arvore" type="Node3D" groups=["arvores"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65521, 0)
 script = ExtResource("1_3coyu")
 
 [node name="Object_3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-3.0598e-09, -0.07, -3.0598e-09, 0, -3.0598e-09, 0.07, -0.07, 3.0598e-09, 1.33748e-16, 0, 0, 0)
+transform = Transform3D(-4.37114e-09, -0.1, -4.37114e-09, 0, -4.37114e-09, 0.1, -0.1, 4.37114e-09, 1.91069e-16, 0, 0, 0)
 mesh = SubResource("ArrayMesh_2esra")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, -3.55271e-15, 3.55271e-15, 3.55271e-15, 1, 2.11758e-22, -3.55271e-15, 2.11758e-22, 1, -1.03413, 3.88614, 0.260119)
+transform = Transform3D(1, -3.55271e-15, 3.55271e-15, 3.55271e-15, 1, 2.11758e-22, -3.55271e-15, 2.11758e-22, 1, 0.36632, 4.97719, 1.05965)
 shape = SubResource("BoxShape3D_8qrgq")
 debug_color = Color(0.885151, 0.321896, 0.218682, 0.42)

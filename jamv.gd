@@ -47,7 +47,7 @@ func update_health_bar() -> void:
 		vida.value = current_health
 
 func die() -> void:
-	queue_free()
+	get_tree().reload_current_scene()
 	
 func _on_hurtbox_area_entered(area):
 	if area.is_in_group("tiro"):  

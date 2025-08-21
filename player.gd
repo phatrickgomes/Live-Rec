@@ -49,7 +49,7 @@ func levar_dano(dano: int) -> void:
 
 func morrer() -> void:
 	print("voce morreu")
-	queue_free()  
+	get_tree().reload_current_scene()  
 
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("tiro_jamv"):

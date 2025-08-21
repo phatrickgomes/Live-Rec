@@ -9,49 +9,56 @@ var current_health = max_health
 var damage_amount = 5  ## dano que cada soco causa
 
 ## maquina de estados
-enum Estado {RECUPERADO, ATAQUE, RESFRIANDO}
-var estado_atual = Estado.RECUPERADO
-var tempo_resfriamento = 3.0
-var intervalo_resfriamento = 4.0  ##tempo de cooldown entre ataques
+enum Estado {IDLE, ATAQUE}
+var estado_atual = Estado.IDLE
+
+var tempo_resfriamento = 0.0
+var intervalo_resfriamento = 1.5  ## tempo de cooldown após ataque
+var tempo_ataque = 0.0
+var duracao_ataque = 1.2  ## duração da animação de ataque
 
 func _ready():
 	randomize()
 	vida_inimigo.max_value = max_health
 	vida_inimigo.value = current_health
 	update_health_bar()
-
+	tempo_resfriamento = 2.0  
+	estado_atual = Estado.IDLE
 
 func _physics_process(delta):
 	match estado_atual:
-		Estado.RECUPERADO:
-			var escolha = randi_range(0,1) 
-			if escolha == 1:
-				soco()
-				estado_atual = Estado.RESFRIANDO
-				tempo_resfriamento = 0.0
-			elif escolha == 2:
-				desviar()
-				estado_atual = Estado.RESFRIANDO
-				tempo_resfriamento = 0.0
-
-		Estado.RESFRIANDO:
-			tempo_resfriamento += delta
-			if tempo_resfriamento >= intervalo_resfriamento:
-				estado_atual = Estado.RECUPERADO
+		Estado.IDLE:
+			anim.play("idle")
+			##espera cooldown
+			if tempo_resfriamento > 0.0:
+				tempo_resfriamento -= delta
+			else:
+				var escolha = randi_range(0, 30)
+				if escolha < 2:
+					estado_atual = Estado.ATAQUE
+					soco()
+					tempo_ataque = duracao_ataque
 
 		Estado.ATAQUE:
-			pass
+			##espera a animaçao acabar
+			tempo_ataque -= delta
+			if tempo_ataque <= 0.0:
+				tempo_resfriamento = intervalo_resfriamento
+				estado_atual = Estado.IDLE  
 
 func soco():
-	anima.play("soco_inimigo")     
-	anim.play("soco_1")              
-	anim.play("soco_2")             
+	anima.play("soco_inimigo") 
+	var random = randi_range(1,2) 
+	if random == 1:
+		anim.play("soco_1")              
+	else:
+		anim.play("soco_2")             
 	print("attack")
 
 func desviar():
 	var chance = randi_range(0,100)
 	if chance > 70: 
-		$AnimationPlayer.play("desvio")
+		anima.play("desvio")
 		print("desvio")
 
 func take_damage(damage):
@@ -75,7 +82,7 @@ func update_health_bar_color():
 		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.RED
 
 func die():
-	## colocar animaçao de morte depois
+	## colocar animação de morte depois
 	get_tree().reload_current_scene()
 
 func _on_hurt_box_area_entered(area):
