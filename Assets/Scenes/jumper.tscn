@@ -1,23 +1,27 @@
-[gd_scene load_steps=29 format=3 uid="uid://bfujas5bjj8aq"]
+[gd_scene load_steps=42 format=3 uid="uid://bfujas5bjj8aq"]
 
 [ext_resource type="Script" uid="uid://cp4q21v87paj2" path="res://Assets/Scenes/sparky_glory_plat.gd" id="1_irb3c"]
 [ext_resource type="Texture2D" uid="uid://c3tm6medvv62e" path="res://Assets/Imagens/1528106245788.jpg" id="2_oqjto"]
 [ext_resource type="Shader" uid="uid://ygxmhbjqsfp8" path="res://Assets/Scenes/S.gdshader" id="3_n2bky"]
+[ext_resource type="AudioStream" uid="uid://bsuuw4myls61w" path="res://Assets/musicas/deslizamiento-de-espada-79903.mp3" id="4_2hlw3"]
+[ext_resource type="AudioStream" uid="uid://dbyf3o6qyhvt4" path="res://Assets/musicas/grappling-hook-made-with-Voicemod.mp3" id="5_wy6na"]
+[ext_resource type="AudioStream" uid="uid://koffrxsi4fxj" path="res://Assets/musicas/walking-96582.mp3" id="6_wy6na"]
+[ext_resource type="AudioStream" uid="uid://cuwwoxxk7sv74" path="res://Assets/musicas/789383__modusmogulus__cartoon-dash-dodge-type-sfx.wav" id="7_5gc7w"]
+[ext_resource type="Script" uid="uid://c48gq2g7aiomh" path="res://Assets/Scenes/vazio.gd" id="8_qwfpk"]
+[ext_resource type="AudioStream" uid="uid://k3ehfe2pc6xe" path="res://Assets/musicas/2021-01-02_-_Super_Suspense_David_Fesliyan.mp3" id="9_qwfpk"]
+[ext_resource type="Script" uid="uid://d3mlr6qt2wo03" path="res://Assets/Scenes/Orbe.gd" id="10_5gc7w"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w0epd"]
-sky_top_color = Color(0.00834118, 0.0124825, 0.0199202, 1)
-sky_horizon_color = Color(0.157161, 0.121533, 0.228232, 1)
-ground_bottom_color = Color(0.199355, 0.0527022, 0.47206, 1)
-ground_horizon_color = Color(0.157161, 0.121533, 0.228232, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qwfpk"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="Sky" id="Sky_irb3c"]
-sky_material = SubResource("ProceduralSkyMaterial_w0epd")
+[sub_resource type="Sky" id="Sky_5gc7w"]
+sky_material = SubResource("ProceduralSkyMaterial_qwfpk")
 
-[sub_resource type="Environment" id="Environment_oqjto"]
+[sub_resource type="Environment" id="Environment_375xw"]
 background_mode = 2
-sky = SubResource("Sky_irb3c")
+sky = SubResource("Sky_5gc7w")
 tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_irb3c"]
 data = PackedVector3Array(2.87915e-07, -30.1308, -24.144, 17.0724, -30.1308, -17.0724, 17.0724, 30.1308, -17.0724, 24.144, 30.1308, 0, 17.0724, 30.1308, 17.0724, 0, 30.1308, 0, 17.0724, 30.1308, 17.0724, 24.144, 30.1308, 0, 24.144, -30.1308, 0, 17.0724, 30.1308, 17.0724, -1.05537e-06, 30.1308, 24.144, 0, 30.1308, 0, -1.05537e-06, 30.1308, 24.144, 17.0724, 30.1308, 17.0724, 17.0724, -30.1308, 17.0724, 17.0724, 30.1308, -17.0724, 24.144, 30.1308, 0, 0, 30.1308, 0, 24.144, 30.1308, 0, 17.0724, 30.1308, -17.0724, 17.0724, -30.1308, -17.0724, 2.87915e-07, 30.1308, -24.144, 17.0724, 30.1308, -17.0724, 0, 30.1308, 0, 17.0724, 30.1308, -17.0724, 2.87915e-07, 30.1308, -24.144, 2.87915e-07, -30.1308, -24.144, 24.144, -30.1308, 0, 17.0724, -30.1308, 17.0724, 17.0724, 30.1308, 17.0724, -1.05537e-06, -30.1308, 24.144, 17.0724, -30.1308, 17.0724, 24.144, -30.1308, 0, 17.0724, -30.1308, 17.0724, -1.05537e-06, -30.1308, 24.144, -1.05537e-06, 30.1308, 24.144, -17.0724, -30.1308, 17.0724, -1.05537e-06, -30.1308, 24.144, 24.144, -30.1308, 0, 17.0724, -30.1308, -17.0724, 24.144, -30.1308, 0, 24.144, 30.1308, 0, 17.0724, -30.1308, -17.0724, 2.87915e-07, -30.1308, -24.144, 24.144, -30.1308, 0, -24.144, -30.1308, -2.11074e-06, -17.0724, -30.1308, -17.0724, -17.0724, 30.1308, -17.0724, 2.87915e-07, -30.1308, -24.144, -17.0724, -30.1308, -17.0724, 24.144, -30.1308, 0, -1.05537e-06, 30.1308, 24.144, -17.0724, 30.1308, 17.0724, 0, 30.1308, 0, -17.0724, 30.1308, 17.0724, -1.05537e-06, 30.1308, 24.144, -1.05537e-06, -30.1308, 24.144, -17.0724, 30.1308, 17.0724, -24.144, 30.1308, -2.11074e-06, 0, 30.1308, 0, -24.144, 30.1308, -2.11074e-06, -17.0724, 30.1308, 17.0724, -17.0724, -30.1308, 17.0724, -17.0724, 30.1308, -17.0724, 2.87915e-07, 30.1308, -24.144, 0, 30.1308, 0, 2.87915e-07, 30.1308, -24.144, -17.0724, 30.1308, -17.0724, -17.0724, -30.1308, -17.0724, -24.144, 30.1308, -2.11074e-06, -17.0724, 30.1308, -17.0724, 0, 30.1308, 0, -17.0724, 30.1308, -17.0724, -24.144, 30.1308, -2.11074e-06, -24.144, -30.1308, -2.11074e-06, -1.05537e-06, -30.1308, 24.144, -17.0724, -30.1308, 17.0724, -17.0724, 30.1308, 17.0724, -24.144, -30.1308, -2.11074e-06, -17.0724, -30.1308, 17.0724, 24.144, -30.1308, 0, -17.0724, -30.1308, 17.0724, -24.144, -30.1308, -2.11074e-06, -24.144, 30.1308, -2.11074e-06, -17.0724, -30.1308, -17.0724, 2.87915e-07, -30.1308, -24.144, 2.87915e-07, 30.1308, -24.144, -17.0724, -30.1308, -17.0724, -24.144, -30.1308, -2.11074e-06, 24.144, -30.1308, 0)
@@ -117,7 +121,25 @@ shader_parameter/pulse_speed = 2.0
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_x7717"]
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_5gc7w"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_375xw"]
+material = SubResource("ORMMaterial3D_5gc7w")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wh5p4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wh5p4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5gc7w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7y41i"]
+radius = 1.09454
+
 [node name="Jumper" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_375xw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.62932, -0.777146, -3.39701e-08, 0, -4.37114e-08, 1, -0.777146, 0.62932, 2.75085e-08, 0, 0, 0)
@@ -125,9 +147,6 @@ light_color = Color(0.152499, 0.565381, 0.330249, 1)
 light_energy = 0.9
 shadow_enabled = true
 directional_shadow_max_distance = 348.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_oqjto")
 
 [node name="Plataformas" type="Node" parent="."]
 
@@ -201,7 +220,7 @@ height = 60.2616
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plat6/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_2hlw3")
 
-[node name="SparkyGloryPlat" type="CharacterBody3D" parent="."]
+[node name="SparkyGloryPlat" type="CharacterBody3D" parent="." groups=["Sparky"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51, 0)
 script = ExtResource("1_irb3c")
 
@@ -271,3 +290,52 @@ draw_pass_1 = SubResource("QuadMesh_pfhg6")
 [node name="WhipLine" type="MeshInstance3D" parent="SparkyGloryPlat/WhipAnchor"]
 material_override = SubResource("ShaderMaterial_n2bky")
 mesh = SubResource("ImmediateMesh_x7717")
+
+[node name="Audio" type="Node3D" parent="SparkyGloryPlat"]
+
+[node name="Sliding" type="AudioStreamPlayer3D" parent="SparkyGloryPlat/Audio"]
+stream = ExtResource("4_2hlw3")
+volume_db = -30.0
+
+[node name="Whiplash" type="AudioStreamPlayer3D" parent="SparkyGloryPlat/Audio"]
+stream = ExtResource("5_wy6na")
+volume_db = -30.0
+
+[node name="Walk" type="AudioStreamPlayer3D" parent="SparkyGloryPlat/Audio"]
+stream = ExtResource("6_wy6na")
+volume_db = -30.0
+
+[node name="Dash" type="AudioStreamPlayer3D" parent="SparkyGloryPlat/Audio"]
+stream = ExtResource("7_5gc7w")
+volume_db = -30.0
+
+[node name="Vazio" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 69.0673, -56.6638)
+script = ExtResource("8_qwfpk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vazio"]
+mesh = SubResource("SphereMesh_375xw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Vazio"]
+shape = SubResource("SphereShape3D_wh5p4")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Vazio"]
+stream = ExtResource("9_qwfpk")
+
+[node name="Orbes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 62.2159, 33.0534)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Orbes"]
+mesh = SubResource("SphereMesh_wh5p4")
+skeleton = NodePath("Azul")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Orbes/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Orbes/MeshInstance3D/StaticBody3D"]
+shape = SubResource("SphereShape3D_5gc7w")
+
+[node name="Azul" type="Area3D" parent="Orbes/MeshInstance3D"]
+script = ExtResource("10_5gc7w")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Orbes/MeshInstance3D/Azul"]
+shape = SubResource("SphereShape3D_7y41i")

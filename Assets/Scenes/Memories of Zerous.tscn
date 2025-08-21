@@ -982,32 +982,32 @@ scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AABaAAYAAAALAAkAAABPABkAAAAKAA8AAABQABkAAAALAA8AAABRABkAAAAMAA8AAABSABkAAAAKAA8AAABTABkAAAALAA8AAABUABkAAAAMAA8AAABVABkAAAAKAA8AAABWABkAAAALAA8AAABXABkAAAAMAA8AAABYABkAAAAKAA8AAABZABkAAAALAA8AAABaABkAAAAMAA8AAABbABkAAAAKAA8AAABcABkAAAALAA8AAABdABkAAAAMAA8AAABeABkAAAAKAA8AAABfABkAAAALAA8AAABgABkAAAAMAA8AAABhABkAAAAKAA8AAABiABkAAAALAA8AAABjABkAAAAMAA8AAABkABkAAAAKAA8AAABlABkAAAALAA8AAABmABkAAAAMAA8AAAA=")
 tile_set = SubResource("TileSet_b43kd")
 
-[node name="SparkyGlory" type="CharacterBody2D" parent="."]
+[node name="SparkyGlory_Zerous" type="CharacterBody2D" parent="."]
 position = Vector2(92, 577)
 script = ExtResource("2_4vu3s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SparkyGlory"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SparkyGlory_Zerous"]
 position = Vector2(-5.5, -45)
 shape = SubResource("RectangleShape2D_5g5ur")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SparkyGlory"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SparkyGlory_Zerous"]
 texture_filter = 1
 position = Vector2(-5, -49)
 scale = Vector2(2.17108, 1.98937)
 sprite_frames = SubResource("SpriteFrames_3uyn7")
 animation = &"idle"
 
-[node name="Camera2D" type="Camera2D" parent="SparkyGlory"]
+[node name="Camera2D" type="Camera2D" parent="SparkyGlory_Zerous"]
 position = Vector2(360, -168)
 zoom = Vector2(1.4, 1.4)
 
-[node name="DashTimer" type="Timer" parent="SparkyGlory"]
+[node name="DashTimer" type="Timer" parent="SparkyGlory_Zerous"]
 wait_time = 0.5
 
-[node name="DashRecargaTimer" type="Timer" parent="SparkyGlory"]
+[node name="DashRecargaTimer" type="Timer" parent="SparkyGlory_Zerous"]
 wait_time = 2.0
 
-[node name="ConjuracaoTimer" type="Timer" parent="SparkyGlory"]
+[node name="ConjuracaoTimer" type="Timer" parent="SparkyGlory_Zerous"]
 wait_time = 9.0
 
 [node name="O Profeta" type="CharacterBody2D" parent="."]
