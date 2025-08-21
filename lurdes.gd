@@ -11,10 +11,13 @@ var tempo_soco: bool = true
 var posicao_original: float = 0.0
 var vida: int = 4
 
-##maquina de estados
-enum Estado {IDLE, ATACANDO, ESQUIVANDO}
+## maquina de estados
+enum Estado {IDLE, ATACANDO, ESQUIVANDO, DANO}
 var estado_atual: Estado = Estado.IDLE
 
+
+var tempo_dano: float = 0.0
+var duracao_dano: float = 0.40 
 func _ready():
 	randomize()
 	anim.animation_finished.connect(_on_animation_finished)
@@ -22,13 +25,22 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
-	##regeneraçao de stamina
+	
+	## regeneração de stamina
 	tempo_regeneracao += delta
 	if tempo_regeneracao >= intervalo_regeneracao:
 		tempo_regeneracao = 0.0
 		regenerar_folego(30)
+
+	## controle do estado de dano
+	if estado_atual == Estado.DANO:
+		tempo_dano -= delta
+		if tempo_dano <= 0.0:
+			estado_atual = Estado.IDLE
+			anim.play("idle")
+
 func _input(event):
-	## so reage ao input se estiver em IDLE
+	## só reage ao input se estiver em IDLE
 	if estado_atual == Estado.IDLE:
 		if event.is_action_pressed("tiro") and tempo_soco:
 			if oxigenio.value > 0:
@@ -91,12 +103,18 @@ func regenerar_folego(percentual: float):
 	var novo_valor = min(oxigenio.max_value, oxigenio.value + regeneracao)
 	animar_barra(novo_valor)
 
-##vida
+## vida
 func levar_dano(dano: int) -> void:
 	vida -= dano
 	if vida < 0:
 		vida = 0
 	atualizar_vida_hud()
+
+	##entra em estado de DANO curto
+	if vida > 0:
+		estado_atual = Estado.DANO
+		tempo_dano = duracao_dano
+		anim.play("hit")     #animação de hit do sprite
 	if vida <= 0:
 		morrer()
 
@@ -108,7 +126,7 @@ func morrer() -> void:
 	print("voce morreu")
 	get_tree().reload_current_scene()
 
-## timer soco
+##timer soco
 func _on_timer_timeout() -> void:
 	tempo_soco = true
 

@@ -293,6 +293,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_gt0wg")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_46de6")
 }],
 "loop": false,
@@ -496,10 +504,8 @@ script = ExtResource("2_cauy1")
 texture_filter = 1
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_k7i15")
-animation = &"desvio"
+animation = &"hit"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {

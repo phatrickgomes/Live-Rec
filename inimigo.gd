@@ -13,11 +13,11 @@ enum Estado {IDLE, ATAQUE, DANO}
 var estado_atual = Estado.IDLE
 
 var tempo_resfriamento = 0.0
-var intervalo_resfriamento = 1.5  ## tempo de cooldown após ataque
+var intervalo_resfriamento = 2.3 
 var tempo_ataque = 0.0
-var duracao_ataque = 1.2  ## duração da animação de ataque
+var duracao_ataque = 1.2 
 var tempo_dano = 0.0
-var duracao_dano = 0.6  ## tempo que o inimigo fica "travado" tomando dano
+var duracao_dano = 1 
 
 func _ready():
 	randomize()
@@ -49,7 +49,7 @@ func _physics_process(delta):
 				estado_atual = Estado.IDLE  
 
 		Estado.DANO:
-			## espera animação de dano acabar
+			##espera animação de dano acabar
 			tempo_dano -= delta
 			if tempo_dano <= 0.0:
 				estado_atual = Estado.IDLE
@@ -74,11 +74,11 @@ func take_damage(damage):
 	current_health = max(0, current_health) 
 	update_health_bar()
 
-	## entra no estado de DANO (não pode atacar durante esse tempo)
-	estado_atual = Estado.DANO
-	tempo_dano = duracao_dano
-	anim.play("hit")  # caso tenha no AnimatedSprite2D
-
+	##entra no estado de dano 
+	if current_health > 0:
+		estado_atual = Estado.DANO
+		tempo_dano = duracao_dano
+		anim.play("hit")
 	if current_health <= 0:
 		die()
 
@@ -96,7 +96,7 @@ func update_health_bar_color():
 		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.RED
 
 func die():
-	## colocar animação de morte depois
+	##colocar animaçao de morte depois
 	get_tree().reload_current_scene()
 
 func _on_hurt_box_area_entered(area):
