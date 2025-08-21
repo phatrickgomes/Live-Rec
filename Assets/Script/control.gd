@@ -63,9 +63,6 @@ func _on_line_edit_text_changed(new_text):
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
 		
-
-
-
 func jamv_truck_submitted(new_text):
 	if new_text == "jamv_truck":
 		for child in sub_viewport.get_children():
@@ -78,3 +75,7 @@ func jamv_truck_submitted(new_text):
 		else:
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
+		
+		
+func Fight_music_submitted(new_text):
+	pass # Replace with function body.

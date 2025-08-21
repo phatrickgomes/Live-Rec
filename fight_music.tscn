@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=79 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://14wi7202yrso" path="res://Assets/Scenes/WhatsApp_Image_2025-08-21_at_03.14.22-removebg-preview.png" id="7_711bf"]
 [ext_resource type="Texture2D" uid="uid://f8mop8phon8w" path="res://Assets/Imagens/barra_energia.png" id="7_quwim"]
 [ext_resource type="Texture2D" uid="uid://bcncahys5ejfr" path="res://idle_lurdes (6).png" id="11_7g5e1"]
+[ext_resource type="Script" uid="uid://b7bh66dncojku" path="res://control_fight.gd" id="13_2jh0k"]
+[ext_resource type="Texture2D" uid="uid://dbcq74kfmwckp" path="res://Assets/Script/telca espaco.png" id="14_ia3gx"]
+[ext_resource type="FontFile" uid="uid://dmh7ufx2seoum" path="res://Assets/Fonts/alagard.ttf" id="15_gb0nn"]
+[ext_resource type="Texture2D" uid="uid://bf1q6v6f0auxp" path="res://Assets/Fonts/botao esquerdo mouse.png" id="16_3ltvy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_58xb7"]
 atlas = ExtResource("3_46de6")
@@ -111,6 +115,11 @@ region = Rect2(32, 79, 32, 79)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_46de6"]
 animations = [{
+"frames": [],
+"loop": false,
+"name": &"esquiva",
+"speed": 14.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_58xb7")
@@ -603,14 +612,14 @@ texture_filter = 1
 position = Vector2(-7.22969, 17.3132)
 scale = Vector2(1.2, 0.592)
 sprite_frames = SubResource("SpriteFrames_46de6")
-animation = &"soco_2"
+animation = &"esquiva"
 
 [node name="progress_inimigo" type="ProgressBar" parent="inimigo"]
 texture_filter = 1
 offset_left = 9.0
-offset_top = -14.0
+offset_top = -11.0
 offset_right = 14.0
-offset_bottom = 36.0
+offset_bottom = 39.0
 rotation = -1.57352
 theme_override_styles/background = SubResource("StyleBoxFlat_qk7xc")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gt0wg")
@@ -628,12 +637,14 @@ debug_color = Color(0.870436, 0.000498057, 0.848942, 0.42)
 
 [node name="Label" type="Label" parent="inimigo"]
 texture_filter = 1
-offset_left = -49.0
-offset_top = -43.0
-offset_right = 43.0
-offset_bottom = -26.0
-theme_override_font_sizes/font_size = 12
-text = "Mauricio Juinior"
+offset_left = -52.0
+offset_top = -34.0
+offset_right = 21.0
+offset_bottom = -17.0
+theme_override_colors/font_color = Color(0.764976, 0.648748, 0.134166, 1)
+theme_override_fonts/font = ExtResource("15_gb0nn")
+theme_override_font_sizes/font_size = 16
+text = "Fabrelson"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="inimigo"]
 libraries = {
@@ -661,10 +672,8 @@ script = ExtResource("2_cauy1")
 texture_filter = 1
 position = Vector2(8, -13)
 sprite_frames = SubResource("SpriteFrames_k7i15")
-animation = &"idle"
+animation = &"desvio"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.262239
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {
@@ -724,6 +733,35 @@ offset_left = -115.0
 offset_top = -64.0
 offset_right = 114.0
 offset_bottom = 65.0
+script = ExtResource("13_2jh0k")
+
+[node name="TelcaEspaco" type="Sprite2D" parent="Control"]
+position = Vector2(163, 18)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("14_ia3gx")
+
+[node name="Label" type="Label" parent="Control/TelcaEspaco"]
+offset_left = -133.334
+offset_top = 133.334
+offset_right = 127.666
+offset_bottom = 212.334
+theme_override_fonts/font = ExtResource("15_gb0nn")
+theme_override_font_sizes/font_size = 72
+text = "Esquiva"
+
+[node name="BotaoEsquerdoMouse" type="Sprite2D" parent="Control"]
+position = Vector2(188, 18)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("16_3ltvy")
+
+[node name="Label" type="Label" parent="Control/BotaoEsquerdoMouse"]
+offset_left = -375.0
+offset_top = 175.0
+offset_right = 526.0
+offset_bottom = 243.0
+theme_override_fonts/font = ExtResource("15_gb0nn")
+theme_override_font_sizes/font_size = 72
+text = "botao esquerdo para attack"
 
 [connection signal="area_entered" from="inimigo/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Lurdes/tempo_soco" to="Lurdes" method="_on_timer_timeout"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhvkm866011qa"]
+[gd_scene load_steps=13 format=3 uid="uid://bhvkm866011qa"]
 
 [ext_resource type="Script" uid="uid://d0waherf7c61m" path="res://Assets/Script/player.gd" id="1_iwpo4"]
 [ext_resource type="Script" uid="uid://dgphrs6wsxbbh" path="res://Assets/Scenes/icone_tutorial.gd" id="2_syrs6"]
 [ext_resource type="Texture2D" uid="uid://c2tpngcfqp5k8" path="res://Assets/Script/Teclas_WASD_em_pixel_art-removebg-preview.png" id="3_syrs6"]
 [ext_resource type="FontFile" uid="uid://dmh7ufx2seoum" path="res://Assets/Fonts/alagard.ttf" id="4_h0edo"]
 [ext_resource type="Texture2D" uid="uid://bt6ax72shq8m3" path="res://Assets/Script/TECLA E e F.png" id="5_h0edo"]
+[ext_resource type="Texture2D" uid="uid://0esvdknmaj2y" path="res://Assets/Script/numero 5.png" id="6_h0edo"]
 
 [sub_resource type="Shader" id="Shader_iwpo4"]
 code = "shader_type canvas_item;
@@ -161,6 +162,11 @@ text = "use para se mover "
 position = Vector2(923, 170)
 scale = Vector2(0.23, 0.23)
 texture = ExtResource("5_h0edo")
+
+[node name="Numero5" type="Sprite2D" parent="CanvasLayer/Control/TeclaEEF"]
+position = Vector2(-10.869, -221.739)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_h0edo")
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control/TeclaEEF"]
 texture_filter = 1

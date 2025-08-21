@@ -234,8 +234,8 @@ points = PackedVector3Array(3.34438, -62.2035, -5.55989, 3.62311, -62.2035, -5.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_opnvx"]
 size = Vector3(0.453742, 4.25219, 8.43665)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lddpm"]
-size = Vector3(6.0414, 1.87012, 1.96894)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_07asa"]
+points = PackedVector3Array(1.07517, 0.150799, 0.549953, -5.18659, -1.57164, 0.393624, -5.02905, -1.72859, 0.393624, -0.646736, 5.63005, -1.48509, -5.18659, 8.13524, 0.549953, -0.646736, 5.63005, 1.48977, -5.00132, 0.188422, -1.24507, 0.470661, -0.647794, -0.90141, -4.71581, 2.96988, 1.6464, -4.87273, 6.56876, -1.32845, 0.762543, -1.1018, 1.01955, -0.80305, 0.463702, -1.48509, -0.646736, 0.463702, 1.48977, -0.80305, -1.1018, -1.01487, -4.71581, 8.29219, 0.393624, 1.07517, -0.00614381, -0.702214, -5.02905, -1.72859, 0.549953, -5.02654, 6.10289, -1.25642, -4.71581, 3.43678, 1.6464, -0.108364, -1.2114, -0.218759, 0.876276, -0.823321, -0.652481, 0.918857, 0.150799, -0.858237, -5.18659, -1.57164, 0.549953, -2.05542, 6.61203, 0.514684, -0.80305, -1.1018, 1.01955, 1.07517, -0.00614381, 0.706896, -5.18659, 8.13524, 0.393624, -0.80305, 0.463702, 1.48977, -4.71581, -1.72859, 0.393624, -4.71581, 8.29219, 0.549953, 1.07517, 0.150799, -0.545578, -0.80305, 5.63005, 1.48977)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsa3l"]
 albedo_texture = ExtResource("5_twob8")
@@ -520,11 +520,11 @@ shape = SubResource("ConvexPolygonShape3D_k0s5u")
 transform = Transform3D(1, 0, 0, 0, 0.999926, -0.0121995, 0, 0.0121995, 0.999925, -2.83063, -60.5146, -1.22945)
 shape = SubResource("BoxShape3D_opnvx")
 
-[node name="cadeira" type="StaticBody3D" parent="quarto/Cube_248" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="quarto/Cube_248" index="0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_248/cadeira"]
-transform = Transform3D(-4.37114e-08, -1, 0, 0.999848, -4.37047e-08, -0.0174524, 0.0174524, -7.62869e-10, 0.999848, -1.16292, 3.57192, 0.140977)
-shape = SubResource("BoxShape3D_lddpm")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_248/StaticBody3D"]
+transform = Transform3D(1.84025, 0, 0, 0, 1.07096, 1.42109e-14, 0, -3.55271e-15, 0.759021, 0, 1.53144, -0.0519004)
+shape = SubResource("ConvexPolygonShape3D_07asa")
 
 [node name="Cube_258" parent="quarto" index="54"]
 visible = false

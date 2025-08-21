@@ -11,7 +11,7 @@ var tempo_soco: bool = true
 var posicao_original: float = 0.0
 var vida: int = 4
 
-## maquina de estados
+##maquina de estados
 enum Estado {IDLE, ATACANDO, ESQUIVANDO, DANO}
 var estado_atual: Estado = Estado.IDLE
 
@@ -26,7 +26,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
-	## regeneração de stamina
+	##regeneracao de stamina
 	tempo_regeneracao += delta
 	if tempo_regeneracao >= intervalo_regeneracao:
 		tempo_regeneracao = 0.0
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			anim.play("idle")
 
 func _input(event):
-	## só reage ao input se estiver em IDLE
+	##so reage ao input se estiver no idle
 	if estado_atual == Estado.IDLE:
 		if event.is_action_pressed("tiro") and tempo_soco:
 			if oxigenio.value > 0:
@@ -83,14 +83,14 @@ func _input(event):
 
 func _on_animation_finished():
 	if estado_atual == Estado.ATACANDO:
-		# coloca um pequeno delay antes de voltar ao idle
+		##coloca dalay no idlle
 		await get_tree().create_timer(0.06).timeout
 		estado_atual = Estado.IDLE
 		anim.play("idle")
 	elif estado_atual == Estado.ESQUIVANDO:
 		pass
 
-## Sistema de fôlego
+##sistema de folego
 func animar_barra(valor_alvo: float, duracao: float = 0.3):
 	var tween = create_tween()
 	tween.tween_property(oxigenio, "value", valor_alvo, duracao).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -105,18 +105,18 @@ func regenerar_folego(percentual: float):
 	var novo_valor = min(oxigenio.max_value, oxigenio.value + regeneracao)
 	animar_barra(novo_valor)
 
-## vida
+##vida
 func levar_dano(dano: int) -> void:
 	vida -= dano
 	if vida < 0:
 		vida = 0
 	atualizar_vida_hud()
 
-	##entra em estado de DANO curto
+	##estado dano
 	if vida > 0:
 		estado_atual = Estado.DANO
 		tempo_dano = duracao_dano
-		anim.play("hit")     #animação de hit do sprite
+		anim.play("hit")     
 	if vida <= 0:
 		morrer()
 

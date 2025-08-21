@@ -67,6 +67,7 @@ func desviar():
 	var chance = randi_range(0,100)
 	if chance > 70: 
 		anima.play("desvio")
+		#anim.play(esquiva)
 		print("desvio")
 
 func take_damage(damage):

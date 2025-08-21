@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cemsn382ds6wt"]
+[gd_scene load_steps=14 format=3 uid="uid://cemsn382ds6wt"]
 
 [ext_resource type="Shader" uid="uid://bora3c3tpu6pq" path="res://Assets/Shader/control.gdshader" id="1_0fbet"]
 [ext_resource type="Script" uid="uid://dw0psq8rp8dxs" path="res://Assets/Script/control.gd" id="1_62e2m"]
 [ext_resource type="Texture2D" uid="uid://c4gwmmu7drcsv" path="res://Assets/Imagens/gnometwitch_93827.png" id="2_iy58a"]
 [ext_resource type="Texture2D" uid="uid://dhkk5py82jj6n" path="res://Assets/Imagens/windows-7-background-akqmsawnpm2hbq67.jpg" id="3_qtu10"]
 [ext_resource type="Texture2D" uid="uid://d1j2l4tpj5e0w" path="res://Assets/Imagens/cfae886e263126f685510e2f45b82970.jpg" id="4_ee4bf"]
+[ext_resource type="FontFile" uid="uid://brjtypgpr5672" path="res://Assets/Fonts/Darkmode demo-Regular.ttf" id="5_g6pjv"]
 [ext_resource type="Texture2D" uid="uid://btq38tiflqfse" path="res://Assets/Imagens/16305343.png" id="5_kbped"]
 [ext_resource type="Texture2D" uid="uid://chs8tlftr5kvo" path="res://Assets/Imagens/sony_vegas_23333.png" id="6_fj5cn"]
 [ext_resource type="Texture2D" uid="uid://dqrdqpnf61sew" path="res://Assets/Imagens/Windows_Folder_icon-icons.png" id="8_6a6wx"]
@@ -65,10 +66,10 @@ texture = ExtResource("3_qtu10")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-offset_left = 16.0
-offset_top = 26.0
-offset_right = 792.0
-offset_bottom = 802.0
+offset_left = 27.0
+offset_top = 39.0
+offset_right = 803.0
+offset_bottom = 815.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.0475674, 0.0373506)
@@ -79,19 +80,21 @@ flat = true
 
 [node name="Label" type="Label" parent="Button"]
 layout_mode = 0
-offset_top = 722.879
-offset_right = 1093.0
-offset_bottom = 1131.88
-theme_override_font_sizes/font_size = 300
-text = "Jogo1"
+offset_left = -462.206
+offset_top = 776.773
+offset_right = 1340.79
+offset_bottom = 1172.77
+theme_override_fonts/font = ExtResource("5_g6pjv")
+theme_override_font_sizes/font_size = 396
+text = "Ghostly Freedom"
 
 [node name="jogo2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 77.0
-offset_top = 29.0
-offset_right = 341.0
-offset_bottom = 293.0
+offset_left = 118.0
+offset_top = 27.0
+offset_right = 382.0
+offset_bottom = 291.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12092, 0.0986597)
@@ -101,19 +104,25 @@ flat = true
 [node name="Label" type="Label" parent="jogo2"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -57.8897
-offset_top = 263.532
-offset_right = 347.11
-offset_bottom = 374.532
-theme_override_font_sizes/font_size = 79
-text = "PORTINITE"
+offset_left = -363.988
+offset_top = 233.457
+offset_right = 672.012
+offset_bottom = 423.457
+theme_override_fonts/font = ExtResource("5_g6pjv")
+theme_override_font_sizes/font_size = 189
+text = "Memories of Zeruos"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 143.0
-offset_top = 27.0
-offset_right = 247.0
-offset_bottom = 131.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.141
+anchor_top = 0.064
+anchor_right = 0.141
+anchor_bottom = 0.064
+offset_left = -141.432
+offset_top = 107.528
+offset_right = -37.432
+offset_bottom = 211.528
 scale = Vector2(0.377295, 0.28136)
 
 [node name="Button3" type="Button" parent="VBoxContainer2"]
@@ -156,10 +165,10 @@ text = "Video para upar"
 [node name="Button4" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 47.0
-offset_top = 93.0
-offset_right = 151.0
-offset_bottom = 197.0
+offset_left = 44.0
+offset_top = 96.0
+offset_right = 148.0
+offset_bottom = 200.0
 scale = Vector2(0.303759, 0.258639)
 size_flags_horizontal = 0
 icon = ExtResource("2_iy58a")
@@ -200,5 +209,6 @@ text = "Obs Studio"
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="LineEdit" to="." method="Fight_music_submitted"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="jogo2" to="." method="_on_jogo_2_pressed"]
