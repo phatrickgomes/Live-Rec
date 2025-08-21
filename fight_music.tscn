@@ -1,5 +1,6 @@
-[gd_scene load_steps=105 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=106 format=3 uid="uid://bkmryy7yjd8ju"]
 
+[ext_resource type="Texture2D" uid="uid://bcorg257sukkn" path="res://Assets/Imagens/ringue_novo.png" id="1_ekbkm"]
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
 [ext_resource type="Script" uid="uid://dmkh584t37eih" path="res://inimigo.gd" id="2_qk7xc"]
@@ -754,7 +755,13 @@ bg_color = Color(0.369285, 0.64143, 0.911841, 1)
 
 [node name="FightMusic" type="Node2D"]
 
+[node name="RingueNovo" type="Sprite2D" parent="."]
+position = Vector2(11, 9)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_ekbkm")
+
 [node name="RingueIgor1" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(6.49999, 9.7425)
 scale = Vector2(1.15196, 1.48088)
@@ -848,7 +855,7 @@ position = Vector2(12, 29)
 sprite_frames = SubResource("SpriteFrames_k7i15")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.890214
+frame_progress = 0.250524
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {
@@ -886,16 +893,16 @@ shape = SubResource("RectangleShape2D_gt0wg")
 debug_color = Color(0.975706, 0.627735, 0.200882, 0.42)
 
 [node name="Vida" type="AnimatedSprite2D" parent="."]
-position = Vector2(-56, 78)
+position = Vector2(-54.5, 66)
 sprite_frames = SubResource("SpriteFrames_qs2eg")
 animation = &"vida_3"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 texture_filter = 1
-offset_left = -25.3
-offset_top = 95.0
-offset_right = -19.3
-offset_bottom = 143.0
+offset_left = -23.8
+offset_top = 83.0
+offset_right = -17.8
+offset_bottom = 131.0
 rotation = 1.5708
 theme_override_styles/background = SubResource("StyleBoxFlat_qetxy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y85iy")
@@ -906,10 +913,10 @@ show_percentage = false
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -92.0
-offset_top = 72.0
-offset_right = -58.0
-offset_bottom = 90.0
+offset_left = -91.0
+offset_top = 59.0
+offset_right = -57.0
+offset_bottom = 77.0
 script = ExtResource("13_2jh0k")
 
 [node name="TelcaEspaco" type="Sprite2D" parent="Control"]
@@ -943,7 +950,7 @@ text = "botao esquerdo"
 
 [node name="BarraEnergia" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-51.3, 99)
+position = Vector2(-49, 87)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("7_quwim")
 

@@ -91,10 +91,10 @@ text = "Ghostly Freedom"
 [node name="jogo2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 365.0
-offset_top = 126.0
-offset_right = 629.0
-offset_bottom = 390.0
+offset_left = 123.0
+offset_top = 51.0
+offset_right = 387.0
+offset_bottom = 315.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12092, 0.0986597)

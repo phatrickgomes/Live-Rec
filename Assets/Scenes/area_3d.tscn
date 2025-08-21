@@ -22,7 +22,7 @@ double_sided = false
 texture = SubResource("ViewportTexture_o6xbb")
 
 [node name="SubViewport" type="SubViewport" parent="CollisionShape3D/Sprite3D"]
-size = Vector2i(491, 256)
+size = Vector2i(431, 244)
 
 [node name="Control" parent="CollisionShape3D/Sprite3D/SubViewport" instance=ExtResource("2_t1ekm")]
 
