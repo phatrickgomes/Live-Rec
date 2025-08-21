@@ -6,9 +6,9 @@ extends CharacterBody2D
 
 var max_health = 100
 var current_health = max_health
-var damage_amount = 5  ## dano que cada soco causa
+var damage_amount = 5  ##dano que cada soco causa
 
-## maquina de estados
+##maquina de estados
 enum Estado {IDLE, ATAQUE, DANO}
 var estado_atual = Estado.IDLE
 
@@ -74,11 +74,18 @@ func take_damage(damage):
 	current_health = max(0, current_health) 
 	update_health_bar()
 
-	##entra no estado de dano 
+	## entra no estado de dano 
 	if current_health > 0:
 		estado_atual = Estado.DANO
 		tempo_dano = duracao_dano
-		anim.play("hit")
+
+		## sorteia animação de dano
+		var random = randi_range(1, 2)
+		if random == 1:
+			anim.play("hit")
+		else:
+			anim.play("hit_2")
+
 	if current_health <= 0:
 		die()
 

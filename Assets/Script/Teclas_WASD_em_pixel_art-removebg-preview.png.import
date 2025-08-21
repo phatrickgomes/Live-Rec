@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beribhweasw5p"
-path="res://.godot/imported/WhatsApp Image 2025-08-20 at 16.15.50.jpeg-e692657eca7f51314ba8935d1c561735.ctex"
+uid="uid://c2tpngcfqp5k8"
+path="res://.godot/imported/Teclas_WASD_em_pixel_art-removebg-preview.png-18868442b370241675dff67063dbe58b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Scenes/WhatsApp Image 2025-08-20 at 16.15.50.jpeg"
-dest_files=["res://.godot/imported/WhatsApp Image 2025-08-20 at 16.15.50.jpeg-e692657eca7f51314ba8935d1c561735.ctex"]
+source_file="res://Assets/Script/Teclas_WASD_em_pixel_art-removebg-preview.png"
+dest_files=["res://.godot/imported/Teclas_WASD_em_pixel_art-removebg-preview.png-18868442b370241675dff67063dbe58b.ctex"]
 
 [params]
 

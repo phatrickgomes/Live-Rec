@@ -69,7 +69,7 @@ func _input(event):
 				estado_atual = Estado.ESQUIVANDO
 				posicao_original = position.x
 				var direcao_esquiva = -1 if randi() % 2 == 0 else 1
-				velocity.x = direcao_esquiva * 70
+				velocity.x = direcao_esquiva * 60
 				anim.play("desvio")
 				anima.play("esquiva")
 				reduzir_folego(10)
@@ -83,6 +83,8 @@ func _input(event):
 
 func _on_animation_finished():
 	if estado_atual == Estado.ATACANDO:
+		# coloca um pequeno delay antes de voltar ao idle
+		await get_tree().create_timer(0.06).timeout
 		estado_atual = Estado.IDLE
 		anim.play("idle")
 	elif estado_atual == Estado.ESQUIVANDO:
