@@ -110,7 +110,7 @@ func create_distortion_effect():
 
 func find_player():
 	# Primeiro tenta encontrar por grupo
-	player = get_tree().get_first_node_in_group("Spark")
+	player = get_tree().get_first_node_in_group("Sparky")
 	
 	# Se não encontrar por grupo, tenta encontrar pelo nome
 	if not player:
