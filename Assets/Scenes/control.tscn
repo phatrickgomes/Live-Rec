@@ -66,10 +66,10 @@ texture = ExtResource("3_qtu10")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-offset_left = 27.0
-offset_top = 39.0
-offset_right = 803.0
-offset_bottom = 815.0
+offset_left = 235.0
+offset_top = 44.0
+offset_right = 1011.0
+offset_bottom = 820.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.0475674, 0.0373506)
@@ -91,10 +91,10 @@ text = "Ghostly Freedom"
 [node name="jogo2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 118.0
-offset_top = 27.0
-offset_right = 382.0
-offset_bottom = 291.0
+offset_left = 365.0
+offset_top = 126.0
+offset_right = 629.0
+offset_bottom = 390.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.12092, 0.0986597)
@@ -144,10 +144,10 @@ text = " VEGAS PRO"
 [node name="Button5" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 145.0
-offset_top = 87.0
-offset_right = 249.0
-offset_bottom = 191.0
+offset_left = 227.0
+offset_top = 117.0
+offset_right = 331.0
+offset_bottom = 221.0
 scale = Vector2(0.452909, 0.358971)
 icon = ExtResource("8_6a6wx")
 flat = true
@@ -165,10 +165,10 @@ text = "Video para upar"
 [node name="Button4" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 44.0
-offset_top = 96.0
-offset_right = 148.0
-offset_bottom = 200.0
+offset_left = 128.0
+offset_top = 203.0
+offset_right = 232.0
+offset_bottom = 307.0
 scale = Vector2(0.303759, 0.258639)
 size_flags_horizontal = 0
 icon = ExtResource("2_iy58a")
@@ -188,10 +188,10 @@ horizontal_alignment = 1
 [node name="Button6" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 84.0
-offset_top = 154.0
-offset_right = 188.0
-offset_bottom = 258.0
+offset_left = 228.0
+offset_top = 187.0
+offset_right = 332.0
+offset_bottom = 291.0
 scale = Vector2(0.495107, 0.357153)
 icon = ExtResource("9_sky72")
 flat = true
@@ -207,8 +207,8 @@ scale = Vector2(2.01865, 2.02029)
 text = "Obs Studio"
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
 [connection signal="text_submitted" from="LineEdit" to="." method="Fight_music_submitted"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="jogo2" to="." method="_on_jogo_2_pressed"]

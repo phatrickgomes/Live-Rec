@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal atacando
 
-@onready var vida_inimigo = $progress_inimigo
+@onready var vida_inimigo = $AnimatedSprite2D/progress_inimigo
 @onready var anima = $AnimationPlayer
 @onready var anim = $AnimatedSprite2D
 @onready var hurt_box = $hurt_box
@@ -69,6 +69,7 @@ func soco():
 	emit_signal("atacando")  # Sinal emitido para o player reagir
 	print("attack")
 
+
 func desviar() -> void:
 	var chance = randi_range(0,100)
 	if chance > 70:
@@ -100,11 +101,9 @@ func take_damage(damage):
 		if hits_seguidos >= 3:
 			anim.play("hit_3")
 			hits_seguidos = 0
-		else:
-			anim.play("hit")
+		
 	if current_health <= 0:
 		die()
-
 func update_health_bar():
 	vida_inimigo.value = current_health
 	update_health_bar_color()
@@ -116,7 +115,7 @@ func update_health_bar_color():
 	elif health_percentage > 0.3:
 		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.YELLOW
 	else:
-		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.RED
+		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.DARK_ORANGE
 
 func die():
 	get_tree().reload_current_scene()
@@ -124,4 +123,9 @@ func die():
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("socao"):
 		print("acertou")
+		anim.play("hit_2")
+		take_damage(damage_amount)
+	if area.is_in_group("socao2"):
+		print("acertou")
+		anim.play("hit")
 		take_damage(damage_amount)

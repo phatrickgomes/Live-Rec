@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://cemsn382ds6wt" path="res://Assets/Scenes/control.tscn" id="2_t1ekm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o6xbb"]
-size = Vector3(2.5, 2.5, 2.5)
+size = Vector3(4.93176, 2.5, 2.5)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o6xbb"]
 viewport_path = NodePath("CollisionShape3D/Sprite3D/SubViewport")
 
 [node name="GUI" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015419, 0, 0)
 script = ExtResource("1_t1ekm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13216, 0.0562548, 0.0605559)
 shape = SubResource("BoxShape3D_o6xbb")
 
 [node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D"]
@@ -22,7 +22,7 @@ double_sided = false
 texture = SubResource("ViewportTexture_o6xbb")
 
 [node name="SubViewport" type="SubViewport" parent="CollisionShape3D/Sprite3D"]
-size = Vector2i(256, 256)
+size = Vector2i(491, 256)
 
 [node name="Control" parent="CollisionShape3D/Sprite3D/SubViewport" instance=ExtResource("2_t1ekm")]
 

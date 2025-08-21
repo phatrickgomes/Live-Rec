@@ -368,7 +368,7 @@ transform = Transform3D(1.25, 2.61934e-10, 3.72529e-09, 1.45519e-11, 1.25, -5.58
 stream = ExtResource("11_igesp")
 
 [node name="GUI" parent="." groups=["monitor", "player", "tela_interativa"] instance=ExtResource("3_twob8")]
-transform = Transform3D(0.00907439, 0, 0.128901, 0, 0.140217, 0, -0.259856, 0, 0.00450134, -1.52136, 1.43578, 1.36423)
+transform = Transform3D(0.00488595, 0, 0.128921, 0, 0.14, 0, -0.139915, 0, 0.00450205, -1.51317, 1.43578, 1.32628)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GUI" groups=["monitor", "player", "tela_interativa"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0120695, 0, -0.457863)
@@ -436,6 +436,9 @@ shape = SubResource("BoxShape3D_4rmfy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quarto/Cube_015/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_2vapn")
+
+[node name="Cube_016" parent="quarto" index="6"]
+transform = Transform3D(-1.91696e-08, -0.154392, 0, 0.43855, -6.74868e-09, 0, 0, 0, 0.50712, -7.21828, 2.43153, -0.594321)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="quarto/Cube_026" index="0"]
 

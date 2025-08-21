@@ -72,7 +72,7 @@ func _input(event):
 			if oxigenio.value > 0:
 				estado_atual = Estado.ATACANDO
 				anim.play("jab")
-				anima.play("porrada")
+				anima.play("jab")
 				$"../inimigo".desviar()
 				$tempo_soco.start()
 				tempo_soco = false

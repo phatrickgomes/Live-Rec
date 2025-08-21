@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=101 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://c7xc8k4slyfud" path="res://perigo.png" id="10_2jh0k"]
 [ext_resource type="Texture2D" uid="uid://n2jgn24dhh80" path="res://todos_os_movimentos.png" id="10_wblu2"]
 [ext_resource type="Script" uid="uid://b7bh66dncojku" path="res://control_fight.gd" id="13_2jh0k"]
+[ext_resource type="Texture2D" uid="uid://xplvosn5b6u3" path="res://Assets/Imagens/idle-Sheet.png" id="13_gb0nn"]
+[ext_resource type="Animation" uid="uid://r0iojlnax4rb" path="res://porrada.res" id="13_ia3gx"]
 [ext_resource type="Texture2D" uid="uid://dbcq74kfmwckp" path="res://Assets/Script/telca espaco.png" id="14_ia3gx"]
 [ext_resource type="FontFile" uid="uid://dmh7ufx2seoum" path="res://Assets/Fonts/alagard.ttf" id="15_gb0nn"]
 [ext_resource type="Texture2D" uid="uid://bf1q6v6f0auxp" path="res://Assets/Fonts/botao esquerdo mouse.png" id="16_3ltvy"]
@@ -76,10 +78,6 @@ region = Rect2(54, 0, 54, 130)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8042u"]
 atlas = ExtResource("5_ia3gx")
 region = Rect2(108, 0, 54, 130)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b31iy"]
-atlas = ExtResource("5_ia3gx")
-region = Rect2(0, 130, 54, 130)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nbm26"]
 atlas = ExtResource("4_cauy1")
@@ -183,9 +181,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8042u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b31iy")
 }],
 "loop": false,
 "name": &"hit_3",
@@ -204,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0iigl")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
 "speed": 9.0
 }, {
@@ -467,29 +462,29 @@ region = Rect2(375, 75, 75, 75)
 atlas = ExtResource("10_wblu2")
 region = Rect2(450, 75, 75, 75)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b31iy"]
+atlas = ExtResource("13_gb0nn")
+region = Rect2(0, 0, 64, 75)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8olup"]
-atlas = ExtResource("10_wblu2")
-region = Rect2(0, 0, 75, 75)
+atlas = ExtResource("13_gb0nn")
+region = Rect2(64, 0, 64, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_artjg"]
-atlas = ExtResource("10_wblu2")
-region = Rect2(75, 0, 75, 75)
+atlas = ExtResource("13_gb0nn")
+region = Rect2(128, 0, 64, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rpv0"]
-atlas = ExtResource("10_wblu2")
-region = Rect2(150, 0, 75, 75)
+atlas = ExtResource("13_gb0nn")
+region = Rect2(192, 0, 64, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8me7"]
-atlas = ExtResource("10_wblu2")
-region = Rect2(225, 0, 75, 75)
+atlas = ExtResource("13_gb0nn")
+region = Rect2(256, 0, 64, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0pabk"]
-atlas = ExtResource("10_wblu2")
-region = Rect2(300, 0, 75, 75)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cduxg"]
-atlas = ExtResource("10_wblu2")
-region = Rect2(375, 0, 75, 75)
+atlas = ExtResource("13_gb0nn")
+region = Rect2(320, 0, 64, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yp388"]
 atlas = ExtResource("10_wblu2")
@@ -591,6 +586,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_b31iy")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8olup")
 }, {
 "duration": 1.0,
@@ -604,9 +602,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0pabk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cduxg")
 }],
 "loop": true,
 "name": &"idle",
@@ -691,28 +686,16 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_qetxy"]
-resource_name = "porrada"
+[sub_resource type="Animation" id="Animation_gb0nn"]
+resource_name = "jab"
 length = 0.3433
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("hit_box:monitoring")
+tracks/0/path = NodePath("soco 2/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("hit_box/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.166667, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -723,7 +706,8 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_y85iy"),
 &"esquiva": SubResource("Animation_711bf"),
-&"porrada": SubResource("Animation_qetxy")
+&"jab": SubResource("Animation_gb0nn"),
+&"porrada": ExtResource("13_ia3gx")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qk7xc"]
@@ -757,16 +741,30 @@ script = ExtResource("2_qk7xc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="inimigo"]
 texture_filter = 1
 position = Vector2(9.77031, 52.3132)
-scale = Vector2(1.2, 0.592)
 sprite_frames = SubResource("SpriteFrames_46de6")
-animation = &"esquiva"
+animation = &"hit"
+autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
-[node name="progress_inimigo" type="ProgressBar" parent="inimigo"]
+[node name="Label" type="Label" parent="inimigo/AnimatedSprite2D"]
 texture_filter = 1
-offset_left = 9.0
-offset_top = 16.0
-offset_right = 14.0
-offset_bottom = 66.0
+offset_left = -21.7703
+offset_top = -54.3132
+offset_right = 51.2297
+offset_bottom = -39.3132
+scale = Vector2(0.6, 0.6)
+theme_override_colors/font_color = Color(0.764976, 0.648748, 0.134166, 1)
+theme_override_fonts/font = ExtResource("15_gb0nn")
+theme_override_font_sizes/font_size = 16
+text = "Fabrelson"
+
+[node name="progress_inimigo" type="ProgressBar" parent="inimigo/AnimatedSprite2D"]
+texture_filter = 1
+offset_left = -25.7703
+offset_top = -41.3132
+offset_right = -20.7703
+offset_bottom = 8.6868
 rotation = -1.57352
 theme_override_styles/background = SubResource("StyleBoxFlat_qk7xc")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gt0wg")
@@ -782,17 +780,6 @@ position = Vector2(3, 9)
 shape = SubResource("RectangleShape2D_711bf")
 disabled = true
 debug_color = Color(0.870436, 0.000498057, 0.848942, 0.42)
-
-[node name="Label" type="Label" parent="inimigo"]
-texture_filter = 1
-offset_left = -57.0
-offset_top = -7.0
-offset_right = 16.0
-offset_bottom = 10.0
-theme_override_colors/font_color = Color(0.764976, 0.648748, 0.134166, 1)
-theme_override_fonts/font = ExtResource("15_gb0nn")
-theme_override_font_sizes/font_size = 16
-text = "Fabrelson"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="inimigo"]
 libraries = {
@@ -827,10 +814,11 @@ script = ExtResource("2_cauy1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Lurdes"]
 texture_filter = 1
-position = Vector2(26, 20)
+position = Vector2(12, 29)
 sprite_frames = SubResource("SpriteFrames_k7i15")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.911393
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {
@@ -841,6 +829,15 @@ libraries = {
 position = Vector2(0, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lurdes/hit_box"]
+position = Vector2(6.5, -15)
+shape = SubResource("RectangleShape2D_qk7xc")
+disabled = true
+debug_color = Color(0.0140328, 0, 0.000464635, 0.42)
+
+[node name="soco 2" type="Area2D" parent="Lurdes" groups=["socao2"]]
+position = Vector2(0, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lurdes/soco 2"]
 position = Vector2(6.5, -15)
 shape = SubResource("RectangleShape2D_qk7xc")
 disabled = true
@@ -882,10 +879,10 @@ show_percentage = false
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -136.0
-offset_top = -35.0
-offset_right = 93.0
-offset_bottom = 94.0
+offset_left = -91.0
+offset_top = -97.0
+offset_right = -57.0
+offset_bottom = -79.0
 script = ExtResource("13_2jh0k")
 
 [node name="TelcaEspaco" type="Sprite2D" parent="Control"]
