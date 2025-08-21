@@ -7,6 +7,7 @@ var jamv = preload("res://Assets/Scenes/sprite_2d.tscn")
 var jogo2d = preload("res://Assets/Scenes/Memories of Zerous.tscn")
 var jamv_truck = preload("res://jamv_truck.tscn")
 var jamv_chupetao = preload("res://jamv_chupetao.tscn")
+var fight_music = preload("res://fight_music.tscn")
 func _ready() -> void:
 	if get_parent() != null:
 		sub_viewport = get_parent()
@@ -64,12 +65,12 @@ func _on_line_edit_text_changed(new_text):
 		print("CESAR PATROCINA NOIS")
 		
 func jamv_truck_submitted(new_text):
-	if new_text == "jamv_truck":
+	if new_text == "fight_music":
 		for child in sub_viewport.get_children():
 			child.queue_free()
-		var jamv_tru = jamv_truck.instantiate()
-		sub_viewport.add_child(jamv_tru)
-		var internal_player = jamv_tru.find_child("SparkyGlory")
+		var fight_music = fight_music.instantiate()
+		sub_viewport.add_child(fight_music)
+		var internal_player = fight_music.find_child("SparkyGlory")
 		if internal_player:
 			PlayerManager.register_internal_player(internal_player)
 		else:
