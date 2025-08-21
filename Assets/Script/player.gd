@@ -2,27 +2,31 @@ extends CharacterBody3D
 
 signal interact_object
 
-## nós e referências
+## NÓS E REFERÊNCIAS
 @onready var camera_pivot: Node3D = $camera_pivot
 @onready var camera: Camera3D = $camera_pivot/Camera3D
 @onready var camera_monitor: Camera3D = get_node_or_null("../GUI/Monitor")
 @onready var camera_monitor2: Camera3D = get_node_or_null("../GUI/Monitor2")
 @onready var camera_folha: Camera3D = $"../camera_folha/camera_folha"
 @onready var camera_folha_2: Camera3D = $"../camera_folha/camera_folha2/camera_folha2"
+@onready var camera_folha_3 = $"../camera_folha3/camera_folha3"
+
+
+
 
 @onready var raycast = $camera_pivot/Camera3D/interacao
 @onready var mao = $camera_pivot/Camera3D/CarryObjectMaker
 @onready var interacao_gui = $"../GUI"
 @onready var interact_label: Label = $CanvasLayer/interact_label
 @onready var ponto_da_camera = $Label
-@onready var main_scene_3d: Node3D = $"." 
+@onready var main_scene_3d: Node3D = $"."
 @onready var interact_monitor: Label = $CanvasLayer/interact_monitor
 @onready var color_rect_MONITOR: ColorRect = $CanvasLayer/ColorRect
 @onready var audio_de_fundo = $audio_de_fundo
 @onready var corvo = $"../corvo"
 @onready var passos_som = $passos_som
 
-## variáveis principais
+## VARIÁVEIS PRINCIPAIS
 var objeto_selecionado = null
 const SPEED = 4.0
 const SENSIBILIDADE = 0.003
@@ -36,7 +40,7 @@ var saved_pivot_rot: Vector3
 var saved_cam_rot: Vector3
 var monitor_atual: int = 0 
 
-## headbob
+## HEADBOB
 var t_bob: float = 0.0
 var bob_freq: float = 2.0
 var bob_amp: float = 0.07
@@ -49,7 +53,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera_inicial_transform = camera.global_transform
 
-## interações
+## INTERAÇÕES
 func iniciar_interacao_monitor1():
 	if not camera_monitor: return
 	_iniciar_transicao_para(camera_monitor, 1)
@@ -67,6 +71,12 @@ func iniciar_interacao_folha():
 func iniciar_interacao_folha2():
 	if not camera_folha_2: return
 	_iniciar_transicao_para_folha(camera_folha_2)
+	
+func iniciar_interacao_folha3():
+	if not camera_folha_3: 
+		print("Camera Folha 3 não encontrada!")
+		return
+	_iniciar_transicao_para_folha(camera_folha_3)
 
 func _iniciar_transicao_para(target_camera: Camera3D, monitor_id: int):
 	Global.Ta_no_jogo = true
@@ -133,7 +143,6 @@ func terminar_interacao():
 		color_rect_MONITOR.visible = false
 	elif interagindo_com_folha:
 		interagindo_com_folha = false
-	
 	interact_label.visible = false
 	ponto_da_camera.visible = true
 	
@@ -154,7 +163,7 @@ func _on_tween_voltar_jogo_finished():
 	camera_pivot.rotation = saved_pivot_rot
 	camera.rotation = saved_cam_rot
 
-## entrada
+## INPUT
 func _input(event):
 	if em_transicao: return
 	
@@ -189,6 +198,8 @@ func _input(event):
 					iniciar_interacao_folha()
 				elif collider.is_in_group("folha2"):
 					iniciar_interacao_folha2()
+				elif collider.is_in_group("folha3"):
+					iniciar_interacao_folha3()
 		else:
 			if raycast.is_colliding():
 				var collider = raycast.get_collider()
@@ -197,6 +208,7 @@ func _input(event):
 				else:
 					soltar_objeto()
 
+## PHYSICS PROCESS
 func _physics_process(delta: float) -> void:
 	if interagindo_com_tela or interagindo_com_folha or em_transicao:
 		velocity = Vector3.ZERO
@@ -221,10 +233,6 @@ func _physics_process(delta: float) -> void:
 		if passos_som.playing:
 			passos_som.stop()
 
-	rotation_degrees.y -= mouse.x * delta
-	camera.rotation_degrees.x -= mouse.y * delta
-	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -80, 80)
-
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
 
@@ -232,7 +240,7 @@ func _physics_process(delta: float) -> void:
 		var collider = raycast.get_collider()
 		interact_object.emit(collider)
 		if collider.is_in_group("tela_interativa") or collider.is_in_group("pegavel") or \
-		   collider.is_in_group("folha") or collider.is_in_group("folha2") or \
+		   collider.is_in_group("folha") or collider.is_in_group("folha2") or collider.is_in_group("folha3") or \
 		   (objeto_selecionado != null and objeto_selecionado.is_in_group("fita") and collider.is_in_group("tela_interativa")):
 			interact_label.visible = true
 		else:
@@ -248,12 +256,14 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+## HEADBOB
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO
 	pos.y = sin(time * bob_freq) * bob_amp
 	pos.x = cos(time * bob_freq / 2) * bob_amp
 	return pos
 
+## PEGAR OBJETO
 func pegar_objeto(obj):
 	objeto_selecionado = obj
 	objeto_selecionado.rotation_degrees = Vector3.ZERO
@@ -263,6 +273,7 @@ func pegar_objeto(obj):
 		if child is CollisionShape3D:
 			child.disabled = true
 
+## SOLTAR OBJETO
 func soltar_objeto():
 	if objeto_selecionado != null:
 		for child in objeto_selecionado.get_children():

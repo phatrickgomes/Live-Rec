@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=4 uid="uid://pr6827hoy8ek"]
+[gd_scene load_steps=86 format=4 uid="uid://pr6827hoy8ek"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://cd1.tscn" id="20_yx88i"]
 [ext_resource type="PackedScene" uid="uid://bp0h3p7pknogf" path="res://papel.tscn" id="21_7fvgo"]
 [ext_resource type="PackedScene" uid="uid://c6ua03fradtk2" path="res://folha_truck.tscn" id="22_yx88i"]
+[ext_resource type="PackedScene" uid="uid://de5yooomejbov" path="res://folha_fight.tscn" id="23_07asa"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yx88i"]
 viewport_path = NodePath("monitor2/Viewport")
@@ -354,7 +355,7 @@ mesh = SubResource("QuadMesh_yx88i")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i5arm")
 
-[node name="Streamer" parent="." groups=["fita", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
+[node name="Streamer" parent="." groups=["fita", "folha3", "monitor", "player", "tela_interativa"] instance=ExtResource("2_chyoy")]
 transform = Transform3D(0.8, -0.000151588, 5.48253e-07, 0.000151588, 0.799979, -0.00575056, 5.41409e-07, 0.00575056, 0.799979, 1.06133, 1.00526, 0.0279773)
 
 [node name="audio_de_fundo" type="AudioStreamPlayer" parent="Streamer"]
@@ -651,6 +652,19 @@ shape = SubResource("BoxShape3D_7fvgo")
 
 [node name="camera_folha2" type="Camera3D" parent="camera_folha/camera_folha2"]
 transform = Transform3D(0.66286, 0.0506033, -0.050006, -0.052965, 0.663869, -0.0302845, 0.0474975, 0.0340845, 0.664098, -0.0352859, -0.00338566, 0.200323)
+
+[node name="camera_folha3" parent="." instance=ExtResource("23_07asa")]
+transform = Transform3D(0.0800437, -0.0509208, 1.497, -0.0125469, 1.49906, 0.0516633, -1.49781, -0.01528, 0.0795668, -1.69001, 1.47726, -0.849602)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="camera_folha3" groups=["folha3"]]
+transform = Transform3D(1, -1.86265e-09, 0, 0, 1, 2.67464e-08, -3.72529e-09, 1.01281e-08, 1, 0.000680029, -0.000860453, 0.0251333)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="camera_folha3/StaticBody3D"]
+transform = Transform3D(0.999817, -0.0111562, 0.012021, 0.0115906, -0.0376063, -0.999215, 0.011595, 0.999227, -0.0374709, 9.34601e-05, -0.000118256, 0.00345397)
+shape = SubResource("BoxShape3D_7fvgo")
+
+[node name="camera_folha3" type="Camera3D" parent="camera_folha3"]
+transform = Transform3D(0.666665, 0, 0, 0, 0.666666, 0, 0, 0, 0.666666, 0, 0, 0.199)
 
 [connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]
 
