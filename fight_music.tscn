@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=105 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
@@ -16,8 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://xplvosn5b6u3" path="res://Assets/Imagens/idle-Sheet.png" id="13_gb0nn"]
 [ext_resource type="Animation" uid="uid://r0iojlnax4rb" path="res://porrada.res" id="13_ia3gx"]
 [ext_resource type="Texture2D" uid="uid://dbcq74kfmwckp" path="res://Assets/Script/telca espaco.png" id="14_ia3gx"]
+[ext_resource type="Texture2D" uid="uid://d2kqx54ct3i2m" path="res://Assets/Imagens/vida_1.png" id="15_ekbkm"]
 [ext_resource type="FontFile" uid="uid://dmh7ufx2seoum" path="res://Assets/Fonts/alagard.ttf" id="15_gb0nn"]
 [ext_resource type="Texture2D" uid="uid://bf1q6v6f0auxp" path="res://Assets/Fonts/botao esquerdo mouse.png" id="16_3ltvy"]
+[ext_resource type="Texture2D" uid="uid://s5pig6rtt3cy" path="res://Assets/Imagens/vida2.png" id="16_5iwbx"]
+[ext_resource type="Texture2D" uid="uid://cc4dsjb6mrq8c" path="res://Assets/Imagens/vida_3.png" id="17_yk7qf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wpjl"]
 atlas = ExtResource("3_fdasf")
@@ -716,6 +719,33 @@ size = Vector2(31, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gt0wg"]
 size = Vector2(36, 23.5)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_qs2eg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_ekbkm")
+}],
+"loop": true,
+"name": &"vida_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_5iwbx")
+}],
+"loop": true,
+"name": &"vida_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_yk7qf")
+}],
+"loop": true,
+"name": &"vida_3",
+"speed": 5.0
+}]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qetxy"]
 bg_color = Color(0.522505, 0.251798, 0.15631, 1)
 
@@ -749,10 +779,10 @@ frame_progress = 1.0
 
 [node name="Label" type="Label" parent="inimigo/AnimatedSprite2D"]
 texture_filter = 1
-offset_left = -21.7703
-offset_top = -54.3132
-offset_right = 51.2297
-offset_bottom = -39.3132
+offset_left = -24.7567
+offset_top = -60.3132
+offset_right = 48.2433
+offset_bottom = -45.3132
 scale = Vector2(0.6, 0.6)
 theme_override_colors/font_color = Color(0.764976, 0.648748, 0.134166, 1)
 theme_override_fonts/font = ExtResource("15_gb0nn")
@@ -761,10 +791,10 @@ text = "Fabrelson"
 
 [node name="progress_inimigo" type="ProgressBar" parent="inimigo/AnimatedSprite2D"]
 texture_filter = 1
-offset_left = -25.7703
-offset_top = -41.3132
-offset_right = -20.7703
-offset_bottom = 8.6868
+offset_left = -28.7567
+offset_top = -47.3132
+offset_right = -23.7567
+offset_bottom = 2.6868
 rotation = -1.57352
 theme_override_styles/background = SubResource("StyleBoxFlat_qk7xc")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gt0wg")
@@ -818,7 +848,7 @@ position = Vector2(12, 29)
 sprite_frames = SubResource("SpriteFrames_k7i15")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.911393
+frame_progress = 0.890214
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {
@@ -855,20 +885,17 @@ position = Vector2(7, -0.25)
 shape = SubResource("RectangleShape2D_gt0wg")
 debug_color = Color(0.975706, 0.627735, 0.200882, 0.42)
 
-[node name="vida" type="Label" parent="."]
-texture_filter = 1
-offset_left = -45.0
-offset_top = 45.0
-offset_right = -35.0
-offset_bottom = 68.0
-text = "0"
+[node name="Vida" type="AnimatedSprite2D" parent="."]
+position = Vector2(-56, 78)
+sprite_frames = SubResource("SpriteFrames_qs2eg")
+animation = &"vida_3"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 texture_filter = 1
-offset_left = -14.0
-offset_top = 75.0
-offset_right = -8.0
-offset_bottom = 123.0
+offset_left = -25.3
+offset_top = 95.0
+offset_right = -19.3
+offset_bottom = 143.0
 rotation = 1.5708
 theme_override_styles/background = SubResource("StyleBoxFlat_qetxy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y85iy")
@@ -879,14 +906,14 @@ show_percentage = false
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -91.0
-offset_top = -97.0
-offset_right = -57.0
-offset_bottom = -79.0
+offset_left = -92.0
+offset_top = 72.0
+offset_right = -58.0
+offset_bottom = 90.0
 script = ExtResource("13_2jh0k")
 
 [node name="TelcaEspaco" type="Sprite2D" parent="Control"]
-position = Vector2(157, 18)
+position = Vector2(188, -12)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("14_ia3gx")
 
@@ -898,6 +925,7 @@ offset_bottom = 262.0
 theme_override_fonts/font = ExtResource("15_gb0nn")
 theme_override_font_sizes/font_size = 150
 text = "Esquiva"
+metadata/_edit_use_anchors_ = true
 
 [node name="BotaoEsquerdoMouse" type="Sprite2D" parent="Control"]
 position = Vector2(188, 17)
@@ -915,7 +943,7 @@ text = "botao esquerdo"
 
 [node name="BarraEnergia" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-40, 79)
+position = Vector2(-51.3, 99)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("7_quwim")
 

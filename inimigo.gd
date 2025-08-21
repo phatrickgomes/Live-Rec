@@ -10,7 +10,7 @@ signal atacando
 
 var max_health = 100
 var current_health = max_health
-var damage_amount = 5
+var damage_amount = 7
 
 enum Estado {IDLE, ATAQUE, DANO, ESQUIVA}
 var estado_atual = Estado.IDLE
@@ -72,7 +72,7 @@ func soco():
 
 func desviar() -> void:
 	var chance = randi_range(0,100)
-	if chance > 70:
+	if chance >= 90:
 		estado_atual = Estado.ESQUIVA
 		posicao_original = position.x
 		anima.play("desvio")
@@ -124,8 +124,8 @@ func _on_hurt_box_area_entered(area):
 	if area.is_in_group("socao"):
 		print("acertou")
 		anim.play("hit_2")
-		take_damage(damage_amount)
+		take_damage(7)
 	if area.is_in_group("socao2"):
 		print("acertou")
 		anim.play("hit")
-		take_damage(damage_amount)
+		take_damage(12)

@@ -9,7 +9,7 @@ var tempo_regeneracao: float = 0.0
 var intervalo_regeneracao: float = 4.0
 var tempo_soco: bool = true
 var posicao_original: float = 0.0
-var vida: int = 4
+var vida: int = 3
 
 enum Estado {IDLE, ATACANDO, ESQUIVANDO, DANO}
 var estado_atual: Estado = Estado.IDLE
@@ -60,7 +60,7 @@ func _input(event):
 	# Se não está no modo de esquiva obrigatória, permite atacar normalmente
 	if not pode_esquivar and estado_atual == Estado.IDLE:
 		if event.is_action_pressed("tiro") and tempo_soco:
-			if oxigenio.value > 0:
+			if oxigenio.value >= 20:
 				estado_atual = Estado.ATACANDO
 				anim.play("direto")
 				anima.play("porrada")
@@ -69,14 +69,14 @@ func _input(event):
 				tempo_soco = false
 				reduzir_folego(20)
 		elif event.is_action_pressed("socojab") and tempo_soco:
-			if oxigenio.value > 0:
+			if oxigenio.value >= 40:
 				estado_atual = Estado.ATACANDO
 				anim.play("jab")
 				anima.play("jab")
 				$"../inimigo".desviar()
 				$tempo_soco.start()
 				tempo_soco = false
-				reduzir_folego(20)
+				reduzir_folego(40)
 
 func _on_inimigo_atacando():
 	# Ativa modo de esquiva obrigatória
@@ -127,8 +127,12 @@ func levar_dano(dano: int) -> void:
 		morrer()
 
 func atualizar_vida_hud():
-	if vida_lab:
-		vida_lab.text = str(vida)
+	if vida == 3:
+		$"../Vida".play("vida_3")
+	if vida == 2:
+		$"../Vida".play("vida_2")
+	if vida == 1:
+		$"../Vida".play("vida_1")
 
 func morrer() -> void:
 	print("voce morreu")
