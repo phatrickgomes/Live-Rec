@@ -9,13 +9,15 @@ var current_health = max_health
 var damage_amount = 5  ## dano que cada soco causa
 
 ## maquina de estados
-enum Estado {IDLE, ATAQUE}
+enum Estado {IDLE, ATAQUE, DANO}
 var estado_atual = Estado.IDLE
 
 var tempo_resfriamento = 0.0
 var intervalo_resfriamento = 1.5  ## tempo de cooldown após ataque
 var tempo_ataque = 0.0
 var duracao_ataque = 1.2  ## duração da animação de ataque
+var tempo_dano = 0.0
+var duracao_dano = 0.6  ## tempo que o inimigo fica "travado" tomando dano
 
 func _ready():
 	randomize()
@@ -40,11 +42,17 @@ func _physics_process(delta):
 					tempo_ataque = duracao_ataque
 
 		Estado.ATAQUE:
-			##espera a animaçao acabar
+			##espera a animação acabar
 			tempo_ataque -= delta
 			if tempo_ataque <= 0.0:
 				tempo_resfriamento = intervalo_resfriamento
 				estado_atual = Estado.IDLE  
+
+		Estado.DANO:
+			## espera animação de dano acabar
+			tempo_dano -= delta
+			if tempo_dano <= 0.0:
+				estado_atual = Estado.IDLE
 
 func soco():
 	anima.play("soco_inimigo") 
@@ -65,6 +73,12 @@ func take_damage(damage):
 	current_health -= damage
 	current_health = max(0, current_health) 
 	update_health_bar()
+
+	## entra no estado de DANO (não pode atacar durante esse tempo)
+	estado_atual = Estado.DANO
+	tempo_dano = duracao_dano
+	anim.play("hit")  # caso tenha no AnimatedSprite2D
+
 	if current_health <= 0:
 		die()
 

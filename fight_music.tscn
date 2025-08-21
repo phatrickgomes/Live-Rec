@@ -1,8 +1,9 @@
-[gd_scene load_steps=48 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=49 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
 [ext_resource type="Script" uid="uid://dmkh584t37eih" path="res://inimigo.gd" id="2_qk7xc"]
+[ext_resource type="Texture2D" uid="uid://cf76gkd6tk0d4" path="res://lurdes_boxe.png" id="3_711bf"]
 [ext_resource type="Texture2D" uid="uid://dq3h6u8r6f11o" path="res://Assets/Imagens/icon.svg" id="3_gt0wg"]
 [ext_resource type="Texture2D" uid="uid://dbaje7nxa7b17" path="res://Assets/Imagens/sprites_png.png" id="3_qetxy"]
 [ext_resource type="Texture2D" uid="uid://dbuku5juvep65" path="res://sprites_esquiva.png" id="6_gt0wg"]
@@ -46,6 +47,14 @@ region = Rect2(225, 150, 75, 75)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_46de6"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_711bf")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_gt0wg")
@@ -429,7 +438,7 @@ texture_filter = 1
 position = Vector2(-4.22969, -0.68677)
 scale = Vector2(0.361484, 0.178314)
 sprite_frames = SubResource("SpriteFrames_46de6")
-animation = &"idle"
+animation = &"hit"
 
 [node name="progress_inimigo" type="ProgressBar" parent="inimigo"]
 texture_filter = 1

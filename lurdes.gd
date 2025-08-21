@@ -27,7 +27,6 @@ func _physics_process(delta: float) -> void:
 	if tempo_regeneracao >= intervalo_regeneracao:
 		tempo_regeneracao = 0.0
 		regenerar_folego(30)
-
 func _input(event):
 	## so reage ao input se estiver em IDLE
 	if estado_atual == Estado.IDLE:
