@@ -18,23 +18,9 @@ var bob_amp: float = 0.07
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
 @onready var passo = $passo
-@onready var qte_ui = $QTE_UI
+@onready var qte_ui = $QTE_UI  # Agora como filho direto
 @onready var qte_a_label = $QTE_UI/CenterContainer/VBoxContainer/HBoxContainer/A/Label
 @onready var qte_d_label = $QTE_UI/CenterContainer/VBoxContainer/HBoxContainer/D/Label
-
-# Lanterna
-@onready var lanterna: SpotLight3D = get_node_or_null("CameraPivot/Camera3D/Lanterna")
-var lanterna_ativa: bool = true
-var bateria: float = 100.0 # %
-var drenagem: float = 10.0 # % por minuto
-
-# Falha da lanterna
-var tempo_falha: float = 0.0
-var intervalo_falha: float = 10.0 # a cada 10s
-var chance_falha: float = 0.90
-var falhou: bool = false
-var tentativas_religar: int = 0
-var tentativas_necessarias: int = 5
 
 ### Variáveis de estado ###
 var current_speed: float = walk_speed
@@ -54,31 +40,6 @@ var qte_current_key: String = "A"
 var qte_presses_required: int = 20
 var qte_current_presses: int = 0
 var qte_enemy_ref: Node = null
-var points: int = 0
-var speed_boost_timer: float = 0.0
-var boosted: bool = false
-
-func add_points(amount: int):
-	points += amount
-	print("Pontos: ", points)
-
-func apply_speed_boost(duration: float):
-	boosted = true
-	speed_boost_timer = duration
-	walk_speed *= 2
-	sprint_speed *= 2
-
-func _unhandled_input(event):
-	if event.is_action_pressed("lanterna_toggle"):
-		if falhou:
-			# Jogador tentando religar após falha
-			tentativas_religar += 1
-			if tentativas_religar >= tentativas_necessarias:
-				religar_lanterna()
-		else:
-			if bateria > 0:
-				lanterna_ativa = !lanterna_ativa
-				lanterna.visible = lanterna_ativa
 
 func _ready():
 	PlayerManager.register_internal_player(self)
@@ -86,91 +47,24 @@ func _ready():
 	camera_original_position = camera.position
 	camera_original_rotation = camera.rotation
 	original_mouse_sensitivity = mouse_sensitivity
-
-	# Garante que temos as ações mesmo dentro do SubViewport
-	_ensure_input_actions()
-
-	# Estado inicial da lanterna
-	if lanterna:
-		lanterna.visible = lanterna_ativa
-		lanterna.light_energy = 2.0 # brilho padrão
-
-	# UI QTE
+	
+	# Configuração inicial da UI do QTE
 	if qte_ui:
 		qte_ui.visible = false
 		update_qte_ui()
 	else:
-		printerr("ERRO: QTE_UI não encontrada como filho do Player.")
-
-func _ensure_input_actions():
-	if not InputMap.has_action("lanterna_toggle"):
-		InputMap.add_action("lanterna_toggle")
-		var ev := InputEventKey.new()
-		ev.keycode = KEY_F
-		InputMap.action_add_event("lanterna_toggle", ev)
-
-func _process(delta):
-	# Consumo de bateria
-	if lanterna_ativa and bateria > 0 and not falhou:
-		bateria -= drenagem * delta / 60.0
-		if bateria <= 0:
-			bateria = 0
-			desligar_lanterna()
-
-	# Sistema de falha
-	if not falhou and lanterna_ativa:
-		tempo_falha += delta
-		if tempo_falha >= intervalo_falha:
-			tempo_falha = 0
-			if randf() <= chance_falha:
-				falha_lanterna()
-	if boosted:
-		speed_boost_timer -= delta
-		if speed_boost_timer <= 0:
-			boosted = false
-			walk_speed /= 2
-			sprint_speed /= 2
-func desligar_lanterna():
-	lanterna_ativa = false
-	if lanterna:
-		lanterna.visible = false
-
-func falha_lanterna():
-	falhou = true
-	lanterna_ativa = false
-	if lanterna:
-		lanterna.visible = false
-		lanterna.light_energy = 0.5
-	tentativas_religar = 0
-	_start_flicker_effect()
-
-func religar_lanterna():
-	falhou = false
-	lanterna_ativa = true
-	if lanterna:
-		lanterna.visible = true
-		lanterna.light_energy = 2.0
-	tentativas_religar = 0
-
-func _start_flicker_effect():
-	if not lanterna:
-		return
-	var flicker_times = 4
-	for i in range(flicker_times):
-		lanterna.visible = not lanterna.visible
-		await get_tree().create_timer(0.15).timeout
-	lanterna.visible = false
+		printerr("ERRO: QTE_UI não encontrada como filho do SparkyGlory")
 
 func _input(event):
 	if qte_active:
+		# Processa teclas A e D durante o QTE
 		if event is InputEventKey and event.pressed:
 			if event.keycode == KEY_A:
 				on_qte_key_pressed("A")
 			elif event.keycode == KEY_D:
 				on_qte_key_pressed("D")
 		return
-
-	# Olhar com o mouse
+		
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		vertical_rotation = clamp(
@@ -179,10 +73,10 @@ func _input(event):
 			deg_to_rad(vertical_angle_limit)
 		)
 		camera_pivot.rotation.x = vertical_rotation
-
-	# ESC / recapturar mouse
-	if event.is_action_pressed("ui_cancel"):
+		
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			
 	if event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -194,39 +88,33 @@ func _physics_process(delta):
 			apply_mouse_shake()
 			apply_qte_effects(delta)
 			return
-
+		
 		handle_movement(delta)
 		current_speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
-
+		
 		if is_on_floor() and Input.is_action_just_pressed("jump"):
 			velocity.y = jump_force
-
+		
 		if not is_on_floor():
 			velocity.y -= 9.8 * delta
-
+		
 		move_and_slide()
-
+		
 		t_bob += delta * velocity.length() * float(is_on_floor())
 		camera.transform.origin = _headbob(t_bob) + Vector3(0, 0.5, 0)
-
-func _set_lanterna(active: bool):
-	lanterna_ativa = active
-	if lanterna:
-		lanterna.visible = active
-
 
 func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
-
+	
 	if input_dir.length() > 0:
 		if abs(input_dir.x) > 0.1 and abs(input_dir.y) > 0.1:
 			direction = direction.normalized() * diagonal_speed_multiplier
-
+	
 	var target_velocity = direction * current_speed
 	velocity.x = lerp(velocity.x, target_velocity.x, acceleration * delta)
 	velocity.z = lerp(velocity.z, target_velocity.z, acceleration * delta)
-
+	
 	if is_on_floor() and input_dir.length() > 0 and !passo.playing and !qte_active:
 		if Input.is_action_pressed("sprint"):
 			passo.pitch_scale = randf_range(1.2, 1.3)
@@ -245,33 +133,40 @@ func start_qte(enemy_position: Vector3, enemy_ref: Node):
 	if not qte_ui:
 		printerr("QTE_UI não disponível!")
 		return
-
+	
 	qte_active = true
 	qte_target_position = enemy_position
 	qte_enemy_ref = enemy_ref
 	qte_shake_timer = 0.0
-
+	
+	# Mostra a UI do QTE
 	qte_ui.visible = true
-	qte_ui.raise()
-
+	qte_ui.raise()  # Garante que está na frente
+	
+	# Configuração inicial
 	qte_current_key = "A"
 	update_qte_ui()
-
+	
+	# Rotação para olhar para o inimigo
 	var direction = (qte_target_position - global_position).normalized()
-	direction.y = 0
+	direction.y = 0  # Ignora componente vertical
 	rotation.y = atan2(direction.x, direction.z)
-
+	
+	# Reseta a rotação vertical
 	vertical_rotation = 0
 	camera_pivot.rotation.x = 0
 	camera.rotation = camera_original_rotation
-
+	
+	# Aumenta sensibilidade do mouse
 	mouse_sensitivity = original_mouse_sensitivity * 2.0
 
 func end_qte():
 	qte_active = false
+	
 	if qte_ui:
 		qte_ui.visible = false
-
+	
+	# Restaura configurações da câmera
 	camera.position = camera_original_position
 	camera.rotation = camera_original_rotation
 	camera_pivot.rotation = Vector3.ZERO
@@ -282,7 +177,8 @@ func handle_qte_movement(delta):
 	direction.y = 0
 	velocity = direction * (walk_speed * 0.5)
 	move_and_slide()
-
+	
+	# Efeito de tremer enquanto se move
 	var body_shake = randf_range(-qte_rotation_shake_intensity, qte_rotation_shake_intensity)
 	rotation.y += body_shake
 	camera_pivot.rotation.x = randf_range(-0.1, 0.1)
@@ -310,6 +206,7 @@ func apply_mouse_shake():
 	get_viewport().push_input(fake_mouse_motion)
 
 func apply_qte_effects(delta):
+	# Tremor adicional da câmera
 	var shake_offset = Vector3(
 		randf_range(-qte_shake_intensity, qte_shake_intensity),
 		randf_range(-qte_shake_intensity, qte_shake_intensity),
@@ -320,13 +217,14 @@ func apply_qte_effects(delta):
 func on_qte_key_pressed(key: String):
 	if !qte_active or !qte_ui:
 		return
-
+	
+	# Feedback visual
 	if key == "A" and qte_a_label:
 		qte_a_label.add_theme_color_override("font_color", Color.GREEN)
 		var tween = create_tween()
 		tween.tween_property(qte_a_label, "scale", Vector2(1.3, 1.3), 0.1)
 		tween.tween_property(qte_a_label, "scale", Vector2(1, 1), 0.1)
-		tween.tween_callback(func():
+		tween.tween_callback(func(): 
 			if qte_current_key == "A":
 				qte_a_label.add_theme_color_override("font_color", Color.YELLOW)
 			else:
@@ -334,16 +232,17 @@ func on_qte_key_pressed(key: String):
 		)
 	elif key == "D" and qte_d_label:
 		qte_d_label.add_theme_color_override("font_color", Color.GREEN)
-		var tween2 = create_tween()
-		tween2.tween_property(qte_d_label, "scale", Vector2(1.3, 1.3), 0.1)
-		tween2.tween_property(qte_d_label, "scale", Vector2(1, 1), 0.1)
-		tween2.tween_callback(func():
+		var tween = create_tween()
+		tween.tween_property(qte_d_label, "scale", Vector2(1.3, 1.3), 0.1)
+		tween.tween_property(qte_d_label, "scale", Vector2(1, 1), 0.1)
+		tween.tween_callback(func(): 
 			if qte_current_key == "D":
 				qte_d_label.add_theme_color_override("font_color", Color.YELLOW)
 			else:
 				qte_d_label.add_theme_color_override("font_color", Color.WHITE)
 		)
-
+	
+	# Envia o input para o inimigo
 	if qte_enemy_ref and qte_enemy_ref.has_method("qte_input"):
 		qte_enemy_ref.qte_input(key)
 
@@ -354,7 +253,8 @@ func update_qte_key(next_key: String):
 func update_qte_ui():
 	if not qte_ui or not qte_a_label or not qte_d_label:
 		return
-
+	
+	# Atualiza cores das teclas
 	if qte_current_key == "A":
 		qte_a_label.add_theme_color_override("font_color", Color(1, 1, 0, 1))
 		qte_d_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
