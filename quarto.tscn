@@ -633,7 +633,7 @@ transform = Transform3D(0.000543402, 0, 0.00998521, 0, 0.01, 0, -0.00998521, 0, 
 transform = Transform3D(-149.969, 5.01277e-06, -3.02369, -3.02369, -2.42825e-05, 149.969, 4.52233e-06, 150, 2.43786e-05, -96.943, -70.9605, -80.4184)
 
 [node name="camera_folha" parent="." groups=["folha"] instance=ExtResource("21_7fvgo")]
-transform = Transform3D(-1.48789, -0.0156676, 0.189558, 0.0608488, 1.37713, 0.591446, -0.180208, 0.594362, -1.36538, 2.10991, 0.319806, 2.78982)
+transform = Transform3D(-0.991928, -0.0104453, 0.126372, 0.0405659, 0.918087, 0.394298, -0.120139, 0.396242, -0.910252, 4.78836, 0.330075, 1.80028)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="camera_folha" groups=["folha"]]
 
@@ -645,7 +645,7 @@ shape = SubResource("BoxShape3D_7fvgo")
 transform = Transform3D(0.66286, 0.0506033, -0.050006, -0.052965, 0.663869, -0.0302845, 0.0474975, 0.0340845, 0.664098, -0.0352859, -0.00338566, 0.200323)
 
 [node name="camera_folha2" parent="camera_folha" instance=ExtResource("22_yx88i")]
-transform = Transform3D(0.997044, 0.0239799, 0.0730225, -0.0145465, 0.991787, -0.127069, -0.0754697, 0.125631, 0.989205, 1.85842, -0.0404547, -0.0993606)
+transform = Transform3D(1.49556, 0.0359695, 0.109534, -0.0218196, 1.48768, -0.190605, -0.113205, 0.188447, 1.48381, 5.32515, 0.349965, -1.3923)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="camera_folha/camera_folha2" groups=["folha2"]]
 
@@ -667,7 +667,7 @@ transform = Transform3D(0.999817, -0.0111562, 0.012021, 0.0115906, -0.0376063, -
 shape = SubResource("BoxShape3D_7fvgo")
 
 [node name="camera_folha3" type="Camera3D" parent="camera_folha3"]
-transform = Transform3D(0.666665, 0, 0, 0, 0.666666, 0, 0, 0, 0.666666, 0, 0, 0.199)
+transform = Transform3D(0.665816, -6.22589e-07, -3.72529e-07, 9.31323e-10, 0.665815, -6.29603e-07, 0, 2.43017e-09, 0.665815, -5.96046e-08, 0, 0.199)
 
 [connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]
 
