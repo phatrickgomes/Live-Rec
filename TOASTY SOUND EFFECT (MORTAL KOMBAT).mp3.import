@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blyle3gv0dd8o"
+path="res://.godot/imported/TOASTY SOUND EFFECT (MORTAL KOMBAT).mp3-08dbdd90c7d2628f85905bfcadee8ad3.mp3str"
+
+[deps]
+
+source_file="res://TOASTY SOUND EFFECT (MORTAL KOMBAT).mp3"
+dest_files=["res://.godot/imported/TOASTY SOUND EFFECT (MORTAL KOMBAT).mp3-08dbdd90c7d2628f85905bfcadee8ad3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

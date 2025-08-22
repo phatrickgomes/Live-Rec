@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=115 format=3 uid="uid://bkmryy7yjd8ju"]
 
 [ext_resource type="Script" uid="uid://bwaqvbwix8ndh" path="res://fight_mu.gd" id="1_58xb7"]
 [ext_resource type="Texture2D" uid="uid://bcorg257sukkn" path="res://Assets/Imagens/ringue_novo.png" id="1_ekbkm"]
@@ -28,6 +28,9 @@
 [ext_resource type="AudioStream" uid="uid://bijksg1y4mq8" path="res://Assets/Sewer/socao2.wav" id="25_78268"]
 [ext_resource type="AudioStream" uid="uid://cgoj3vrucora4" path="res://Assets/musicas/esquivo.wav" id="26_nedy6"]
 [ext_resource type="AudioStream" uid="uid://bpvmudp4guknc" path="res://Assets/musicas/Som de multidão em show.mp3" id="28_i2vo5"]
+[ext_resource type="Script" uid="uid://chi4m6gdrg4hf" path="res://braboa.gd" id="29_knk0c"]
+[ext_resource type="Texture2D" uid="uid://clqa4bhwbnwe5" path="res://IMG-20250708-WA0014~2.jpg" id="30_nbm26"]
+[ext_resource type="AudioStream" uid="uid://blyle3gv0dd8o" path="res://TOASTY SOUND EFFECT (MORTAL KOMBAT).mp3" id="31_kgakq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wpjl"]
 atlas = ExtResource("3_fdasf")
@@ -1001,6 +1004,17 @@ stream = ExtResource("26_nedy6")
 [node name="fundo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("28_i2vo5")
 volume_db = -20.613
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("29_knk0c")
+
+[node name="Img-20250708-wa0014~2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(499, -5.96046e-08)
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("30_nbm26")
+
+[node name="toasy" type="AudioStreamPlayer" parent="CanvasLayer"]
+stream = ExtResource("31_kgakq")
 
 [connection signal="area_entered" from="inimigo/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Lurdes/tempo_soco" to="Lurdes" method="_on_timer_timeout"]
