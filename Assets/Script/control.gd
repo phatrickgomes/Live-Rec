@@ -1,4 +1,3 @@
-# control.gd (sua tela Control)
 extends Control
 
 @onready var sub_viewport
@@ -28,7 +27,7 @@ func blink_label() -> void:
 		await get_tree().create_timer(blink_duration).timeout
 	error_label.visible = false
 
-# --- Funções de botões e comandos ---
+
 func _on_button_pressed() -> void:
 	var player = PlayerManager.get_current_player()
 	if player and player.objeto_selecionado != null and player.objeto_selecionado.is_in_group("fita"):
@@ -49,6 +48,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 		var internal_player = jamv_inst.find_child("SparkyGlory")
 		if internal_player:
 			PlayerManager.register_internal_player(internal_player)
+			Global.chat_on = true
 		else:
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
@@ -60,6 +60,7 @@ func _on_jogo_2_pressed():
 			child.queue_free()
 		var maze_inst = jogo2d.instantiate()
 		sub_viewport.add_child(maze_inst)
+		Global.chat_on = true
 	else:
 		print("voce precisa da fita")
 
@@ -76,9 +77,11 @@ func _on_line_edit_text_changed(new_text):
 			child.queue_free()
 		var jamv_inst = JAMV_CHUPETAO.instantiate()
 		sub_viewport.add_child(jamv_inst)
+		Global.chat_on = true
 		var internal_player = jamv_inst.find_child("SparkyGlory")
 		if internal_player:
 			PlayerManager.register_internal_player(internal_player)
+			
 		else:
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
@@ -89,9 +92,11 @@ func jamv_truck_submitted(new_text):
 			child.queue_free()
 		var jamv_inst = jamv_truck.instantiate()
 		sub_viewport.add_child(jamv_inst)
+		Global.chat_on = true
 		var internal_player = jamv_inst.find_child("SparkyGlory")
 		if internal_player:
 			PlayerManager.register_internal_player(internal_player)
+			
 		else:
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
@@ -102,6 +107,7 @@ func Fight_music_submitted(new_text):
 			child.queue_free()
 		var fight_inst = fight_music.instantiate()
 		sub_viewport.add_child(fight_inst)
+		Global.chat_on = true
 		var internal_player = fight_inst.find_child("SparkyGlory")
 		if internal_player:
 			PlayerManager.register_internal_player(internal_player)
