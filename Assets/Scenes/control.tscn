@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://dw0psq8rp8dxs" path="res://Assets/Script/control.gd" id="1_62e2m"]
 [ext_resource type="Texture2D" uid="uid://c4gwmmu7drcsv" path="res://Assets/Imagens/gnometwitch_93827.png" id="2_iy58a"]
 [ext_resource type="Texture2D" uid="uid://dhkk5py82jj6n" path="res://Assets/Imagens/windows-7-background-akqmsawnpm2hbq67.jpg" id="3_qtu10"]
-[ext_resource type="Texture2D" uid="uid://bsyfrfxwtoxbf" path="res://terror_3d.png" id="4_g6pjv"]
+[ext_resource type="Texture2D" uid="uid://d1j2l4tpj5e0w" path="res://Assets/Imagens/cfae886e263126f685510e2f45b82970.jpg" id="4_ee4bf"]
 [ext_resource type="FontFile" uid="uid://brjtypgpr5672" path="res://Assets/Fonts/Darkmode demo-Regular.ttf" id="5_g6pjv"]
+[ext_resource type="Texture2D" uid="uid://btq38tiflqfse" path="res://Assets/Imagens/16305343.png" id="5_kbped"]
 [ext_resource type="Texture2D" uid="uid://chs8tlftr5kvo" path="res://Assets/Imagens/sony_vegas_23333.png" id="6_fj5cn"]
-[ext_resource type="Texture2D" uid="uid://3cadds4ur2ny" path="res://icone_jogoterror.png" id="6_g6pjv"]
 [ext_resource type="Texture2D" uid="uid://dqrdqpnf61sew" path="res://Assets/Imagens/Windows_Folder_icon-icons.png" id="8_6a6wx"]
 [ext_resource type="Texture2D" uid="uid://fdg2lyl2001e" path="res://Assets/Imagens/communityIcon_hbfqltc7u6l01.png" id="9_sky72"]
 
@@ -66,24 +66,24 @@ texture = ExtResource("3_qtu10")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-offset_left = 20.0
-offset_top = 33.0
-offset_right = 1052.0
-offset_bottom = 1065.0
+offset_left = 27.0
+offset_top = 39.0
+offset_right = 803.0
+offset_bottom = 815.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.04, 0.031)
+scale = Vector2(0.0475674, 0.0373506)
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_ee4bf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kbped")
-icon = ExtResource("4_g6pjv")
+icon = ExtResource("4_ee4bf")
 flat = true
 
 [node name="Label" type="Label" parent="Button"]
 layout_mode = 0
-offset_left = -378.411
-offset_top = 1054.48
-offset_right = 1424.59
-offset_bottom = 1450.48
+offset_left = -462.206
+offset_top = 776.773
+offset_right = 1340.79
+offset_bottom = 1172.77
 theme_override_fonts/font = ExtResource("5_g6pjv")
 theme_override_font_sizes/font_size = 396
 text = "Ghostly Freedom"
@@ -91,26 +91,25 @@ text = "Ghostly Freedom"
 [node name="jogo2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 123.0
-offset_top = 32.0
-offset_right = 1155.0
-offset_bottom = 1064.0
+offset_left = 118.0
+offset_top = 27.0
+offset_right = 382.0
+offset_bottom = 291.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.038, 0.032)
-theme_override_colors/font_disabled_color = Color(1, 0, 0, 1)
-icon = ExtResource("6_g6pjv")
+scale = Vector2(0.12092, 0.0986597)
+icon = ExtResource("5_kbped")
 flat = true
 
 [node name="Label" type="Label" parent="jogo2"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -520.832
-offset_top = 1050.0
-offset_right = 1647.17
-offset_bottom = 1446.0
+offset_left = -363.988
+offset_top = 233.457
+offset_right = 672.012
+offset_bottom = 423.457
 theme_override_fonts/font = ExtResource("5_g6pjv")
-theme_override_font_sizes/font_size = 396
+theme_override_font_sizes/font_size = 189
 text = "Memories of Zeruos"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]

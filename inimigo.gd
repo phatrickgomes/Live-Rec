@@ -25,14 +25,6 @@ var duracao_dano = 1.0
 var hits_seguidos = 0
 var posicao_original: float = 0.0
 
-# Cooldown da esquiva
-var pode_desviar: bool = true
-var cooldown_desvio: float = 1.5
-
-@onready var soco_player = $"../soco_player"
-@onready var erou = $"../erou"
-
-
 func _ready():
 	aneme.visible = false
 	randomize()
@@ -40,7 +32,6 @@ func _ready():
 	vida_inimigo.value = current_health
 	update_health_bar()
 	estado_atual = Estado.IDLE
-
 
 func _physics_process(delta):
 	match estado_atual:
@@ -65,54 +56,43 @@ func _physics_process(delta):
 			tempo_dano -= delta
 			if tempo_dano <= 0.0:
 				estado_atual = Estado.IDLE
-				tempo_resfriamento = intervalo_resfriamento  
+
+		Estado.ESQUIVA:
+			# Ocorre dentro do método desviar(), não precisa processar aqui
+			pass
+
 func soco():
 	aneme.visible = true
 	aneme.play("perigo")
 	anima.play("soco_inimigo")
 	anim.play("soco_2")
-	emit_signal("atacando") 
+	emit_signal("atacando")  # Sinal emitido para o player reagir
 	print("attack")
 
-
 func desviar() -> void:
-	if not pode_desviar:
-		return
-
 	var chance = randi_range(0,100)
 	if chance > 70:
-		pode_desviar = false
 		estado_atual = Estado.ESQUIVA
 		posicao_original = position.x
-		erou.play()
 		anima.play("desvio")
 		anim.play("esquiva")
 		hurt_box.monitoring = false
-
 		var direcao = 1
 		var pos_lateral = position.x + direcao * 20
 		var tween = create_tween()
 		tween.tween_property(self, "position:x", pos_lateral, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		await tween.finished
-
 		var tween_volta = create_tween()
 		tween_volta.tween_property(self, "position:x", posicao_original, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		await tween_volta.finished
-
 		hurt_box.monitoring = true
 		estado_atual = Estado.IDLE
-		tempo_resfriamento = intervalo_resfriamento
 		print("desvio")
-		await get_tree().create_timer(cooldown_desvio).timeout
-		pode_desviar = true
-
 
 func take_damage(damage):
-	soco_player.play()
 	current_health -= damage
 	current_health = max(0, current_health)
 	update_health_bar()
-
 	if current_health > 0:
 		estado_atual = Estado.DANO
 		tempo_dano = duracao_dano
@@ -122,14 +102,12 @@ func take_damage(damage):
 			hits_seguidos = 0
 		else:
 			anim.play("hit")
-	else:
+	if current_health <= 0:
 		die()
-
 
 func update_health_bar():
 	vida_inimigo.value = current_health
 	update_health_bar_color()
-
 
 func update_health_bar_color():
 	var health_percentage = float(current_health) / float(max_health)
@@ -140,10 +118,8 @@ func update_health_bar_color():
 	else:
 		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.RED
 
-
 func die():
 	get_tree().reload_current_scene()
-
 
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("socao"):

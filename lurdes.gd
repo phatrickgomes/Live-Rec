@@ -11,35 +11,22 @@ var tempo_soco: bool = true
 var posicao_original: float = 0.0
 var vida: int = 4
 
-# Cooldown da esquiva
-var pode_esquivar_cd: bool = true
-@export var cooldown_esquiva: float = 1.3 
-var tempo_esquiva: Timer 
-
 enum Estado {IDLE, ATACANDO, ESQUIVANDO, DANO}
 var estado_atual: Estado = Estado.IDLE
 
 var duracao_dano: float = 0.40 
 var esquiva_tween: Tween = null
 var pode_esquivar: bool = false   # Flag para modo de esquiva obrigatória
-@onready var audio_soco = $"../soco_inimigo"
-@onready var esquivo = $"../esquivo"
-
 
 func _ready():
 	randomize()
 	anim.animation_finished.connect(_on_animation_finished)
 	atualizar_vida_hud()
+	
+	# Conectar ao inimigo para receber sinal de ataque
 	var inimigo = $"../inimigo"
 	if inimigo:
 		inimigo.connect("atacando", Callable(self, "_on_inimigo_atacando"))
-
-	# Criar o Timer de cooldown da esquiva
-	tempo_esquiva = Timer.new()
-	tempo_esquiva.one_shot = true
-	tempo_esquiva.wait_time = cooldown_esquiva
-	add_child(tempo_esquiva)
-	tempo_esquiva.timeout.connect(_on_tempo_esquiva_timeout)
 
 
 func _physics_process(delta: float) -> void:
@@ -50,21 +37,16 @@ func _physics_process(delta: float) -> void:
 		tempo_regeneracao = 0.0
 		regenerar_folego(30)
 
-
 func _input(event):
+	# Se estiver no modo de esquiva obrigatória, só permite esquivar
 	if estado_atual == Estado.IDLE or pode_esquivar:
-		# Só permite esquivar se não estiver em cooldown
-		if event.is_action_pressed("jump") and oxigenio.value > 0 and pode_esquivar_cd:
+		if event.is_action_pressed("jump") and oxigenio.value > 0:
 			estado_atual = Estado.ESQUIVANDO
-			pode_esquivar_cd = false   # trava até cooldown acabar
-			tempo_esquiva.start()      # inicia cooldown
-
 			posicao_original = position.x
 			var direcao_esquiva = -1 if randi() % 2 == 0 else 1
 			velocity.x = direcao_esquiva * 60
 			anim.play("desvio")
 			anima.play("esquiva")
-			esquivo.play()
 			reduzir_folego(10)
 			await anim.animation_finished
 			velocity.x = 0
@@ -96,11 +78,10 @@ func _input(event):
 				tempo_soco = false
 				reduzir_folego(20)
 
-
 func _on_inimigo_atacando():
 	# Ativa modo de esquiva obrigatória
 	pode_esquivar = true
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1.0).timeout  # espera 1 segundo
 	pode_esquivar = false
 
 
@@ -111,7 +92,6 @@ func _on_animation_finished():
 		anim.play("idle")
 	elif estado_atual == Estado.ESQUIVANDO:
 		pass
-
 
 func animar_barra(valor_alvo: float, duracao: float = 0.3):
 	var tween = create_tween()
@@ -139,7 +119,6 @@ func levar_dano(dano: int) -> void:
 		velocity.x = 0
 		estado_atual = Estado.DANO
 		anim.play("hit")
-		audio_soco.play()
 		await get_tree().create_timer(duracao_dano + 0.25).timeout
 		if estado_atual == Estado.DANO:
 			estado_atual = Estado.IDLE
@@ -162,8 +141,3 @@ func _on_hurt_area_entered(area):
 	if area.is_in_group("soco_inimigo"):
 		print("tomando dano")
 		levar_dano(1)
-
-
-# Callback do cooldown da esquiva
-func _on_tempo_esquiva_timeout():
-	pode_esquivar_cd = true

@@ -1,6 +1,5 @@
-[gd_scene load_steps=106 format=3 uid="uid://bkmryy7yjd8ju"]
+[gd_scene load_steps=100 format=3 uid="uid://bkmryy7yjd8ju"]
 
-[ext_resource type="Script" uid="uid://dbwcfrrruvuc3" path="res://fight_music.gd" id="1_gb0nn"]
 [ext_resource type="Texture2D" uid="uid://cusi68gfpy0ty" path="res://ringue_igor1.png" id="1_oklet"]
 [ext_resource type="Script" uid="uid://ci3dpqxn877kh" path="res://lurdes.gd" id="2_cauy1"]
 [ext_resource type="Script" uid="uid://dmkh584t37eih" path="res://inimigo.gd" id="2_qk7xc"]
@@ -17,11 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dbcq74kfmwckp" path="res://Assets/Script/telca espaco.png" id="14_ia3gx"]
 [ext_resource type="FontFile" uid="uid://dmh7ufx2seoum" path="res://Assets/Fonts/alagard.ttf" id="15_gb0nn"]
 [ext_resource type="Texture2D" uid="uid://bf1q6v6f0auxp" path="res://Assets/Fonts/botao esquerdo mouse.png" id="16_3ltvy"]
-[ext_resource type="AudioStream" uid="uid://dyfdnlextb6of" path="res://Som de multidão em show.mp3" id="17_ia3gx"]
-[ext_resource type="AudioStream" uid="uid://bauwo5tdbwldq" path="res://som de Pancada do Chaves para edição - Efeitos Sonoros HD.wav" id="19_3ltvy"]
-[ext_resource type="AudioStream" uid="uid://ccsrftobf7mt2" path="res://soco_player.wav" id="20_rch46"]
-[ext_resource type="AudioStream" uid="uid://cnq6dtxqbxtbj" path="res://Errou - Faustao Falando.mp3" id="21_ekbkm"]
-[ext_resource type="AudioStream" uid="uid://dgjcd0rfnjrdp" path="res://esquivo.wav" id="22_5iwbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wpjl"]
 atlas = ExtResource("3_fdasf")
@@ -745,7 +739,6 @@ bg_color = Color(0.522505, 0.251798, 0.15631, 1)
 bg_color = Color(0.369285, 0.64143, 0.911841, 1)
 
 [node name="FightMusic" type="Node2D"]
-script = ExtResource("1_gb0nn")
 
 [node name="RingueIgor1" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -928,23 +921,6 @@ texture_filter = 1
 position = Vector2(-40, 79)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("7_quwim")
-
-[node name="multidap" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_ia3gx")
-volume_db = -12.181
-
-[node name="soco_inimigo" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_3ltvy")
-
-[node name="soco_player" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_rch46")
-
-[node name="erou" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("21_ekbkm")
-volume_db = 11.244
-
-[node name="esquivo" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("22_5iwbx")
 
 [connection signal="area_entered" from="inimigo/hurt_box" to="inimigo" method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Lurdes/tempo_soco" to="Lurdes" method="_on_timer_timeout"]
