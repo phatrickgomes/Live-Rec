@@ -207,8 +207,8 @@ scale = Vector2(2.01865, 2.02029)
 text = "Obs Studio"
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
 [connection signal="text_submitted" from="LineEdit" to="." method="Fight_music_submitted"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="jogo2" to="." method="_on_jogo_2_pressed"]

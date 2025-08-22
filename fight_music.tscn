@@ -810,9 +810,9 @@ script = ExtResource("2_qk7xc")
 texture_filter = 1
 position = Vector2(9.77031, 52.3132)
 sprite_frames = SubResource("SpriteFrames_46de6")
-animation = &"hit"
+animation = &"hit_3"
 autoplay = "idle"
-frame = 3
+frame = 2
 frame_progress = 1.0
 
 [node name="Label" type="Label" parent="inimigo/AnimatedSprite2D"]
@@ -884,9 +884,10 @@ script = ExtResource("2_cauy1")
 texture_filter = 1
 position = Vector2(12, 29)
 sprite_frames = SubResource("SpriteFrames_k7i15")
-animation = &"idle"
+animation = &"hit"
 autoplay = "idle"
-frame_progress = 0.250524
+frame = 6
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lurdes"]
 libraries = {

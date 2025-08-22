@@ -1004,7 +1004,6 @@ frame_progress = 0.540423
 
 [node name="Camera2D" type="Camera2D" parent="SparkyGlory_Zerous"]
 position = Vector2(0, -100)
-zoom = Vector2(1.4, 1.4)
 
 [node name="DashTimer" type="Timer" parent="SparkyGlory_Zerous"]
 wait_time = 0.5
