@@ -49,6 +49,7 @@ func levar_dano(dano: int) -> void:
 		morrer()
 
 func morrer() -> void:
+	Global.Lurdes_vida = 0
 	print("voce morreu")
 	
 func _on_hurt_box_area_entered(area):
