@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bpvmudp4guknc"
+path="res://.godot/imported/Som de multidão em show.mp3-f60bd1e305ca9997b08077a08f0ac275.mp3str"
+
+[deps]
+
+source_file="res://Assets/musicas/Som de multidão em show.mp3"
+dest_files=["res://.godot/imported/Som de multidão em show.mp3-f60bd1e305ca9997b08077a08f0ac275.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://2gybpuyqrn0t"]
+[gd_scene load_steps=25 format=3 uid="uid://2gybpuyqrn0t"]
 
 [ext_resource type="Texture2D" uid="uid://c3tm6medvv62e" path="res://Assets/Imagens/1528106245788.jpg" id="1_3bxd5"]
+[ext_resource type="Script" uid="uid://cqr7ildbh5x7b" path="res://jamv_chupetao.gd" id="1_cfpx6"]
 [ext_resource type="Texture2D" uid="uid://balu6khjn0wr5" path="res://ceu-brilhante-com-nuvens-e-raios-sobre-a-colina-verde_1234489-6595.png" id="1_earnq"]
 [ext_resource type="Script" uid="uid://vd15ia3s5ko0" path="res://jamv.gd" id="1_ufv8t"]
 [ext_resource type="PackedScene" uid="uid://dvcdovm0x8n4x" path="res://tiro_jamv.tscn" id="2_844nh"]
@@ -13,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dn3hv0sy8q4mw" path="res://IMG-20250306-WA0045.jpg" id="11_3ah41"]
 [ext_resource type="Texture2D" uid="uid://vfh3k0hrkg8" path="res://Assets/Imagens/fabbri2.png" id="11_8wgdn"]
 [ext_resource type="Script" uid="uid://ds0ewakevqvam" path="res://eu.gd" id="12_8wgdn"]
+[ext_resource type="AudioStream" uid="uid://bndn62l6d0qdj" path="res://Dying Light Soundtrack OST - Main Menu Theme Extended.mp3" id="14_wqp7u"]
+[ext_resource type="AudioStream" uid="uid://c43gj4qugg4k6" path="res://tirolaser.wav" id="16_c8g55"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_earnq"]
 size = Vector2(196, 512)
@@ -39,6 +42,7 @@ size = Vector2(2074, 20)
 size = Vector2(34, 125.25)
 
 [node name="Jamv_chupetao" type="Node2D"]
+script = ExtResource("1_cfpx6")
 
 [node name="Ceu-brilhante-com-nuvens-e-raios-sobre-a-colina-verde1234489-6595" type="Sprite2D" parent="."]
 position = Vector2(1233.5, 323)
@@ -179,6 +183,14 @@ offset_bottom = 1194.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 136
 text = "0"
+
+[node name="audiod" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_wqp7u")
+volume_db = -17.802
+
+[node name="laser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_c8g55")
+volume_db = -25.297
 
 [connection signal="area_entered" from="JAMV/hurtbox" to="JAMV" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="player/Fabbri2/hurt_box" to="player" method="_on_hurt_box_area_entered"]

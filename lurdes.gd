@@ -3,10 +3,7 @@ extends CharacterBody2D
 @onready var anima: AnimationPlayer = $AnimationPlayer
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var oxigenio: ProgressBar = $"../ProgressBar"
-@onready var vida_lab: Label = $"../vida"
-
-
-
+@onready var soco_inimigo = $"../soco_inimigo"
 
 var tempo_regeneracao: float = 0.0
 var intervalo_regeneracao: float = 4.0
@@ -19,14 +16,17 @@ var estado_atual: Estado = Estado.IDLE
 
 var duracao_dano: float = 0.40 
 var esquiva_tween: Tween = null
-var pode_esquivar: bool = false   # Flag para modo de esquiva obrigatória
+var pode_esquivar: bool = false   #
+@onready var esquivo = $"../esquivo"
+
+
+var pode_esquivar_cooldown: bool = true
+var tempo_esquiva: float = 0.4  
 
 func _ready():
 	randomize()
 	anim.animation_finished.connect(_on_animation_finished)
 	atualizar_vida_hud()
-	
-	# Conectar ao inimigo para receber sinal de ataque
 	var inimigo = $"../inimigo"
 	if inimigo:
 		inimigo.connect("atacando", Callable(self, "_on_inimigo_atacando"))
@@ -41,16 +41,20 @@ func _physics_process(delta: float) -> void:
 		regenerar_folego(30)
 
 func _input(event):
-	# Se estiver no modo de esquiva obrigatória, só permite esquivar
-	if estado_atual == Estado.IDLE or pode_esquivar:
-		if event.is_action_pressed("jump") and oxigenio.value > 0:
+	if (estado_atual == Estado.IDLE or pode_esquivar) and estado_atual != Estado.DANO:
+		if event.is_action_pressed("jump") and oxigenio.value > 0 and pode_esquivar_cooldown:
 			estado_atual = Estado.ESQUIVANDO
 			posicao_original = position.x
 			var direcao_esquiva = -1 if randi() % 2 == 0 else 1
 			velocity.x = direcao_esquiva * 60
 			anim.play("desvio")
 			anima.play("esquiva")
+			esquivo.play()
 			reduzir_folego(10)
+			pode_esquivar_cooldown = false
+			await get_tree().create_timer(tempo_esquiva).timeout
+			pode_esquivar_cooldown = true
+			
 			await anim.animation_finished
 			velocity.x = 0
 			esquiva_tween = create_tween()
@@ -59,14 +63,14 @@ func _input(event):
 			if estado_atual == Estado.ESQUIVANDO:
 				estado_atual = Estado.IDLE
 				anim.play("idle")
-	
-	# Se não está no modo de esquiva obrigatória, permite atacar normalmente
+				
 	if not pode_esquivar and estado_atual == Estado.IDLE and $"../inimigo".atacando1 == false:
 		if event.is_action_pressed("tiro") and tempo_soco:
 			if oxigenio.value >= 20:
 				estado_atual = Estado.ATACANDO
 				anim.play("direto")
 				anima.play("porrada")
+				
 				$"../inimigo".desviar()
 				$tempo_soco.start()
 				tempo_soco = false
@@ -82,9 +86,8 @@ func _input(event):
 				reduzir_folego(40)
 
 func _on_inimigo_atacando():
-	# Ativa modo de esquiva obrigatória
 	pode_esquivar = true
-	await get_tree().create_timer(1.0).timeout  # espera 1 segundo
+	await get_tree().create_timer(1.0).timeout  
 	pode_esquivar = false
 
 
@@ -140,12 +143,11 @@ func atualizar_vida_hud():
 func morrer() -> void:
 	print("voce morreu")
 	
-	
-
 func _on_timer_timeout() -> void:
 	tempo_soco = true
 
 func _on_hurt_area_entered(area):
 	if area.is_in_group("soco_inimigo"):
+		soco_inimigo.play()
 		print("tomando dano")
 		levar_dano(1)

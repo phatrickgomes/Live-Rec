@@ -2,9 +2,8 @@ extends CharacterBody2D
 
 @export var speed: float = 500
 @export var tiro_scene: PackedScene = preload("res://tiro.tscn")
-
 @onready var vida_label = $"../vida_label"
-
+@onready var laser = $"../laser"
 
 var vida_atual = 3
 
@@ -30,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if Input.is_action_just_pressed("tiro"):
+		laser.play()
 		atirar()
 
 func atirar() -> void:
@@ -51,13 +51,11 @@ func levar_dano(dano: int) -> void:
 func morrer() -> void:
 	print("voce morreu")
 	
-
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("tiro_jamv"):
 		print("tomando dano")
-		
 		levar_dano(1)
-		
+	
 func atualizar_vida_hud():
 	if vida_label:
 		vida_label.text = str(vida_atual)

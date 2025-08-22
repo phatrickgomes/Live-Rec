@@ -9,6 +9,8 @@ signal atacando
 @onready var aneme = $AnimatedSprite2D2
 @export var atacando1 = false
 
+@onready var esquiva = $"../esquiva"
+@onready var soco_player = $"../soco_player"
 
 var max_health = 100
 var current_health = max_health
@@ -80,6 +82,7 @@ func desviar() -> void:
 		posicao_original = position.x
 		anima.play("desvio")
 		anim.play("esquiva")
+		esquiva.play()
 		hurt_box.monitoring = false
 		var direcao = 1
 		var pos_lateral = position.x + direcao * 20
@@ -103,6 +106,7 @@ func take_damage(damage):
 		hits_seguidos += 1
 		if hits_seguidos >= 3:
 			anim.play("hit_3")
+			soco_player.play()
 			hits_seguidos = 0
 		
 	if current_health <= 0:
@@ -127,8 +131,10 @@ func _on_hurt_box_area_entered(area):
 	if area.is_in_group("socao"):
 		print("acertou")
 		anim.play("hit_2")
+		soco_player.play()
 		take_damage(7)
 	if area.is_in_group("socao2"):
 		print("acertou")
 		anim.play("hit")
+		soco_player.play()
 		take_damage(12)

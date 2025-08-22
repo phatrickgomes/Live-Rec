@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dhhx2yfscubbj" path="res://arvore.tscn" id="3_ng0hk"]
 [ext_resource type="Script" uid="uid://qjcbp68cwkoq" path="res://canvas_layer.gd" id="5_4jcav"]
 [ext_resource type="AudioStream" uid="uid://77t0y8lx277n" path="res://Assets/musicas/beatea.mp3" id="5_c1kv6"]
-[ext_resource type="Texture2D" uid="uid://dy6dui3t7y7l" path="res://Assets/Script/55190053e7d3017e582eeb868d8a6f02-removebg-preview.png" id="5_dkpos"]
 [ext_resource type="Texture2D" uid="uid://ccfbyxs4bko7d" path="res://Assets/Imagens/fabbri1.png" id="5_f7yf1"]
 [ext_resource type="Script" uid="uid://be5fevrcl24fl" path="res://fabrri.gd" id="5_ke3uu"]
-[ext_resource type="Texture2D" uid="uid://sh5ky0kx1ucm" path="res://Assets/Scenes/carro.png" id="5_lvt7x"]
 [ext_resource type="Texture2D" uid="uid://b2ygfvtno66o2" path="res://Assets/Script/elementos-zen-para-relaxar.jpg" id="5_rwmk3"]
 [ext_resource type="AudioStream" uid="uid://xx4euhsc5uht" path="res://Assets/musicas/so sabe correr (online-audio-converter.com).mp3" id="6_po5ju"]
+[ext_resource type="Texture2D" uid="uid://cjv33yswo06rp" path="res://Assets/Script/trunck.png" id="7_po5ju"]
 [ext_resource type="Texture2D" uid="uid://vfh3k0hrkg8" path="res://Assets/Imagens/fabbri2.png" id="7_rwda5"]
+[ext_resource type="Texture2D" uid="uid://fu6r6gao5pdv" path="res://Assets/Script/volate.png" id="8_ulhnw"]
 [ext_resource type="Texture2D" uid="uid://b8cqv468anuci" path="res://javm_doido21.png.png" id="10_c1kv6"]
 [ext_resource type="Texture2D" uid="uid://bcorpksmp542o" path="res://Assets/Script/large-greenery-trees-row-cut-out-for-landscape-3d-rendering-png.png" id="10_lvt7x"]
 [ext_resource type="Script" uid="uid://jv25rhnd42nq" path="res://area_3d.gd" id="14_luxwo"]
@@ -244,28 +244,28 @@ shape = SubResource("BoxShape3D_rwda5")
 
 [node name="Camera3D" type="Camera3D" parent="jamv"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12951, 0)
+fov = 95.1
+
+[node name="Trunck" type="Sprite2D" parent="jamv"]
+position = Vector2(435.5, 427.5)
+scale = Vector2(4.598, 2.774)
+texture = ExtResource("7_po5ju")
+
+[node name="Volate" type="Sprite2D" parent="jamv"]
+position = Vector2(-55, 558)
+scale = Vector2(3, 3)
+texture = ExtResource("8_ulhnw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="jamv" node_paths=PackedStringArray("volante", "mao", "carro")]
 script = ExtResource("5_4jcav")
-volante = NodePath("../Sprite2D_Volante")
+volante = NodePath("../Volate")
 mao = NodePath("../Sprite2D_Mao")
-carro = NodePath("../Carro")
+carro = NodePath("../Trunck")
 
 [node name="Camera2D" type="Camera2D" parent="jamv/CanvasLayer"]
 position = Vector2(417, 271)
+scale = Vector2(0.8, 0.8)
 zoom = Vector2(0.3, 0.3)
-
-[node name="Carro" type="Sprite2D" parent="jamv"]
-texture_filter = 1
-position = Vector2(404, 252)
-scale = Vector2(3.7, 3.91)
-texture = ExtResource("5_lvt7x")
-
-[node name="Sprite2D_Volante" type="Sprite2D" parent="jamv"]
-texture_filter = 1
-position = Vector2(199, 489)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("5_dkpos")
 
 [node name="Area3D" type="Area3D" parent="jamv"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.23178)
@@ -277,8 +277,8 @@ debug_color = Color(0.477945, 0.0574232, 0.151927, 0.42)
 
 [node name="Sprite2D_Mao" type="Sprite2D" parent="jamv"]
 texture_filter = 1
-position = Vector2(317, 408)
-scale = Vector2(2.5, 2.5)
+position = Vector2(90, 432)
+scale = Vector2(4, 4)
 texture = ExtResource("10_c1kv6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

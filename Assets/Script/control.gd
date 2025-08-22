@@ -6,8 +6,10 @@ var labirinto = preload("res://Assets/Scenes/labirinto.tscn")
 var jamv = preload("res://Assets/Scenes/sprite_2d.tscn")
 var jogo2d = preload("res://Assets/Scenes/Memories of Zerous.tscn")
 var jamv_truck = preload("res://jamv_truck.tscn")
-var jamv_chupetao = preload("res://jamv_chupetao.tscn")
+const JAMV_CHUPETAO = preload("res://jamv_chupetao.tscn")
 var fight_music = preload("res://fight_music.tscn")
+
+
 func _ready() -> void:
 	Global.Lurdes_vida = 3
 	Global.Vida_jamv = 3
@@ -57,7 +59,7 @@ func _on_line_edit_text_changed(new_text):
 	if new_text == "jamv_chupetao":
 		for child in sub_viewport.get_children():
 			child.queue_free()
-		var jamv = jamv_chupetao.instantiate()
+		var jamv = JAMV_CHUPETAO.instantiate()
 		sub_viewport.add_child(jamv)
 		var internal_player = jamv.find_child("SparkyGlory")
 		if internal_player:
@@ -67,7 +69,21 @@ func _on_line_edit_text_changed(new_text):
 		print("CESAR PATROCINA NOIS")
 		
 func jamv_truck_submitted(new_text):
-	if new_text == "fight_music":
+	if new_text == "jamv_truck":
+		for child in sub_viewport.get_children():
+			child.queue_free()
+		var jamv = jamv_truck.instantiate()
+		sub_viewport.add_child(jamv)
+		var internal_player = jamv.find_child("SparkyGlory")
+		if internal_player:
+			PlayerManager.register_internal_player(internal_player)
+		else:
+			printerr("Jogador interno não encontrado!")
+		print("CESAR PATROCINA NOIS")
+		
+		
+func Fight_music_submitted(new_text):
+	if new_text == "night_terror":
 		for child in sub_viewport.get_children():
 			child.queue_free()
 		var fight_music = fight_music.instantiate()
@@ -78,7 +94,3 @@ func jamv_truck_submitted(new_text):
 		else:
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
-		
-		
-func Fight_music_submitted(new_text):
-	pass # Replace with function body.

@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var volante: Sprite2D
 @export var mao: Sprite2D
-@export var carro: Sprite2D  # Adicione esta linha para referenciar o ícone do carro
+@export var carro: Sprite2D  
 @export var angulo_maximo_volante: float = 90.0
 @export var angulo_maximo_mao: float = 30.0
 @export var suavizacao: float = 8.0
@@ -10,12 +10,12 @@ extends CanvasLayer
 @export var tremor_intensidade: float = 0.5
 @export var tamanho_base_mao: float = 2.4
 @export var efeito_escala_curva: float = 0.05
-@export var posicao_vertical_mao: float = 408.0
+@export var posicao_vertical_mao: float = 432.0
 
-# Novos parâmetros para o tremor do carro
+
 @export var tremor_carro_intensidade: float = 3.0
 @export var tremor_carro_velocidade: float = 5.0
-@export var tremor_carro_rotacao: float = 1.5  # Graus de rotação do tremor
+@export var tremor_carro_rotacao: float = 1.5  
 
 var rotacao_alvo: float = 0.0
 var input_anterior: float = 0.0
@@ -25,7 +25,7 @@ var posicao_original_carro: Vector2
 func _ready():
 	mao.scale = Vector2(tamanho_base_mao, tamanho_base_mao)
 	mao.position.y = posicao_vertical_mao
-	posicao_original_carro = carro.position  # Guarda a posição original
+	posicao_original_carro = carro.position 
 
 func _process(delta):
 	var direcao = Input.get_axis("esquerda", "direita")
@@ -37,7 +37,7 @@ func _process(delta):
 	volante.rotation_degrees = lerp(volante.rotation_degrees, rotacao_alvo, delta * suavizacao)
 	
 	mao.rotation_degrees = -rotacao_alvo * -0.3
-	mao.position.x = (direcao * movimento_lateral) + 317.0
+	mao.position.x = (direcao * movimento_lateral) + 90.0
 	mao.position.y = posicao_vertical_mao
 	
 	# Aplica efeitos de tremor no carro
@@ -47,13 +47,12 @@ func _process(delta):
 
 func aplicar_tremor_carro(delta):
 	tempo_tremor += delta * tremor_carro_velocidade
-	
-	# Gera valores de tremor usando funções de onda diferentes
+
 	var tremor_x = sin(tempo_tremor * 1.7) * tremor_carro_intensidade
 	var tremor_y = cos(tempo_tremor * 1.3) * tremor_carro_intensidade
 	var tremor_rot = sin(tempo_tremor * 2.1) * tremor_carro_rotacao
 	
-	# Aplica o tremor mantendo a posição original como base
+
 	carro.position = posicao_original_carro + Vector2(tremor_x, tremor_y)
 	carro.rotation_degrees = tremor_rot
 

@@ -56,7 +56,7 @@ skeleton = NodePath("")
 
 [node name="Label3D" type="Label3D" parent="Paper_Metal_0"]
 transform = Transform3D(0.50293, -0.864328, 1.40817e-07, 0.864328, 0.50293, 8.09831e-08, -1.40817e-07, 8.09832e-08, 1, 1.17724, -0.915239, 0.0364488)
-text = "fight_music"
+text = "night_terror"
 font = ExtResource("3_i8e3q")
 font_size = 281
 outline_size = 20
