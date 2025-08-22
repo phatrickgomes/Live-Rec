@@ -7,10 +7,20 @@ var controle = preload("res://Assets/Scenes/control.tscn")
 
 var ativo := false
 
+func _ready() -> void:
+	var new_world = World3D.new()
+	viewport.world_3d = new_world
+	viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+
+	# 🔊 Habilita saída de áudio do SubViewport para o jogo principal
+	viewport.audio_listener_enable_3d = true
+	viewport.audio_listener_enable_2d = true
+
 func _unhandled_input(event) -> void:
 	if not ativo:
 		return
 	viewport.push_input(event)
+
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if not ativo:
 		return
@@ -30,4 +40,3 @@ func _input(event) -> void:
 		$CollisionShape3D/Sprite3D/SubViewport.add_child(tela_inst)
 		Global.Ta_no_jogo = false
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		

@@ -49,7 +49,7 @@ func levar_dano(dano: int) -> void:
 
 func morrer() -> void:
 	print("voce morreu")
-	get_tree().reload_current_scene()  
+	get_tree().change_scene_to_file("res://quarto.tscn")  
 
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("tiro_jamv"):

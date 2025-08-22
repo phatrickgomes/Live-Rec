@@ -8,9 +8,11 @@ var jogo2d = preload("res://Assets/Scenes/Memories of Zerous.tscn")
 var jamv_truck = preload("res://jamv_truck.tscn")
 var jamv_chupetao = preload("res://jamv_chupetao.tscn")
 var fight_music = preload("res://fight_music.tscn")
+
 func _ready() -> void:
 	if get_parent() != null:
 		sub_viewport = get_parent()
+
 func _on_button_pressed() -> void:
 	var player = PlayerManager.get_current_player()
 	if player and player.objeto_selecionado != null and player.objeto_selecionado.is_in_group("fita"):
@@ -76,7 +78,6 @@ func jamv_truck_submitted(new_text):
 		else:
 			printerr("Jogador interno não encontrado!")
 		print("CESAR PATROCINA NOIS")
-		
 		
 func Fight_music_submitted(new_text):
 	pass # Replace with function body.
