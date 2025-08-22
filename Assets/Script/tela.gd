@@ -30,4 +30,16 @@ func _input(event) -> void:
 		$CollisionShape3D/Sprite3D/SubViewport.add_child(tela_inst)
 		Global.Ta_no_jogo = false
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		
+func _physics_process(delta: float) -> void:
+	if Global.Lurdes_vida <= 0:
+		$CollisionShape3D/Sprite3D/SubViewport.get_child(0).queue_free()
+		var tela_inst = controle.instantiate()
+		$CollisionShape3D/Sprite3D/SubViewport.add_child(tela_inst)
+		Global.Ta_no_jogo = false
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Global.Vida_jamv <= 0:
+		$CollisionShape3D/Sprite3D/SubViewport.get_child(0).queue_free()
+		var tela_inst = controle.instantiate()
+		$CollisionShape3D/Sprite3D/SubViewport.add_child(tela_inst)
+		Global.Ta_no_jogo = false
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

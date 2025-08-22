@@ -7,6 +7,8 @@ signal atacando
 @onready var anim = $AnimatedSprite2D
 @onready var hurt_box = $hurt_box
 @onready var aneme = $AnimatedSprite2D2
+@export var atacando1 = false
+
 
 var max_health = 100
 var current_health = max_health
@@ -62,6 +64,7 @@ func _physics_process(delta):
 			pass
 
 func soco():
+	atacando1 = true
 	aneme.visible = true
 	aneme.play("perigo")
 	anima.play("soco_inimigo")

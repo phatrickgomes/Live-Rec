@@ -9,6 +9,8 @@ var jamv_truck = preload("res://jamv_truck.tscn")
 var jamv_chupetao = preload("res://jamv_chupetao.tscn")
 var fight_music = preload("res://fight_music.tscn")
 func _ready() -> void:
+	Global.Lurdes_vida = 3
+	Global.Vida_jamv = 3
 	if get_parent() != null:
 		sub_viewport = get_parent()
 func _on_button_pressed() -> void:

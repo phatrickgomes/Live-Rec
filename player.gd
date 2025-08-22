@@ -40,6 +40,7 @@ func atirar() -> void:
 	get_parent().add_child(tiro)
 
 func levar_dano(dano: int) -> void:
+	Global.Vida_jamv -= 1
 	vida_atual -= dano
 	if vida_atual < 0:
 		vida_atual = 0
@@ -49,11 +50,12 @@ func levar_dano(dano: int) -> void:
 
 func morrer() -> void:
 	print("voce morreu")
-	get_tree().reload_current_scene()  
+	
 
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("tiro_jamv"):
 		print("tomando dano")
+		
 		levar_dano(1)
 		
 func atualizar_vida_hud():

@@ -5,6 +5,9 @@ extends CharacterBody2D
 @onready var oxigenio: ProgressBar = $"../ProgressBar"
 @onready var vida_lab: Label = $"../vida"
 
+
+
+
 var tempo_regeneracao: float = 0.0
 var intervalo_regeneracao: float = 4.0
 var tempo_soco: bool = true
@@ -31,7 +34,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
-	
+	Global.Lurdes_vida = vida
 	tempo_regeneracao += delta
 	if tempo_regeneracao >= intervalo_regeneracao:
 		tempo_regeneracao = 0.0
@@ -58,7 +61,7 @@ func _input(event):
 				anim.play("idle")
 	
 	# Se não está no modo de esquiva obrigatória, permite atacar normalmente
-	if not pode_esquivar and estado_atual == Estado.IDLE:
+	if not pode_esquivar and estado_atual == Estado.IDLE and $"../inimigo".atacando1 == false:
 		if event.is_action_pressed("tiro") and tempo_soco:
 			if oxigenio.value >= 20:
 				estado_atual = Estado.ATACANDO
@@ -136,7 +139,8 @@ func atualizar_vida_hud():
 
 func morrer() -> void:
 	print("voce morreu")
-	get_tree().reload_current_scene()
+	
+	
 
 func _on_timer_timeout() -> void:
 	tempo_soco = true
