@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 500
-@export var tiro_scene: PackedScene = preload("res://tiro.tscn")
+@export var tiro_scene: PackedScene = preload("res://Assets/Scenes/tiro.tscn")
 @onready var vida_label = $"../vida_label"
 @onready var laser = $"../laser"
 

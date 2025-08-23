@@ -10,9 +10,23 @@ extends CharacterBody3D
 @onready var audio_investigacao: AudioStreamPlayer3D = $TrilhaInvestigação
 @onready var audio_irritado: AudioStreamPlayer3D = $TrilhaIrritado
 @onready var audio_enganacao: AudioStreamPlayer3D = $TrilhaEnganação
+@onready var bite_sound: AudioStreamPlayer3D = $BiteSound
+@onready var bone_crack_sound: AudioStreamPlayer3D = $BoneCrackSound
+@onready var anim_player: AnimationPlayer = $"Skinwalker andando de4/AnimationPlayer"
+@onready var mesh: MeshInstance3D = $"Skinwalker andando de4/Armature/Skeleton3D/Cube"
+@onready var attack_area: Area3D = $AttackArea
+@export var main_scene: PackedScene
+var _attack_lock := false
+
+### Variáveis de Material ###
+var original_material: Material = null
+var original_materials: Dictionary = {}
+var reveal_material: StandardMaterial3D = null
+var aura_mesh: MeshInstance3D = null
+var reveal_targets: Array = []
 
 ### Configurações ###
-const SPEED: float = 10.0
+const SPEED: float = 5.0
 const GRAVITY: float = 1.8
 const CHASE_DURATION: float = 30.0
 const INVESTIGATE_DURATION: float = 5.0
@@ -23,12 +37,13 @@ const PATH_UPDATE_THRESHOLD: float = 0.1
 const DICA_UPDATE_INTERVAL: float = 60.0
 const ENRAGED_DURATION: float = 60.0
 const TURN_THRESHOLD: float = deg_to_rad(15.0)
-const PATROL_RADIUS: float = 50.0  # Raio máximo para buscar pontos aleatórios
+const PATROL_RADIUS: float = 50.0
+const AURA_SCALE: float = 1.04
 
 ### Sistema de Velocidade Dinâmica ###
 var straight_frames: int = 0
-const MAX_STRAIGHT_FRAMES: int = 120  # Frames máximos para aceleração
-const SPEED_BOOST_FACTOR: float = 0.5  # Acréscimo máximo de velocidade
+const MAX_STRAIGHT_FRAMES: int = 120
+const SPEED_BOOST_FACTOR: float = 0.5
 
 ### Estados ###
 enum {PATROL, CHASE, INVESTIGATE, ENRAGED, QTE}
@@ -48,18 +63,14 @@ var is_moving_to_patrol_target: bool = false
 var is_investigating_position: bool = false
 var dica_update_timer: float = 0.0
 var show_path: bool = true
-var navigation_region: NavigationRegion3D  # Referência para a região de navegação
-
-### Modo enfurecido ###
+var navigation_region: NavigationRegion3D
 var failed_investigate_count: int = 0
 var enraged_timer: float = 0.0
 var last_direction: Vector3 = Vector3.ZERO
 var is_turning: bool = false
-
-### Controle de áudio ###
 var investigacao_sound_played: bool = false
 
-### Variáveis para QTE ###
+### QTE ###
 var qte_active: bool = false
 var qte_success: bool = false
 var qte_presses_required: int = 20
@@ -67,15 +78,117 @@ var qte_presses_count: int = 0
 var qte_time_limit: float = 2.0
 var qte_timer: float = 0.0
 var qte_last_key: String = ""
-var qte_chance: float = 0
+var qte_chance: float = 0.0
 var player_controller: Node = null
-var camera_shake_intensity: float = 2.0
-var qte_current_key: String = "A"  # Tecla atual que o jogador deve pressionar
+var qte_current_key: String = "A"
+var stunned: bool = false
+var stun_timer: float = 0.0
+
+### Reveal ###
+var revealed: bool = false
+var reveal_timer: float = 0.0
+
+func _process(delta):
+	if stunned:
+		stun_timer -= delta
+		if stun_timer <= 0:
+			stunned = false
+	
+	if revealed:
+		reveal_timer -= delta
+		if reveal_timer <= 0:
+			revealed = false
+			_clear_reveal_aura()
+			_restore_original_materials()
+
+### Funções de Stun/Revelar/Material ###
+func stun(duration: float):
+	stunned = true
+	stun_timer = duration
+
+func reveal(duration: float):
+	revealed = true
+	reveal_timer = duration
+	_ensure_aura_mesh()
+	if aura_mesh:
+		aura_mesh.visible = true
+	_apply_reveal_aura()
+	_apply_mesh_reveal_material()
+
+func _ensure_aura_mesh():
+	if aura_mesh or not mesh:
+		return
+	
+	aura_mesh = MeshInstance3D.new()
+	aura_mesh.name = "AuraMesh"
+	aura_mesh.mesh = mesh.mesh
+	aura_mesh.skeleton = mesh.skeleton
+	aura_mesh.material_override = _make_aura_material()
+	aura_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	aura_mesh.visible = false
+	mesh.get_parent().add_child(aura_mesh)
+	aura_mesh.scale = mesh.scale * Vector3(AURA_SCALE, AURA_SCALE, AURA_SCALE)
+
+func _make_aura_material() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.emission_enabled = true
+	m.emission = Color(1, 0, 0)
+	m.emission_energy_multiplier = 2.0
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.albedo_color = Color(1, 0, 0, 0.0)
+	return m
+
+func _apply_reveal_aura():
+	if reveal_targets.is_empty():
+		_collect_geometry_nodes(self)
+	
+	for g in reveal_targets:
+		if not original_materials.has(g):
+			original_materials[g] = g.material_override
+		g.material_override = _get_reveal_material()
+
+func _collect_geometry_nodes(root: Node):
+	for c in root.get_children():
+		if c is GeometryInstance3D:
+			reveal_targets.append(c)
+		_collect_geometry_nodes(c)
+
+func _get_reveal_material() -> StandardMaterial3D:
+	if reveal_material == null:
+		reveal_material = StandardMaterial3D.new()
+		reveal_material.emission_enabled = true
+		reveal_material.emission = Color(0, 1, 0)
+		reveal_material.emission_energy_multiplier = 2.0
+		reveal_material.albedo_color = Color(0.05, 0.1, 0.05, 1.0)
+	return reveal_material
+
+func _clear_reveal_aura():
+	if aura_mesh:
+		aura_mesh.visible = false
+
+func _apply_mesh_reveal_material():
+	if mesh:
+		if original_material == null:
+			original_material = mesh.material_override
+		
+		var mat := StandardMaterial3D.new()
+		mat.emission_enabled = true
+		mat.emission = Color(0, 1, 0)
+		mat.emission_energy_multiplier = 2.0
+		mesh.material_override = mat
+
+func _restore_original_materials():
+	if mesh and original_material:
+		mesh.material_override = original_material
+	
+	for g in reveal_targets:
+		if original_materials.has(g):
+			g.material_override = original_materials[g]
 
 func _ready():
 	# Busca o jogador através do PlayerManager
 	player = PlayerManager.get_current_player()
-	
 	if player:
 		print("Jogador encontrado: ", player.name)
 	else:
@@ -103,41 +216,51 @@ func _ready():
 	material.vertex_color_use_as_albedo = true
 	debug_path.mesh = immediate_mesh
 	debug_path.material_override = material
-
-# Tenta encontrar a região de navegação na cena
-func find_navigation_region() -> NavigationRegion3D:
-	# Primeiro tenta encontrar no mesmo nível
-	var region = get_parent().find_child("NavigationRegion3D", true, false)
 	
-	# Se não encontrou, procura em toda a árvore
-	if not region:
-		region = get_tree().get_root().find_child("NavigationRegion3D", true, false)
+	# Configuração do AnimationPlayer
+	if anim_player:
+		print("AnimationPlayer encontrado")
+	else:
+		printerr("AnimationPlayer não encontrado!")
 	
-	return region
+	if typeof(CrystalManager) != TYPE_NIL and CrystalManager.has_method("register_enemy"):
+		CrystalManager.register_enemy(self)
+	
+	await get_tree().process_frame
+	set_new_patrol_target()
+	get_tree().create_timer(0.1).timeout.connect(set_new_patrol_target)
 
-func setup_navigation():
-	nav_agent.path_desired_distance = 1.0
-	nav_agent.target_desired_distance = 1.0
-	nav_agent.avoidance_enabled = true
-	nav_agent.path_max_distance = 50.0
-	nav_agent.avoidance_layers = 3
-
-func connect_signals():
-	visao.body_entered.connect(_on_Visao_body_entered)
-	visao.body_exited.connect(_on_Visao_body_exited)
-	dicas.body_entered.connect(_on_Dicas_body_entered)
-	dicas.body_exited.connect(_on_Dicas_body_exited)
-	nav_agent.navigation_finished.connect(_on_navigation_finished)
+func update_animation():
+	if not anim_player:
+		return
+	
+	# Verifica se está se movendo
+	var is_moving = Vector2(velocity.x, velocity.z).length() > 0.1
+	
+	# Controla a animação Walk
+	if is_moving:
+		if not anim_player.is_playing() or anim_player.current_animation != "Walk":
+			anim_player.play("Walk")
+	else:
+		if anim_player.is_playing():
+			anim_player.stop()
 
 func _physics_process(delta):
-	# Atualiza a referência do jogador a cada frame
+	# Atualiza a referência del jugador
 	player = PlayerManager.get_current_player()
-	
 	if not player:
 		printerr("Jogador não encontrado!")
 		return
 	
-	# Se o jogador estiver visível, começar/continuar perseguição
+	# >>> ADICIONE ISSO <<<
+	if stunned:
+		velocity = Vector3.ZERO
+		update_animation()
+		move_and_slide()
+		return
+	# >>> ---------------- <<<
+	
+	# Se o jogador estiver visível, iniciar perseguição
 	if is_player_visible() and current_state != CHASE and current_state != ENRAGED and current_state != QTE:
 		current_state = CHASE
 		chase_timer = CHASE_DURATION
@@ -148,11 +271,13 @@ func _physics_process(delta):
 	
 	if qte_active:
 		handle_qte(delta)
+		update_animation()
 		return
 	
 	apply_gravity(delta)
 	update_timers(delta)
 	handle_movement(delta)
+	update_animation()
 	
 	if player_in_dicas and current_state != CHASE and current_state != ENRAGED:
 		dica_update_timer = max(0.0, dica_update_timer - delta)
@@ -176,16 +301,15 @@ func update_timers(delta):
 				chase_timer = CHASE_DURATION
 			else:
 				chase_timer = max(0.0, chase_timer - delta)
-				if chase_timer <= 0.0:
-					enter_patrol_state()
+			
+			if chase_timer <= 0.0:
+				enter_patrol_state()
 		
 		INVESTIGATE:
 			investigate_timer = max(0.0, investigate_timer - delta)
-			
 			if nav_agent.is_navigation_finished() and not investigacao_sound_played:
 				play_investigacao_sound()
 				investigacao_sound_played = true
-				
 				if rng.randf() < qte_chance:
 					start_qte()
 			
@@ -219,7 +343,8 @@ func handle_movement(delta: float):
 		if should_update_target(target_pos):
 			nav_agent.target_position = target_pos
 			last_path_update_pos = global_position
-			is_moving_to_patrol_target = (current_state == PATROL)
+	
+	is_moving_to_patrol_target = (current_state == PATROL)
 	
 	if nav_agent.is_navigation_finished():
 		if current_state == PATROL:
@@ -255,7 +380,6 @@ func handle_movement(delta: float):
 		
 		# Cálculo de velocidade modificado
 		var speed_boost = 0.0
-		
 		if !is_turning && straight_frames > 10:
 			speed_boost = SPEED_BOOST_FACTOR * (straight_frames / float(MAX_STRAIGHT_FRAMES))
 		
@@ -263,10 +387,11 @@ func handle_movement(delta: float):
 		var current_rotation_speed = ROTATION_SPEED
 		
 		if current_state == ENRAGED:
-			current_speed = SPEED * 1.8  # Ajustado para 1.8x em vez de 2x para melhor controle
-			if is_turning:
-				current_speed = SPEED * 0.9  # Reduz velocidade nas curvas
-				current_rotation_speed = ROTATION_SPEED * 1.5
+			current_speed = SPEED * 1.8 # Ajustado para 1.8x em vez de 2x para melhor controle
+		
+		if is_turning:
+			current_speed = SPEED * 0.9 # Reduz velocidade nas curvas
+			current_rotation_speed = ROTATION_SPEED * 1.5
 		
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
@@ -289,20 +414,24 @@ func should_update_target(target_pos: Vector3) -> bool:
 
 func get_current_target() -> Vector3:
 	match current_state:
-		CHASE: 
+		CHASE:
 			if player:
 				return player.global_position
 			else:
 				return last_known_position
-		INVESTIGATE: 
+		
+		INVESTIGATE:
 			return last_known_position
-		PATROL: 
+		
+		PATROL:
 			return patrol_target
+		
 		ENRAGED:
 			if player:
 				return player.global_position
 			else:
 				return last_known_position
+		
 		_:
 			return patrol_target
 
@@ -335,11 +464,10 @@ func enter_patrol_state():
 	if current_state == INVESTIGATE:
 		failed_investigate_count += 1
 		print("Investigações fracassadas: ", failed_investigate_count)
-		
 		qte_chance = min(qte_chance + 0.05, 1.0)
 		print("Nova chance de QTE: ", qte_chance * 100, "%")
 		
-		if failed_investigate_count >= 3:
+		if failed_investigate_count >= 5:
 			enter_enraged_state()
 			return
 	
@@ -375,12 +503,11 @@ func is_player_visible() -> bool:
 	# Verificar linha de visada direta
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.new()
-	query.from = global_position + Vector3(0, 1, 0)  # Altura dos olhos
+	query.from = global_position + Vector3(0, 1, 0) # Altura dos olhos
 	query.to = player.global_position + Vector3(0, 1, 0)
 	query.exclude = [self]
 	
 	var result = space_state.intersect_ray(query)
-	
 	if result and result.collider == player:
 		return true
 	
@@ -388,12 +515,18 @@ func is_player_visible() -> bool:
 
 func get_state_name() -> String:
 	match current_state:
-		PATROL: return "PATROL"
-		CHASE: return "CHASE"
-		INVESTIGATE: return "INVESTIGATE"
-		ENRAGED: return "ENRAGED"
-		QTE: return "QTE"
-		_: return "UNKNOWN"
+		PATROL:
+			return "PATROL"
+		CHASE:
+			return "CHASE"
+		INVESTIGATE:
+			return "INVESTIGATE"
+		ENRAGED:
+			return "ENRAGED"
+		QTE:
+			return "QTE"
+		_:
+			return "UNKNOWN"
 
 func draw_debug_path():
 	if not show_path:
@@ -405,17 +538,24 @@ func draw_debug_path():
 	var path = nav_agent.get_current_navigation_path()
 	if path.size() > 1:
 		immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		
 		for i in range(path.size()):
 			var color = Color.RED
 			match current_state:
-				PATROL: color = Color.GREEN
-				CHASE: color = Color.RED
-				INVESTIGATE: color = Color.YELLOW
-				ENRAGED: color = Color.PURPLE
-				QTE: color = Color.ORANGE
+				PATROL:
+					color = Color.GREEN
+				CHASE:
+					color = Color.RED
+				INVESTIGATE:
+					color = Color.YELLOW
+				ENRAGED:
+					color = Color.PURPLE
+				QTE:
+					color = Color.ORANGE
 			
 			immediate_mesh.surface_set_color(color)
 			immediate_mesh.surface_add_vertex(to_local(path[i]))
+		
 		immediate_mesh.surface_end()
 
 func toggle_path_visibility():
@@ -437,7 +577,8 @@ func update_dica_position():
 			nav_agent.target_position = last_known_position
 			last_path_update_pos = global_position
 			is_investigating_position = true
-			play_dica_sound()
+		
+		play_dica_sound()
 
 func play_dica_sound():
 	if not audio_dica.playing:
@@ -489,17 +630,17 @@ func end_qte():
 	if qte_success:
 		print("QTE bem sucedido! Inimigo enganado.")
 		failed_investigate_count = max(0, failed_investigate_count - 1)
-		qte_chance = max(0.1, qte_chance - 0.2)  # Reduz chance de QTE após sucesso
+		qte_chance = max(0.1, qte_chance - 0.2) # Reduz chance de QTE após sucesso
 	else:
 		print("QTE falhou!")
 		failed_investigate_count += 1
-		qte_chance = min(1.0, qte_chance + 0.1)  # Aumenta chance de QTE após falha
-		
-		# Voltar a perseguir imediatamente se o jogador estiver visível
-		if player and is_player_visible():
-			current_state = CHASE
-			chase_timer = CHASE_DURATION
-			print("Voltando a perseguir após falha no QTE")
+		qte_chance = min(1.0, qte_chance + 0.1) # Aumenta chance de QTE após falha
+	
+	# Voltar a perseguir imediatamente se o jogador estiver visível
+	if player and is_player_visible():
+		current_state = CHASE
+		chase_timer = CHASE_DURATION
+		print("Voltando a perseguir após falha no QTE")
 	
 	if player_controller and player_controller.has_method("end_qte"):
 		player_controller.end_qte()
@@ -585,3 +726,68 @@ func _on_Dicas_body_exited(body: Node3D):
 	if body.name == "SparkyGlory" and body is CharacterBody3D:
 		print("Jogador saiu da área de dicas")
 		player_in_dicas = false
+
+# Tenta encontrar a região de navegação na cena
+func find_navigation_region() -> NavigationRegion3D:
+	# Primeiro tenta encontrar no mesmo nível
+	var region = get_parent().find_child("NavigationRegion3D", true, false)
+	
+	# Se não encontrou, procura em toda a árvore
+	if not region:
+		region = get_tree().get_root().find_child("NavigationRegion3D", true, false)
+	
+	return region
+
+func setup_navigation():
+	nav_agent.path_desired_distance = 1.0
+	nav_agent.target_desired_distance = 1.0
+	nav_agent.avoidance_enabled = true
+	nav_agent.path_max_distance = 50.0
+	nav_agent.avoidance_layers = 3
+
+func connect_signals():
+	visao.body_entered.connect(_on_Visao_body_entered)
+	visao.body_exited.connect(_on_Visao_body_exited)
+	dicas.body_entered.connect(_on_Dicas_body_entered)
+	dicas.body_exited.connect(_on_Dicas_body_exited)
+	nav_agent.navigation_finished.connect(_on_navigation_finished)
+
+func _on_attack_area_entered(area: Area3D) -> void:
+	print("Jogador atingido pelo inimigo! Reiniciando jogo...")
+	_restart_game()
+
+func _restart_game() -> void:
+		# toca mordida
+	bite_sound.play()
+	# toca osso quebrando
+	bone_crack_sound.play()
+	await bone_crack_sound.finished   # espera terminar
+	var main_scene = load("res://Assets/Scenes/menu.tscn")
+	call_deferred("_change_scene", main_scene)
+	
+func _change_scene(scene):
+	get_tree().change_scene_to_packed(scene)
+
+func _on_attack_area_body_entered(body: Node3D) -> void:
+	if _attack_lock:
+		return
+	
+	# Verifica se é o SparkyGlory (jogador do labirinto)
+	if body.name == "SparkyGlory" and body is CharacterBody3D:
+		_attack_lock = true
+		print("SparkyGlory atingido! Voltando ao quarto...")
+		
+		# Toca os sons de ataque
+		bite_sound.play()
+		bone_crack_sound.play()
+		
+		# Espera os sons terminarem
+		await bone_crack_sound.finished
+		
+		# **IMPORTANTE**: Salva que o jogador morreu para resetar o Streamer depois
+		Global.player_died = true
+		
+		# Volta para a cena do QUARTO (onde está o Streamer)
+		get_tree().reload_current_scene()  # Substitua pelo caminho real
+		
+		_attack_lock = false

@@ -1,14 +1,14 @@
-[gd_scene load_steps=86 format=4 uid="uid://pr6827hoy8ek"]
+[gd_scene load_steps=93 format=4 uid="uid://pr6827hoy8ek"]
 
 [ext_resource type="PackedScene" uid="uid://deovo5i043qs" path="res://Assets/Modelos/monitor.glb" id="1_6wfgo"]
 [ext_resource type="Texture2D" uid="uid://t38l338swxtr" path="res://Assets/Imagens/the last.jpg" id="1_jtej5"]
-[ext_resource type="Script" uid="uid://bi57kwwy1lta8" path="res://quarto.gd" id="1_lddpm"]
+[ext_resource type="Script" uid="uid://bi57kwwy1lta8" path="res://Assets/Script/quarto.gd" id="1_lddpm"]
 [ext_resource type="Texture2D" uid="uid://bd0g001gxntfl" path="res://Assets/Imagens/anime.jpg" id="1_od0w4"]
 [ext_resource type="Texture2D" uid="uid://b4onahpbxy5b" path="res://Assets/Imagens/lucas.jpg" id="1_xtcex"]
 [ext_resource type="Texture2D" uid="uid://2u5xpsy34jb0" path="res://Assets/Imagens/foto geral.png" id="2_2vapn"]
 [ext_resource type="PackedScene" uid="uid://bhvkm866011qa" path="res://Assets/Scenes/character_body_3d.tscn" id="2_chyoy"]
 [ext_resource type="PackedScene" uid="uid://rwmv3ram5t1a" path="res://Assets/Scenes/area_3d.tscn" id="3_twob8"]
-[ext_resource type="PackedScene" uid="uid://kx1k6tr8xq6w" path="res://chat.tscn" id="4_7fvgo"]
+[ext_resource type="PackedScene" uid="uid://kx1k6tr8xq6w" path="res://Assets/Scenes/chat.tscn" id="4_7fvgo"]
 [ext_resource type="PackedScene" uid="uid://cx56uqtqto44b" path="res://Assets/Modelos/ninja.glb" id="5_chyoy"]
 [ext_resource type="Texture2D" uid="uid://dbnilyx5nb7pv" path="res://Assets/Texture/WoodSiding008_4K-JPG_Color.jpg" id="5_jsa3l"]
 [ext_resource type="Texture2D" uid="uid://oi5yt67t0ys3" path="res://Assets/Texture/texturaparede.jpg" id="5_twob8"]
@@ -17,12 +17,15 @@
 [ext_resource type="AudioStream" uid="uid://bd3wt6s2g5mek" path="res://Assets/musicas/Relaxe Por 2 Minutos ao som da noite!.mp3" id="9_mckiv"]
 [ext_resource type="AudioStream" uid="uid://cosrrq14s7pra" path="res://Assets/musicas/corvo.wav" id="10_lddpm"]
 [ext_resource type="AudioStream" uid="uid://brmxxoi1r6sj0" path="res://Assets/musicas/caminhando.wav" id="11_igesp"]
-[ext_resource type="PackedScene" uid="uid://dmv2ooeugq6ov" path="res://xbox_360_s.glb" id="20_4rmfy"]
+[ext_resource type="PackedScene" uid="uid://dmv2ooeugq6ov" path="res://Assets/Scenes/xbox_360_s.glb" id="20_4rmfy"]
 [ext_resource type="PackedScene" uid="uid://bm1lvkgax6uya" path="res://musicas/bmo___adventure_time_fan_art.glb" id="20_7fvgo"]
-[ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://cd1.tscn" id="20_yx88i"]
-[ext_resource type="PackedScene" uid="uid://bp0h3p7pknogf" path="res://papel.tscn" id="21_7fvgo"]
-[ext_resource type="PackedScene" uid="uid://c6ua03fradtk2" path="res://folha_truck.tscn" id="22_yx88i"]
-[ext_resource type="PackedScene" uid="uid://de5yooomejbov" path="res://folha_fight.tscn" id="23_07asa"]
+[ext_resource type="PackedScene" uid="uid://bpv4r1wh654sp" path="res://Assets/Scenes/cd1.tscn" id="20_yx88i"]
+[ext_resource type="PackedScene" uid="uid://bp0h3p7pknogf" path="res://Assets/Scenes/papel.tscn" id="21_7fvgo"]
+[ext_resource type="PackedScene" uid="uid://c6ua03fradtk2" path="res://Assets/Scenes/folha_truck.tscn" id="22_yx88i"]
+[ext_resource type="PackedScene" uid="uid://de5yooomejbov" path="res://Assets/Scenes/folha_fight.tscn" id="23_07asa"]
+[ext_resource type="Texture2D" uid="uid://bmjkb1831i6rx" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_0.png" id="24_7r4yn"]
+[ext_resource type="Texture2D" uid="uid://bdlwlua0duh2" path="res://Assets/Modelos/ps1_style_patient_sheet_with_clipboard_1.png" id="25_v3itj"]
+[ext_resource type="FontFile" uid="uid://bud3epf48w464" path="res://Assets/HorrorFont-Regular.ttf" id="26_6k40a"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yx88i"]
 viewport_path = NodePath("monitor2/Viewport")
@@ -291,6 +294,49 @@ albedo_texture = ExtResource("6_xtcex")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7fvgo"]
 size = Vector3(0.187337, 0.0335159, 0.302185)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi5a7"]
+resource_name = "Metal"
+cull_mode = 2
+albedo_texture = ExtResource("24_7r4yn")
+roughness = 0.892971
+normal_enabled = true
+normal_texture = ExtResource("25_v3itj")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1rjgs"]
+_surfaces = [{
+"aabb": AABB(-3.78581, -5.25661, 0, 7.57161, 10.5132, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "Metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("qkpywDA2qMAAAAAAqkpyQDA2qEAAAAAAqkpyQDA2qMAAAAAAqkpywDA2qEAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y5n0n"]
+resource_name = "Sketchfab_Scene_Paper_Metal_0"
+_surfaces = [{
+"aabb": AABB(-3.78581, -5.25661, 0, 7.57161, 10.5132, 1e-05),
+"attribute_data": PackedByteArray("KIZ8P/oSJD+CQv0+Mr5+PyiGfD8wvn4/gkL9PvwSJD8="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_xi5a7"),
+"name": "Metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("qkpywDA2qMAAAAAAqkpyQDA2qEAAAAAAqkpyQDA2qMAAAAAAqkpywDA2qEAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AIA=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_1rjgs")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_75e2r"]
+points = PackedVector3Array(3.80707, 5.34004, 0.0834381, -3.86924, -5.34004, -0.0834381, -3.86924, -5.34004, 0.0834381, -3.86924, 5.34004, -0.0834381, 3.80707, -5.34004, -0.0834381, 3.80707, -5.34004, 0.0834381, -3.86924, 5.34004, 0.0834381, 3.80707, 5.34004, -0.0834381)
 
 [node name="quarto" type="Node3D"]
 transform = Transform3D(0.999653, 0, 0.0263514, 0, 1, 0, -0.0263514, 0, 0.999653, 0, 0, 0)
@@ -668,6 +714,47 @@ shape = SubResource("BoxShape3D_7fvgo")
 
 [node name="camera_folha3" type="Camera3D" parent="camera_folha3"]
 transform = Transform3D(0.665816, -6.22589e-07, -3.72529e-07, 9.31323e-10, 0.665815, -6.29603e-07, 0, 2.43017e-09, 0.665815, -5.96046e-08, 0, 0.199)
+
+[node name="camera_folha4" type="Node3D" parent="."]
+transform = Transform3D(0.0800437, -0.0509208, 1.497, -0.0125469, 1.49906, 0.0516633, -1.49781, -0.01528, 0.0795668, -1.77834, 1.47726, 2.50127)
+
+[node name="Paper_Metal_0" type="MeshInstance3D" parent="camera_folha4"]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, -4.13819e-09, 0, 4.13819e-09, 0.0254, -0.000146091, -0.00737281, 0.0135718)
+mesh = SubResource("ArrayMesh_y5n0n")
+skeleton = NodePath("")
+
+[node name="Label3D" type="Label3D" parent="camera_folha4/Paper_Metal_0"]
+transform = Transform3D(0.50293, -0.864328, 1.40817e-07, 0.864328, 0.50293, 8.09831e-08, -1.40817e-07, 8.09832e-08, 1, 1.17724, -0.915239, 0.0364488)
+modulate = Color(0.529022, 0, 0.0665132, 1)
+text = "Desenvolvido Por:"
+font = ExtResource("26_6k40a")
+font_size = 281
+outline_size = 20
+
+[node name="Label3D2" type="Label3D" parent="camera_folha4/Paper_Metal_0"]
+transform = Transform3D(0.50293, -0.864329, 1.45286e-07, 0.864329, 0.50293, 8.72533e-08, -1.4063e-07, 8.19564e-08, 1, -1.03764, 1.65888, 0.0561714)
+text = "Leonardo
+Caio Miguel
+Breno
+Yan Patrick
+Phatick"
+font = ExtResource("26_6k40a")
+font_size = 185
+outline_size = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="camera_folha4"]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, -4.13819e-09, 0, 4.13819e-09, 0.0254, -0.000146091, -0.00737281, 0.0135718)
+shape = SubResource("ConvexPolygonShape3D_75e2r")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="camera_folha4" groups=["folha3"]]
+transform = Transform3D(1, -1.86265e-09, 0, 0, 1, 2.67464e-08, -3.72529e-09, 1.01281e-08, 1, 0.000680029, -0.000860453, 0.0251333)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="camera_folha4/StaticBody3D"]
+transform = Transform3D(0.999817, -0.0111562, 0.012021, 0.0115906, -0.0376063, -0.999215, 0.011595, 0.999227, -0.0374709, 9.34601e-05, -0.000118256, 0.00345397)
+shape = SubResource("BoxShape3D_7fvgo")
+
+[node name="Camera_folha4" type="Camera3D" parent="camera_folha4"]
+transform = Transform3D(0.666667, -6.21192e-07, -3.81842e-07, 0, 0.666666, -6.32092e-07, 0, 3.65253e-09, 0.666665, 0.00652969, -0.00826281, 0.24134)
 
 [connection signal="timeout" from="corvo/Timer" to="." method="_on_timer_timeout"]
 

@@ -33,10 +33,10 @@ func _ready():
 
 	play_button.add_theme_color_override("font_color", Color(1, 0, 0))
 	exit_button.add_theme_color_override("font_color", Color(1, 0, 0)) 
-
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file("res://quarto.tscn")
+	get_tree().change_scene_to_file("res://Assets/Scenes/quarto.tscn")
 
 func exit_on_exit_button_pressed():
 	get_tree().quit()
