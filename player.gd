@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 500
-@export var tiro_scene: PackedScene = preload("res://Assets/Scenes/tiro.tscn")
+@export var tiro_scene: PackedScene = preload("res://tiro.tscn")
 @onready var vida_label = $"../vida_label"
 @onready var laser = $"../laser"
 
@@ -49,7 +49,6 @@ func levar_dano(dano: int) -> void:
 		morrer()
 
 func morrer() -> void:
-	Global.Lurdes_vida = 0
 	print("voce morreu")
 	
 func _on_hurt_box_area_entered(area):

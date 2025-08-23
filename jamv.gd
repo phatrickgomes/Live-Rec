@@ -7,16 +7,14 @@ extends CharacterBody2D
 @export var max_health: int = 100
 var current_health: int = max_health
 
-@onready var vida: ProgressBar = $ProgressBar
+@onready var vida = $ProgressBar
+
 
 var shoot_timer: float = 0.0
 var time: float = 0.0
 
 func _ready() -> void:
-	Global.Vida_jamv = current_health
-	if vida:
-		vida.max_value = max_health
-		vida.value = current_health
+	pass
 
 func _physics_process(delta: float) -> void:
 	time += delta
@@ -41,10 +39,6 @@ func take_damage(amount: int) -> void:
 	current_health -= amount
 	current_health = clamp(current_health, 0, max_health)
 	update_health_bar()
-	
-	# Sempre sincroniza com o Global
-	Global.Vida_jamv = current_health
-
 	if current_health <= 0:
 		die()
 
@@ -53,9 +47,10 @@ func update_health_bar() -> void:
 		vida.value = current_health
 
 func die() -> void:
-	Global.Vida_jamv = 0
-
+	get_tree().reload_current_scene()
+	
 func _on_hurtbox_area_entered(area):
 	if area.is_in_group("tiro"):  
 		take_damage(1)
+		update_health_bar()
 		print("acertou")

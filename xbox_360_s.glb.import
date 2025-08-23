@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c8bdm0esicotx"
-path="res://.godot/imported/arvore_low_poly.glb-b12394f82ec681a49d75e69fe53bef4d.scn"
+uid="uid://dmv2ooeugq6ov"
+path="res://.godot/imported/xbox_360_s.glb-38783d8ca0c28bb5eacca7574d7ab2b0.scn"
 
 [deps]
 
-source_file="res://Assets/Scenes/arvore_low_poly.glb"
-dest_files=["res://.godot/imported/arvore_low_poly.glb-b12394f82ec681a49d75e69fe53bef4d.scn"]
+source_file="res://xbox_360_s.glb"
+dest_files=["res://.godot/imported/xbox_360_s.glb-38783d8ca0c28bb5eacca7574d7ab2b0.scn"]
 
 [params]
 
