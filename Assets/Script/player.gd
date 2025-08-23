@@ -45,69 +45,14 @@ var t_bob: float = 0.0
 var bob_freq: float = 2.0
 var bob_amp: float = 0.07
 
-func reset_player():
-	velocity = Vector3.ZERO
-	objeto_selecionado = null
-	interagindo_com_tela = false
-	interagindo_com_folha = false
-	em_transicao = false
-	monitor_atual = 0
-	
-
-	if interacao_gui and interacao_gui.has_method("set_ativo"):
-		interacao_gui.ativo = false
-	
-
-	camera_pivot.rotation = Vector3.ZERO
-	camera.rotation = Vector3.ZERO
-	
-
-	if camera and camera_inicial_transform:
-		camera.global_transform = camera_inicial_transform
-	
-	# Reset FORÇADO do input e mouse
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	Input.warp_mouse(Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2))
-	
-	# Reset da UI - DESATIVA TUDO
-	interact_label.visible = false
-	interact_monitor.visible = false
-	color_rect_MONITOR.visible = false
-	ponto_da_camera.visible = true
-	
-
-	if tween_atual and tween_atual.is_valid():
-		tween_atual.kill()
-		tween_atual = null
-	
-	
-	em_transicao = false
-	
-	print("Reset completo - Forçado para modo livre")
-
 func _ready():
-	# Sempre reseta completamente
-	reset_player()
-	
-	# Se veio de uma morte, mostra mensagem e reseta o flag
-	if "player_died" in Global:
-		if Global.player_died:
-			print("Streamer resetado após morte no labirinto")
-			Global.player_died = false
-	
 	PlayerManager.register_main_player(self)
 	add_to_group("player")
 	interact_monitor.visible = false
 	color_rect_MONITOR.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera_inicial_transform = camera.global_transform
-	
-	# Garante que o mouse está capturado e centralizado
-	Input.warp_mouse(Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2))
-	
-	set_process_input(true)
-	set_physics_process(true)
-	
+
 ## INTERAÇÕES
 func iniciar_interacao_monitor1():
 	if not camera_monitor: return
@@ -310,13 +255,7 @@ func _physics_process(delta: float) -> void:
 		objeto_selecionado.angular_velocity = Vector3.ZERO
 
 	move_and_slide()
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not (interagindo_com_tela or interagindo_com_folha or em_transicao):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		Input.warp_mouse(Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2))
-	
-	if interagindo_com_tela or interagindo_com_folha or em_transicao:
-		velocity = Vector3.ZERO
-		return
+
 ## HEADBOB
 func _headbob(time: float) -> Vector3:
 	var pos = Vector3.ZERO

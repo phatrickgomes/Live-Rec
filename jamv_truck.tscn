@@ -1,13 +1,13 @@
 [gd_scene load_steps=45 format=4 uid="uid://d3xkxa47x1vgg"]
 
-[ext_resource type="Script" uid="uid://crvf6kbiyu71l" path="res://Assets/Script/jamv_truck_arvore.gd" id="1_3vgtj"]
-[ext_resource type="Script" uid="uid://drdsmes80vsqa" path="res://Assets/Script/jamv_truck.gd" id="1_rayc8"]
-[ext_resource type="PackedScene" uid="uid://de3li86lmryby" path="res://Assets/Scenes/obstacle_spawner.tscn" id="2_3vgtj"]
-[ext_resource type="PackedScene" uid="uid://dhhx2yfscubbj" path="res://Assets/Scenes/arvore.tscn" id="3_ng0hk"]
-[ext_resource type="Script" uid="uid://qjcbp68cwkoq" path="res://Assets/Script/canvas_layer.gd" id="5_4jcav"]
+[ext_resource type="Script" uid="uid://crvf6kbiyu71l" path="res://jamv_truck_arvore.gd" id="1_3vgtj"]
+[ext_resource type="Script" uid="uid://drdsmes80vsqa" path="res://jamv_truck.gd" id="1_rayc8"]
+[ext_resource type="PackedScene" uid="uid://de3li86lmryby" path="res://obstacle_spawner.tscn" id="2_3vgtj"]
+[ext_resource type="PackedScene" uid="uid://dhhx2yfscubbj" path="res://arvore.tscn" id="3_ng0hk"]
+[ext_resource type="Script" uid="uid://qjcbp68cwkoq" path="res://canvas_layer.gd" id="5_4jcav"]
 [ext_resource type="AudioStream" uid="uid://77t0y8lx277n" path="res://Assets/musicas/beatea.mp3" id="5_c1kv6"]
 [ext_resource type="Texture2D" uid="uid://ccfbyxs4bko7d" path="res://Assets/Imagens/fabbri1.png" id="5_f7yf1"]
-[ext_resource type="Script" uid="uid://be5fevrcl24fl" path="res://Assets/Script/fabrri.gd" id="5_ke3uu"]
+[ext_resource type="Script" uid="uid://be5fevrcl24fl" path="res://fabrri.gd" id="5_ke3uu"]
 [ext_resource type="Texture2D" uid="uid://b2ygfvtno66o2" path="res://Assets/Script/elementos-zen-para-relaxar.jpg" id="5_rwmk3"]
 [ext_resource type="AudioStream" uid="uid://xx4euhsc5uht" path="res://Assets/musicas/so sabe correr (online-audio-converter.com).mp3" id="6_po5ju"]
 [ext_resource type="Texture2D" uid="uid://cjv33yswo06rp" path="res://Assets/Script/trunck.png" id="7_po5ju"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://fu6r6gao5pdv" path="res://Assets/Script/volate.png" id="8_ulhnw"]
 [ext_resource type="Texture2D" uid="uid://b8cqv468anuci" path="res://javm_doido21.png.png" id="10_c1kv6"]
 [ext_resource type="Texture2D" uid="uid://bcorpksmp542o" path="res://Assets/Script/large-greenery-trees-row-cut-out-for-landscape-3d-rendering-png.png" id="10_lvt7x"]
-[ext_resource type="Script" uid="uid://jv25rhnd42nq" path="res://Assets/Script/area_3d (2).gd" id="14_luxwo"]
+[ext_resource type="Script" uid="uid://jv25rhnd42nq" path="res://area_3d.gd" id="14_luxwo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4jcav"]
 size = Vector3(7.57129, 9.87415, 3.80219)

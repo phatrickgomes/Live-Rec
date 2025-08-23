@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dbyf3o6qyhvt4" path="res://Assets/musicas/grappling-hook-made-with-Voicemod.mp3" id="5_wy6na"]
 [ext_resource type="AudioStream" uid="uid://koffrxsi4fxj" path="res://Assets/musicas/walking-96582.mp3" id="6_wy6na"]
 [ext_resource type="AudioStream" uid="uid://cuwwoxxk7sv74" path="res://Assets/musicas/789383__modusmogulus__cartoon-dash-dodge-type-sfx.wav" id="7_5gc7w"]
-[ext_resource type="Script" path="res://Assets/Scenes/vazio.gd" id="8_qwfpk"]
+[ext_resource type="Script" uid="uid://c48gq2g7aiomh" path="res://Assets/Scenes/vazio.gd" id="8_qwfpk"]
 [ext_resource type="AudioStream" uid="uid://k3ehfe2pc6xe" path="res://Assets/musicas/2021-01-02_-_Super_Suspense_David_Fesliyan.mp3" id="9_qwfpk"]
 [ext_resource type="Script" uid="uid://d3mlr6qt2wo03" path="res://Assets/Scenes/Orbe.gd" id="10_5gc7w"]
 

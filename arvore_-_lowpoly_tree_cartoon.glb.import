@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ci53sgh6pa20l"
-path="res://.godot/imported/arvore_-_lowpoly_tree_cartoon.glb-76fef7f6e6062bf8769d592df6c2eb62.scn"
+path="res://.godot/imported/arvore_-_lowpoly_tree_cartoon.glb-4728f0b5be4f5d035dbc1281e0ac4bfc.scn"
 
 [deps]
 
-source_file="res://Assets/Scenes/arvore_-_lowpoly_tree_cartoon.glb"
-dest_files=["res://.godot/imported/arvore_-_lowpoly_tree_cartoon.glb-76fef7f6e6062bf8769d592df6c2eb62.scn"]
+source_file="res://arvore_-_lowpoly_tree_cartoon.glb"
+dest_files=["res://.godot/imported/arvore_-_lowpoly_tree_cartoon.glb-4728f0b5be4f5d035dbc1281e0ac4bfc.scn"]
 
 [params]
 
