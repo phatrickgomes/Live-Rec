@@ -36,6 +36,7 @@ func _ready():
 	vida_inimigo.value = current_health
 	update_health_bar()
 	estado_atual = Estado.IDLE
+	Global.Lurdes_vida = current_health
 
 func _physics_process(delta):
 	match estado_atual:
@@ -100,6 +101,7 @@ func take_damage(damage):
 	current_health -= damage
 	current_health = max(0, current_health)
 	update_health_bar()
+	Global.Lurdes_vida = current_health
 	if current_health > 0:
 		estado_atual = Estado.DANO
 		tempo_dano = duracao_dano
@@ -125,7 +127,7 @@ func update_health_bar_color():
 		vida_inimigo.get("theme_override_styles/fill").bg_color = Color.DARK_ORANGE
 
 func die():
-	get_tree().reload_current_scene()
+	pass
 
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("socao"):

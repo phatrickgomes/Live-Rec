@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cemsn382ds6wt"]
+[gd_scene load_steps=14 format=3 uid="uid://cemsn382ds6wt"]
 
 [ext_resource type="Shader" uid="uid://bora3c3tpu6pq" path="res://Assets/Shader/control.gdshader" id="1_0fbet"]
 [ext_resource type="Script" uid="uid://dw0psq8rp8dxs" path="res://Assets/Script/control.gd" id="1_62e2m"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://d11h8c44hy2wq" path="res://Assets/Script/icone_jogoterror.png" id="6_qj883"]
 [ext_resource type="Texture2D" uid="uid://dqrdqpnf61sew" path="res://Assets/Imagens/Windows_Folder_icon-icons.png" id="8_6a6wx"]
 [ext_resource type="Texture2D" uid="uid://fdg2lyl2001e" path="res://Assets/Imagens/communityIcon_hbfqltc7u6l01.png" id="9_sky72"]
-[ext_resource type="FontFile" uid="uid://cwf5mf3fbut6c" path="res://Assets/Fonts/Crash Scene.ttf" id="11_0qgpd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fbet"]
 shader = ExtResource("1_0fbet")
@@ -207,22 +206,9 @@ offset_bottom = 124.217
 scale = Vector2(2.01865, 2.02029)
 text = "Obs Studio"
 
-[node name="Label" type="Label" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 101.0
-offset_top = 42.0
-offset_right = 329.0
-offset_bottom = 227.0
-theme_override_colors/font_color = Color(0.929412, 0, 0, 1)
-theme_override_fonts/font = ExtResource("11_0qgpd")
-theme_override_font_sizes/font_size = 90
-text = "error
-reset"
-
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
 [connection signal="text_submitted" from="LineEdit" to="." method="Fight_music_submitted"]
+[connection signal="text_submitted" from="LineEdit" to="." method="jamv_truck_submitted"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="jogo2" to="." method="_on_jogo_2_pressed"]

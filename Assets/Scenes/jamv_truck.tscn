@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://bcorpksmp542o" path="res://Assets/Script/large-greenery-trees-row-cut-out-for-landscape-3d-rendering-png.png" id="10_lvt7x"]
 [ext_resource type="Script" uid="uid://jv25rhnd42nq" path="res://Assets/Script/area_3d (2).gd" id="14_luxwo"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4jcav"]
+size = Vector3(7.57129, 9.87415, 3.80219)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ke3uu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rwda5"]
@@ -207,9 +210,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xl3tf")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4jcav"]
-size = Vector3(7.57129, 9.87415, 3.80219)
-
 [sub_resource type="BoxMesh" id="BoxMesh_c1kv6"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c1kv6"]
@@ -220,6 +220,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.7204, 0)
 script = ExtResource("1_3vgtj")
 tree_scene = ExtResource("2_3vgtj")
 arvore_centro = ExtResource("3_ng0hk")
+
+[node name="Area3D" type="Area3D" parent="." groups=["player_jamv"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -440.252)
+script = ExtResource("14_luxwo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16553, 4.43708, -73.4559)
+shape = SubResource("BoxShape3D_4jcav")
 
 [node name="jamv" type="CharacterBody3D" parent="." groups=["player_jamv"]]
 transform = Transform3D(0.987529, 0, 0, 0, 0.987529, 0, 0, 0, 0.987529, -0.0559232, 4.75868, 511.854)
@@ -872,14 +880,6 @@ skeleton = NodePath("")
 [node name="Cylinder_5" type="MeshInstance3D" parent="Cylinder_35"]
 mesh = SubResource("ArrayMesh_5n6gh")
 skeleton = NodePath("")
-
-[node name="Area3D" type="Area3D" parent="." groups=["player_jamv"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -440.252)
-script = ExtResource("14_luxwo")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16553, 4.43708, -73.4559)
-shape = SubResource("BoxShape3D_4jcav")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(-185.466, 0.0589719, -0.197185, 0.694656, 0.0267983, -365.974, -15.5572, -0.701837, -13.9906, -13.7917, 115.826, 528.262)
