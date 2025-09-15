@@ -80,4 +80,14 @@ func jamv_truck_submitted(new_text):
 		print("CESAR PATROCINA NOIS")
 		
 func Fight_music_submitted(new_text):
-	pass # Replace with function body.
+	if new_text == "jamv_truck":
+		for child in sub_viewport.get_children():
+			child.queue_free()
+		var jamv_trucki = jamv_truck.instantiate()
+		sub_viewport.add_child(jamv_trucki)
+		var internal_player = jamv_trucki.find_child("SparkyGlory")
+		if internal_player:
+			PlayerManager.register_internal_player(internal_player)
+		else:
+			printerr("Jogador interno não encontrado!")
+		print("CESAR PATROCINA NOIS")
